@@ -52,7 +52,7 @@ export default {
         .signOut()
         .then(() => {
           this.$router.replace({
-            name: "/home"
+            path: "/"
           });
         });
     }
@@ -62,8 +62,16 @@ export default {
 
 <style lang="scss">
   .navbar {
-    background: #ccc;    
+    color: white;
+    background: black;   
+    a {
+      color: #7B9FCF !important;
+    } 
+    button {
+      background: #7B9FCF !important;
+    }
   }
   .navbar-brand {
-  color: red;}
+    color: white;
+  }
 </style>

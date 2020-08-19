@@ -1,7 +1,7 @@
 <template>
   <div id="home" class="has-footer has-header">
     <navbar></navbar>
-    <h1 class="text-center">InSong</h1>
+    <h2 class="text-center mt-5">Welcome to InSong</h2>
     <Footer></Footer>
   </div>
 </template>
@@ -43,6 +43,11 @@ import navbar from './Navbar.vue';
   }
 </script>
 <style lang="scss">
+  html, body {
+    color: white;
+    height: 100%;
+    background: #7B9FCF;
+  }
   h1 {
     font-weight:900;
   }
