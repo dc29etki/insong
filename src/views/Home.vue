@@ -44,7 +44,6 @@ import navbar from './Navbar.vue';
 </script>
 <style lang="scss">
   html, body {
-    color: white;
     height: 100%;
     background: #7B9FCF;
   }
