@@ -2,8 +2,8 @@
   <div id="footer">
     <nav>
       <ul class="footer-navigation">
-        <li v-bind:class="{'current': isCurrent(link)}" v-for="link in links" :key="link.label" v-on:click="routeTo(link.component)">
-          <div>LINK<br></div>
+        <li v-bind:class="{'current': isCurrent(link)}" v-for="link in links" :key="link.label" v-on:click="routeTo(link.path)">
+          <div style="font-size: 1.5rem;" class="mb-2"><font-awesome-icon :icon="link.icon" /><br></div>
           <span class="label">{{link.label}}</span>
         </li>
       </ul>
@@ -20,21 +20,22 @@
         {
           label: "Home",
           icon: "home",
-          component: "home"
+          component: "home",
+          path: "/"
         },
         {
           label: "Articles",
-          icon: "articles",
+          icon: "newspaper",
           component: "articles"
         },
         {
           label: "Order",
-          icon: "tools",
+          icon: "store",
           component: "order"
         },
         {
           label: "More",
-          icon: "more",
+          icon: "bars",
           component: "more"
         },
       ];
@@ -44,7 +45,7 @@
     },
     methods: {
       routeTo(component) {
-        router.push({ name: component })
+        this.$router.push({ path: component })
       },
       isCurrent(link) {
         return router.currentRoute.name === link.component;

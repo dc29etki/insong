@@ -1,9 +1,10 @@
 <template>
-  <div class="container">
-    <div class="row justify-content-center">
+  <div class="container p-0">
+  <navbar></navbar>
+    <div id="login" class="row p-4 justify-content-center">
       <div class="col-md-8">
         <div class="card">
-          <div class="card-header">Login</div>
+          <div class="card-header"><h5>Login to InSong</h5></div>
           <div class="card-body">
             <div v-if="error" class="alert alert-danger">{{error}}</div>
             <form action="#" @submit.prevent="submit">
@@ -44,18 +45,26 @@
                   <button type="submit" class="btn btn-primary">Login</button>
                 </div>
               </div>
+              <div class="mt-3">
+                No account? <a href="/register">Sign Up Now</a>
+              </div>
             </form>
           </div>
         </div>
       </div>
     </div>
+  <Footer></Footer>
   </div>
 </template>
 
 <script>
 import firebase from "firebase";
+import navbar from './Navbar.vue';
+import Footer from './layout/Footer';
 
 export default {
+  name: 'Login',
+  components: {Footer, navbar},
   data() {
     return {
       form: {
@@ -80,3 +89,15 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+  #login {
+    height: 100vh;
+    background: #14213d;
+    overflow: hidden;
+    button {
+      background: #fca311;
+      border: none;
+    }
+  }
+</style>

@@ -64,11 +64,14 @@ export default {
   .navbar {
     color: white;
     background: black;   
+    .navbar-brand {
+      color: #fca311 !important;
+    }
     a {
-      color: #7B9FCF !important;
-    } 
+      color: white !important;
+    }
     button {
-      background: #7B9FCF !important;
+      background: white !important;
     }
   }
   .navbar-brand {

@@ -14,6 +14,25 @@ import Register from './views/Register'
 import Dashboard from './views/Dashboard'
 import navbar from "./views/Navbar";
 
+
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faHome } from '@fortawesome/free-solid-svg-icons'
+import { faNewspaper } from '@fortawesome/free-solid-svg-icons'
+import { faStore } from '@fortawesome/free-solid-svg-icons'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faHome)
+library.add(faNewspaper)
+library.add(faStore)
+library.add(faBars)
+
+
+Vue.config.productionTip = false
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
 const router = new VueRouter({
   mode: 'history',
   base: __dirname,
