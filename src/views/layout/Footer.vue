@@ -31,7 +31,8 @@
         {
           label: "Order",
           icon: "store",
-          component: "order"
+          component: "order",
+          path: "/order"
         },
         {
           label: "More",

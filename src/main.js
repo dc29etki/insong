@@ -5,6 +5,10 @@ import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import * as firebase from "firebase";
 import store from "./store";
+import VueAxios from './plugins/axios'
+
+Vue.use(VueAxios)
+
 
 Vue.use(VueRouter);
 
@@ -13,6 +17,7 @@ import Login from './views/Login'
 import Register from './views/Register'
 import Dashboard from './views/Dashboard'
 import navbar from "./views/Navbar";
+import order from "./views/Order";
 
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -55,24 +60,14 @@ const router = new VueRouter({
             path: '/dashboard',
             name: 'Dashboard',
             component: Dashboard
+        },
+        {
+            path: '/order',
+            name: 'Order',
+            component: order
         }
   ]
 });
-
-
-
-
-new Vue({
-  router,
-  store,
-  template: `
-      <div>
-        <main class="pb-4">
-          <router-view></router-view>
-        </main>
-      </div>
-      `
-}).$mount('#app');
 
 const firebaseConfig = {
   apiKey: "AIzaSyCSl8YKPaQkuVno6XILrc0uEgZZQVdCG5w",
@@ -90,3 +85,20 @@ firebase.initializeApp(firebaseConfig);
 firebase.auth().onAuthStateChanged(user => {
   store.dispatch("fetchUser", user);
 });
+
+var database = firebase.database();
+
+
+new Vue({
+  router,
+  store,
+  template: `
+      <div>
+        <main class="pb-4">
+          <router-view></router-view>
+        </main>
+      </div>
+      `
+}).$mount('#app');
+
+
