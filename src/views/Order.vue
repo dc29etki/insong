@@ -121,7 +121,7 @@ export default {
 </script>
 <style lang="scss">
   #order {
-    height: 90vh;
+    height: auto;
     background: #14213d;
     overflow: scroll;
     color: white;
