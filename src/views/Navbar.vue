@@ -18,7 +18,7 @@
         <ul class="navbar-nav mr-auto"></ul>
         <ul class="navbar-nav ml-auto">
           <template v-if="$auth.isAuthenticated">
-            <a href="/profile" class="nav-item">{{$auth.user.name}}</a>
+            <router-link to="/profile" class="nav-item">{{$auth.user.name}}</router-link>
             <li class="nav-item">
               <a class="nav-link" @click="signOut">Sign out</a>
             </li>

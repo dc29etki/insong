@@ -2,7 +2,7 @@
   <div id="profile">
     <h2 class="text-center m-3">Profile</h2>
     <div class="p-3 m-3 border text-center">
-      <img :src="$auth.user.picture">
+      <img style="height:10vh;" :src="$auth.user.picture">
       <div class="font-weight-bold py-3">{{ $auth.user.name.toUpperCase() }}</div>
       <div class>Email: {{ $auth.user.email }}</div>
       <div class="btn btn-danger m-3" @click="signOut">Log Out</div>
@@ -11,12 +11,8 @@
 </template>
 
 <style lang="scss">
-  html, body {
-    height: 100%;
-    overflow: scroll;
-  }
   #profile {
-    height: 100vh;
+    height: auto;
     background: #14213d;
     overflow: scroll;
     color: white;

@@ -24,8 +24,8 @@
         <div v-else class="s2">
           <hr>
           <h4>Welcome back, {{$auth.user.name}}!</h4>
-          <a href="/order" class="btn btn-dark m-2">Send a greeting now!</a>
-          <a class="btn btn-dark m-2" href="/profile">Profile</a>
+          <router-link to="/order" class="btn btn-dark m-2">Send a greeting now!</router-link>
+          <router-link class="btn btn-dark m-2" to="/profile">Profile</router-link>
         </div>
       
         <div class="s3">
