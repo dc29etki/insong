@@ -87,6 +87,7 @@ const router = new VueRouter({
             path: '/order',
             name: 'Order',
             component: order,
+            beforeEnter: authGuard
         },
         {
             path: "/profile",
