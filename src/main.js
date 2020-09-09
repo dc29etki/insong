@@ -94,7 +94,7 @@ const router = new VueRouter({
             name: "profile",
             component: Profile,
             beforeEnter: authGuard
-        } 
+        }
   ]
 });
 
