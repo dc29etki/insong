@@ -1,6 +1,6 @@
 <template>
   <div id="home" class="has-footer has-header">    
-    <div class="home-area m-3 text-center">
+    <div class="home-area m-2 text-center">
     <img style="height: 20vh;" src=".././assets/logo.png"/>
     
     <h2 class="text-center">Welcome to InSong</h2>
@@ -76,10 +76,9 @@ export default {
 <style lang="scss">
   html, body {
     height: 100%;
-    overflow: hidden !important;
   }
   #home {
-    height: 100vh;
+    height: 90vh;
     background: #14213d;
     overflow: hidden !important;
     .hidden {

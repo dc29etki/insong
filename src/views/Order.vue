@@ -1,7 +1,7 @@
 <template>
   <div id="order" class="has-footer has-header">
     
-    <div class="home-area m-3 text-center">    
+    <div class="home-area m-2 text-center">    
     <h2 class="text-center">Send a Greeting</h2>
     <h6>Fill out the form below to send a greeting now!</h6>
     
@@ -125,7 +125,7 @@ export default {
     overflow: scroll;
   }
   #order {
-    height: 100vh;
+    height: 90vh;
     background: #14213d;
     overflow: scroll;
     color: white;
