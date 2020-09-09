@@ -1,32 +1,25 @@
 <template>
   <div id="order" class="has-footer has-header">
-    <navbar></navbar>
     
     <div class="home-area m-3 text-center">    
     <h2 class="text-center">Order</h2>
     
     <div class="formf">
         <form>
-          <label>First Name</label>
-          <input type="text" v-model="formData.firstname" class="span3">
+          <label>Recipient</label>
+          <input type="text" v-model="formData.recipient" class="span3">
           <br>
-          <label>Last Name</label>
-          <input type="text" v-model="formData.lastname" class="span3">
+          <label>Song</label>
+          <input type="type" v-model="formData.song" class="span3">
           <br>
-          <label>Order Type</label>
-          <input type="type" v-model="formData.ordertype" class="span3">
-          <br>
-          <input type="submit" value="Submit" @click="postOrder()" class="btn btn-primary pull-right">
+          <input type="submit" value="Submit" @click="postOrders()" class="btn btn-primary pull-right">
           <div class="clearfix"></div>
         </form>
-    </div>
-    
-    Orders: {{this.orders['-MGimxozWBlUsIZyrNUT']}}
+    </div>    
     
     
     </div>
     
-    <Footer></Footer>
   </div>
 </template>
 <script>
@@ -38,11 +31,12 @@ import firebase from 'firebase';
 import axios from 'axios';
 export default {
     name: 'Home',
-    components: {Footer, navbar},
+    components: {},
     inject: [],
     data() {      
       var orders = {};
       var objectkeys = {};
+      var user = "";
       const headerControls = {
         left: {
           isImage: true,
@@ -67,60 +61,63 @@ export default {
         headerControls,
         orders,
         objectkeys,
+        user,
+        apiMessage: "",
         formData: {
-          firstname: '',
-          lastname: '',
-          ordertype: ''
+          recipient: '',
+          song: '',
         }
       }
     },
       computed: {
-        ...mapGetters({
-    // map `this.user` to `this.$store.getters.user`
-          user: "user"
-        })
+
       },
     methods: {
-      getOrders() {
-        var url = 'https://insong-94de5.firebaseio.com/';
-        this.$axios
-          .get(url + 'orders.json')
-          .then(response => {
-            this.orders = response.data;
-            console.log(response.data)
-            var yourObject = response.data
-            var keys = Object.keys(yourObject);
-            for(var i=0; i<keys.length; i++){
-                var key = keys[i];
-                console.log(key, yourObject[key].useremail);
-                console.log("user", this.user)
-                if(yourObject[key].useremail=='test5@test5.com'){
-                  console.log("hi")
-                }
+      // Log the user in
+          login() {
+            this.$auth.loginWithRedirect();
+          },
+          // Log the user out
+          logout() {
+            this.$auth.logout({
+              returnTo: window.location.origin
+            });
+          },
+          
+          postOrder(){
+            var url = "https://insong-066b.restdb.io/rest/";
+            const token = this.$auth.getTokenSilently();
+            console.log(token);
+            axios.get(url)
+            },
+        async getOrders() {
+          const token = await this.$auth.getTokenSilently();
+          const { data } = await axios.get("https://insong-066b.restdb.io/rest/orders", {
+            headers: {
+              Authorization: `Bearer ${token}`    // send the access token through the 'Authorization' header
             }
-          })
-          .catch((err) => {
-            // do something with. the error
-          })
-      },
-      postOrder() {
-        console.log("click")
-        var url = 'https://insong-94de5.firebaseio.com/';
-        this.$axios
-          .post(url + 'orders.json', {
-            useremail: this.user.data.email,
-            ordertype: this.formData.ordertype
-          })
-          .then(response => {
-            console.log(response.data)
-          })
-          .catch((err) => {
-            // do something with. the error
-          })
-      }
+          });
+
+          this.apiMessage = data;
+        },
+        async postOrders() {
+          const token = await this.$auth.getTokenSilently();
+          axios.post("https://insong-066b.restdb.io/rest/orders",
+          {
+            recipient: this.formData.recipient,
+            song: this.formData.song,
+            user: this.$auth.user
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`    // send the access token through the 'Authorization' header
+            }
+          }).then(this.$router.push({path: "/"}));
+
+        }
     },
     mounted() {
-      this.getOrders();
+      
     }
     
   }

@@ -34,6 +34,26 @@ library.add(faStore)
 library.add(faBars)
 
 
+// Import the plugin here
+import { Auth0Plugin } from "./auth";
+
+import { domain, clientId, audience } from "../auth_config.json";
+
+// Install the authentication plugin here
+Vue.use(Auth0Plugin, {
+  domain,
+  clientId,
+  audience,
+  onRedirectCallback: appState => {
+    router.push(
+      appState && appState.targetUrl
+        ? appState.targetUrl
+        : window.location.pathname
+    );
+  }
+});
+
+
 Vue.config.productionTip = false
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
@@ -69,36 +89,12 @@ const router = new VueRouter({
   ]
 });
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCSl8YKPaQkuVno6XILrc0uEgZZQVdCG5w",
-  authDomain: "insong-94de5.firebaseapp.com",
-  databaseURL: "https://insong-94de5.firebaseio.com",
-  projectId: "insong-94de5",
-  storageBucket: "insong-94de5.appspot.com",
-  messagingSenderId: "523033426454",
-  appId: "1:523033426454:web:33cdc5e9c89a0912eb5337",
-  measurementId: "G-MDH2QBJCMT"
-};
-
-firebase.initializeApp(firebaseConfig);
-
-firebase.auth().onAuthStateChanged(user => {
-  store.dispatch("fetchUser", user);
-});
-
-var database = firebase.database();
 
 
 new Vue({
   router,
   store,
-  template: `
-      <div>
-        <main class="pb-4">
-          <router-view></router-view>
-        </main>
-      </div>
-      `
+  render: h => h(App)
 }).$mount('#app');
 
 

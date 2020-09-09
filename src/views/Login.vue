@@ -1,6 +1,5 @@
 <template>
   <div class="container p-0">
-  <navbar></navbar>
     <div id="login" class="row p-4 justify-content-center">
       <div class="col-md-8">
         <div class="card">
@@ -53,7 +52,6 @@
         </div>
       </div>
     </div>
-  <Footer></Footer>
   </div>
 </template>
 
@@ -64,7 +62,7 @@ import Footer from './layout/Footer';
 
 export default {
   name: 'Login',
-  components: {Footer, navbar},
+  components: {},
   data() {
     return {
       form: {
@@ -76,15 +74,7 @@ export default {
   },
   methods: {
     submit() {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.form.email, this.form.password)
-        .then(data => {
-          this.$router.replace({ path: "/" });
-        })
-        .catch(err => {
-          this.error = err.message;
-        });
+      this.$auth.loginWithRedirect();
     }
   }
 };

@@ -1,12 +1,11 @@
 <template>
-  <div id="home" class="has-footer has-header">
-    <navbar></navbar>
-    
+  <div id="home" class="has-footer has-header">    
     <div class="home-area m-3 text-center">
     <img style="height: 20vh;" src=".././assets/logo.png"/>
     
     <h2 class="text-center">Welcome to InSong</h2>
-    
+      
+      <button @click="logout()">signout</button>
       
       <div class="sections">
         
@@ -14,7 +13,6 @@
           <hr>
           <h4>Who We Are</h4>
           <p>InSong is an on-demand live-audio greeting delivery service. Well-qualified singing greeters call that special someone in your life and perform a surprise greeting of your choice live over the phone. InSong delivers regular or customized greetings, in song form. </p>
-          user: {{user.data.email}}
         </div>
       
         <div class="s2">
@@ -34,7 +32,6 @@
     
     </div>
     
-    <Footer></Footer>
   </div>
 </template>
 <script>
@@ -46,11 +43,12 @@ import firebase from 'firebase';
 import axios from 'axios';
 export default {
     name: 'Home',
-    components: {Footer, navbar},
+    components: {},
     inject: [],
     data() {
       let message= "nice";
       var orders = [];
+      var token = this.$auth.getTokenSilently();
       const headerControls = {
         left: {
           isImage: true,
@@ -77,42 +75,19 @@ export default {
       }
     },
       computed: {
-        ...mapGetters({
-    // map `this.user` to `this.$store.getters.user`
-          user: "user"
-        })
       },
     methods: {
-      getOrder() {
-        var url = 'https://insong-94de5.firebaseio.com/';
-        this.$axios
-          .get(url + 'orders.json')
-          .then(response => {
-            var data = JSON.parse(response.data)
-            var obj = data;
-            for (var p in obj) {
-              if( obj.hasOwnProperty(p) ) {
-                console.log(obj[p])
-              } 
-            }
-          })
-          .catch((err) => {
-            // do something with. the error
-          })
-      },
-      postOrder() {
-        var url = 'https://insong-94de5.firebaseio.com/';
-        this.$axios
-          .post(url + 'orders.json', {
-            user: this.user,
-          })
-          .then(response => {
-            console.log(response.data)
-          })
-          .catch((err) => {
-            // do something with. the error
-          })
-      }
+      // Log the user in
+          login() {
+            this.$auth.loginWithRedirect();
+            
+          },
+          // Log the user out
+          logout() {
+            this.$auth.logout({
+              returnTo: window.location.origin
+            });
+          }
     }
   }
 </script>

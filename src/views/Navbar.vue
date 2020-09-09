@@ -16,15 +16,15 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto"></ul>
         <ul class="navbar-nav ml-auto">
-          <template v-if="user.loggedIn">
-            <div class="nav-item">{{user.data.displayName}}</div>
+          <template v-if="$auth.isAuthenticated">
+            <div class="nav-item">{{$auth.user.name}}</div>
             <li class="nav-item">
-              <a class="nav-link" @click.prevent="signOut">Sign out</a>
+              <a class="nav-link" @click="signOut">Sign out</a>
             </li>
           </template>
           <template v-else>
             <li class="nav-item">
-              <router-link to="login" class="nav-link">Login</router-link>
+              <a @click="login" class="nav-link">Login</a>
             </li>
             <li class="nav-item">
               <router-link to="register" class="nav-link">Register</router-link>
@@ -46,15 +46,13 @@ export default {
     })
   },
   methods: {
+  login() {
+        this.$auth.loginWithRedirect();
+      },
     signOut() {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          this.$router.replace({
-            path: "/"
-          });
-        });
+      this.$auth.logout({
+              returnTo: window.location.origin
+            });
     }
   }
 };
