@@ -76,9 +76,10 @@ export default {
 <style lang="scss">
   html, body {
     height: 100%;
+    background: #14213d;
   }
   #home {
-    height: 90vh;
+    height: auto;
     background: #14213d;
     overflow: hidden !important;
     .hidden {

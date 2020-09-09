@@ -120,10 +120,6 @@ export default {
   }
 </script>
 <style lang="scss">
-  html, body {
-    height: 100%;
-    overflow: scroll;
-  }
   #order {
     height: 90vh;
     background: #14213d;
