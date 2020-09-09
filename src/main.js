@@ -42,7 +42,7 @@ import { Auth0Plugin } from "./auth";
 import { domain, clientId, audience } from "../auth_config.json";
 
 // Install the authentication plugin here
-Vue.use(Auth0Plugin, {
+Vue.use(Auth0Plugin, { 
   domain,
   clientId,
   audience,
