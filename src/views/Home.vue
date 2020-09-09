@@ -5,7 +5,7 @@
     
     <h2 class="text-center">Welcome to InSong</h2>
       
-      <button @click="logout()">signout</button>
+      <button @click="logout()" class="hidden">signout</button>
       
       <div class="sections">
         
@@ -15,11 +15,17 @@
           <p>InSong is an on-demand live-audio greeting delivery service. Well-qualified singing greeters call that special someone in your life and perform a surprise greeting of your choice live over the phone. InSong delivers regular or customized greetings, in song form. </p>
         </div>
       
-        <div class="s2">
+        <div v-if="!$auth.isAuthenticated" class="s2">
           <hr>
           <h4>Login or Create an Account Today!</h4>
-          <a href="/login" class="btn btn-dark m-2">Login</a>
-          <a href="/register" class="btn btn-dark m-2">Sign Up</a>
+          <a @click="login" class="btn btn-dark m-2">Login</a>
+          <a @click="login" class="btn btn-dark m-2">Sign Up</a>
+        </div>
+        <div v-else class="s2">
+          <hr>
+          <h4>Welcome back, {{$auth.user.name}}!</h4>
+          <a href="/order" class="btn btn-dark m-2">Send a greeting now!</a>
+          <a class="btn btn-dark m-2" href="/profile">Profile</a>
         </div>
       
         <div class="s3">
@@ -35,42 +41,14 @@
   </div>
 </template>
 <script>
-import Footer from './layout/Footer';
-import Header from './layout/Header';
-import navbar from './Navbar.vue';
-import { mapGetters } from "vuex";
-import firebase from 'firebase';
 import axios from 'axios';
 export default {
     name: 'Home',
     components: {},
     inject: [],
     data() {
-      let message= "nice";
       var orders = [];
-      var token = this.$auth.getTokenSilently();
-      const headerControls = {
-        left: {
-          isImage: true,
-          text: null,
-          component: "",
-          icon: "logo-w"
-        },
-        right: {
-          isImage: true,
-          text: null,
-          component: "",
-          icon: "search_grey"
-        },
-        center: {
-          isImage: false,
-          text: "InSong",
-          component: "home",
-          icon: ""
-        }
-      }
       return {
-        headerControls,
         orders
       }
     },
@@ -87,6 +65,10 @@ export default {
             this.$auth.logout({
               returnTo: window.location.origin
             });
+          },
+          loggedIn() {
+            if (this.$auth.isAuthenticated) return true;
+            return false;
           }
     }
   }
@@ -94,12 +76,15 @@ export default {
 <style lang="scss">
   html, body {
     height: 100%;
-    overflow: scroll;
+    overflow: hidden !important;
   }
   #home {
     height: 100vh;
     background: #14213d;
-    overflow: hidden;
+    overflow: hidden !important;
+    .hidden {
+      display: none;
+    }
   }
   h1 {
     font-weight:900;

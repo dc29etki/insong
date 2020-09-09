@@ -2,17 +2,44 @@
   <div id="order" class="has-footer has-header">
     
     <div class="home-area m-3 text-center">    
-    <h2 class="text-center">Order</h2>
+    <h2 class="text-center">Send a Greeting</h2>
+    <h6>Fill out the form below to send a greeting now!</h6>
     
-    <div class="formf">
+    <div class="formf border py-4 m-1">
         <form>
-          <label>Recipient</label>
-          <input type="text" v-model="formData.recipient" class="span3">
+        <div class="row p-2">
+          <div class="col-4"><label>Recipient</label></div>
+          <div class="col-6"><input type="text" v-model="formData.recipient" class="span3"></div>
           <br>
-          <label>Song</label>
-          <input type="type" v-model="formData.song" class="span3">
+        </div>
+        <div class="row p-2">
+          <div class="col-4"><label>Song</label></div>
+          <div class="col-6"><input type="type" v-model="formData.song" class="span3"></div>
           <br>
-          <input type="submit" value="Submit" @click="postOrders()" class="btn btn-primary pull-right">
+        </div>
+        <div class="row p-2">
+          <div class="col-4"><label>Input</label></div>
+          <div class="col-6"><input type="type" class="span3"></div>
+          <br>
+        </div>
+        <div class="row p-2">
+          <div class="col-4"><label>Input</label></div>
+          <div class="col-6"><input type="type" class="span3"></div>
+          <br>
+        </div>
+        <div class="row p-2">
+          <div class="col-4"><label>Input</label></div>
+          <div class="col-6"><input type="type" class="span3"></div>
+          <br>
+        </div>
+        <div class="row p-2">
+          <div class="col-4"><label>Input</label></div>
+          <div class="col-6"><input type="type" class="span3"></div>
+          <br>
+        </div>
+        <div class="row pt-2">
+          <div class="col-12"><input type="submit" value="Submit" @click="postOrders()" class="btn btn-lg btn-light pull-right"></div>
+        </div>
           <div class="clearfix"></div>
         </form>
     </div>    
@@ -23,42 +50,16 @@
   </div>
 </template>
 <script>
-import Footer from './layout/Footer';
-import Header from './layout/Header';
-import navbar from './Navbar.vue';
-import { mapGetters } from "vuex";
-import firebase from 'firebase';
 import axios from 'axios';
 export default {
-    name: 'Home',
+    name: 'Order',
     components: {},
     inject: [],
     data() {      
       var orders = {};
       var objectkeys = {};
       var user = "";
-      const headerControls = {
-        left: {
-          isImage: true,
-          text: null,
-          component: "",
-          icon: "logo-w"
-        },
-        right: {
-          isImage: true,
-          text: null,
-          component: "",
-          icon: "search_grey"
-        },
-        center: {
-          isImage: false,
-          text: "InSong",
-          component: "home",
-          icon: ""
-        }
-      }
       return {
-        headerControls,
         orders,
         objectkeys,
         user,
@@ -73,23 +74,20 @@ export default {
 
       },
     methods: {
-      // Log the user in
-          login() {
-            this.$auth.loginWithRedirect();
+        login() {
+          this.$auth.loginWithRedirect();
+        },
+        logout() {
+          this.$auth.logout({
+            returnTo: window.location.origin
+          });
+        },   
+        postOrder(){
+          var url = "https://insong-066b.restdb.io/rest/";
+          const token = this.$auth.getTokenSilently();
+          console.log(token);
+          axios.get(url)
           },
-          // Log the user out
-          logout() {
-            this.$auth.logout({
-              returnTo: window.location.origin
-            });
-          },
-          
-          postOrder(){
-            var url = "https://insong-066b.restdb.io/rest/";
-            const token = this.$auth.getTokenSilently();
-            console.log(token);
-            axios.get(url)
-            },
         async getOrders() {
           const token = await this.$auth.getTokenSilently();
           const { data } = await axios.get("https://insong-066b.restdb.io/rest/orders", {
@@ -97,7 +95,6 @@ export default {
               Authorization: `Bearer ${token}`    // send the access token through the 'Authorization' header
             }
           });
-
           this.apiMessage = data;
         },
         async postOrders() {
@@ -141,5 +138,9 @@ export default {
   }
   .formf {
     color: white;
+    font-size: 18px;
+    .label {
+      float: left;
+    }
   }
 </style>

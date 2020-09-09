@@ -1,6 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
     <div class="container">
+      <span><img style="height: 6vh;" src=".././assets/logo.png"/></span>
       <router-link to="/" class="navbar-brand">InSong</router-link>
       <button
         class="navbar-toggler"
@@ -17,7 +18,7 @@
         <ul class="navbar-nav mr-auto"></ul>
         <ul class="navbar-nav ml-auto">
           <template v-if="$auth.isAuthenticated">
-            <div class="nav-item">{{$auth.user.name}}</div>
+            <a href="/profile" class="nav-item">{{$auth.user.name}}</a>
             <li class="nav-item">
               <a class="nav-link" @click="signOut">Sign out</a>
             </li>
@@ -27,7 +28,7 @@
               <a @click="login" class="nav-link">Login</a>
             </li>
             <li class="nav-item">
-              <router-link to="register" class="nav-link">Register</router-link>
+              <a @click="register" class="nav-link">Register</a>
             </li>
           </template>
         </ul>
@@ -37,18 +38,14 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import firebase from "firebase";
 export default {
-  computed: {
-    ...mapGetters({
-// map `this.user` to `this.$store.getters.user`
-      user: "user"
-    })
-  },
   methods: {
   login() {
         this.$auth.loginWithRedirect();
       },
+  register() {
+      this.$auth.loginWithRedirect();
+          },
     signOut() {
       this.$auth.logout({
               returnTo: window.location.origin

@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import * as firebase from "firebase";
 import store from "./store";
 import VueAxios from './plugins/axios'
+import { authGuard } from "./auth/authGuard";
 
 Vue.use(VueAxios)
 
@@ -18,6 +19,7 @@ import Register from './views/Register'
 import Dashboard from './views/Dashboard'
 import navbar from "./views/Navbar";
 import order from "./views/Order";
+import Profile from "./views/Profile.vue";
 
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -84,8 +86,15 @@ const router = new VueRouter({
         {
             path: '/order',
             name: 'Order',
-            component: order
-        }
+            component: order,
+            beforeEnter: authGuard
+        },
+        {
+            path: "/profile",
+            name: "profile",
+            component: Profile,
+            beforeEnter: authGuard
+        } 
   ]
 });
 
