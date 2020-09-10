@@ -31,7 +31,7 @@
         <div class="s3">
           <hr>
           <h4>Interested in Being a Greeter?</h4>
-          <a href="/login" class="btn btn-dark m-2">Apply Now</a>
+          <a @click="login" class="btn btn-dark m-2">Apply Now</a>
         </div>
         
       </div>
