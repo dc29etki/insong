@@ -1,11 +1,18 @@
 <template>
   <div id="order" class="has-footer has-header">
     
-    <div class="home-area m-2 text-center">    
+    <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">    
     <h2 class="text-center">Send a Greeting</h2>
     <h6>Fill out the form below to send a greeting now!</h6>
-    
-    <div class="formf border py-4 m-1">
+        
+    <div class="text-left p-3 m-3 w-75 mx-auto border">
+      <h5>My Orders:</h5>
+      <div v-for="o in  orders" :key="o">
+        <hr><div>Sent to: {{o.recipient}}<br>Song: {{o.song}}<br>Date: {{o.created_at}}</div>
+      </div>
+            
+    </div>
+    <div class="formf border py-4 m-1" style="margin-bottom: 100px;">
         <form>
         <div class="row p-2">
           <div class="col-4"><label>Recipient</label></div>
@@ -56,7 +63,7 @@ export default {
     components: {},
     inject: [],
     data() {      
-      var orders = {};
+      var orders = [];
       var objectkeys = {};
       var user = "";
       return {
@@ -95,7 +102,11 @@ export default {
               Authorization: `Bearer ${token}`    // send the access token through the 'Authorization' header
             }
           });
-          this.apiMessage = data;
+          for(var i=0; i<data.length; i++) {
+            if(data[i].auth0_user_id == this.$auth.user.sub) {
+              this.orders.push(data[i])
+            }
+          }
         },
         async postOrders() {
           const token = await this.$auth.getTokenSilently();
@@ -103,7 +114,9 @@ export default {
           {
             recipient: this.formData.recipient,
             song: this.formData.song,
-            user: this.$auth.user
+            sender: this.$auth.user.name,
+            auth0_user_id: this.$auth.user.sub,
+            created_at: Date.now()
           },
           {
             headers: {
@@ -113,8 +126,8 @@ export default {
 
         }
     },
-    mounted() {
-      
+    created() {
+      this.getOrders();
     }
     
   }
@@ -123,7 +136,7 @@ export default {
   #order {
     height: auto;
     background: #14213d;
-    overflow: scroll;
+    overflow: scroll !important;
     color: white;
   }
   h1 {

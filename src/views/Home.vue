@@ -12,6 +12,7 @@
         <div class="s1">
           <hr>
           <h4>Who We Are</h4>
+          id:{{$auth.user.name}}
           <p>InSong is an on-demand live-audio greeting delivery service. Well-qualified singing greeters call that special someone in your life and perform a surprise greeting of your choice live over the phone. InSong delivers regular or customized greetings, in song form. </p>
         </div>
       
@@ -33,6 +34,7 @@
           <h4>Interested in Being a Greeter?</h4>
           <a @click="login" class="btn btn-dark m-2">Apply Now</a>
         </div>
+         
         
       </div>
     
@@ -77,11 +79,11 @@ export default {
   html, body {
     height: 100%;
     background: #14213d;
+    overflow: scroll;
   }
   #home {
     height: auto;
     background: #14213d;
-    overflow: hidden !important;
     .hidden {
       display: none;
     }
