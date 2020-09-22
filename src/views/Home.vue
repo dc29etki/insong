@@ -43,7 +43,7 @@
 <script>
 import axios from 'axios';
 export default {
-    name: 'Home',
+    name: 'home',
     components: {},
     inject: [],
     data() {

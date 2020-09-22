@@ -37,7 +37,8 @@
         {
           label: "More",
           icon: "bars",
-          component: "more"
+          component: "more",
+          path: "/more"
         },
       ];
       return {
@@ -45,8 +46,11 @@
       }
     },
     methods: {
-      routeTo(component) {
-        this.$router.push({ path: component })
+      routeTo(path) {
+        if(path=="/"){
+          this.$router.push('home');
+        }
+        this.$router.push({ path: path })
       },
       isCurrent(link) {
         return router.currentRoute.name === link.component;

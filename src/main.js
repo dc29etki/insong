@@ -20,13 +20,18 @@ import Dashboard from './views/Dashboard'
 import navbar from "./views/Navbar";
 import order from "./views/Order";
 import Profile from "./views/Profile.vue";
-
+import more from "./views/more.vue";
+import MyOrders from "./views/MyOrders.vue";
+import checkout from "./views/checkout.vue";
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { faNewspaper } from '@fortawesome/free-solid-svg-icons'
 import { faStore } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faList } from '@fortawesome/free-solid-svg-icons'
+import { faMicrophone } from '@fortawesome/free-solid-svg-icons'
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -34,6 +39,9 @@ library.add(faHome)
 library.add(faNewspaper)
 library.add(faStore)
 library.add(faBars)
+library.add(faUser)
+library.add(faList)
+library.add(faMicrophone)
 
 
 // Import the plugin here
@@ -66,6 +74,7 @@ const router = new VueRouter({
   routes: [
     { 
             path: '/',
+            name: 'home',
             component: Home 
     },
     {
@@ -90,11 +99,27 @@ const router = new VueRouter({
             beforeEnter: authGuard
         },
         {
+            path: "/more",
+            name: "more",
+            component: more,
+        },
+        {
             path: "/profile",
             name: "profile",
             component: Profile,
             beforeEnter: authGuard
-        } 
+        },
+        {
+            path: "/my-orders",
+            name: "myorders",
+            component: MyOrders,
+            beforeEnter: authGuard
+        },
+        {
+            path: "/checkout",
+            name: "checkout",
+            component: checkout,
+        }
   ]
 });
 
