@@ -1,9 +1,12 @@
+<!DOCTYPE html>
 <template>
   <div id="order" class="has-footer has-header">
     
     <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">    
-    <h2 class="text-center">My Orders</h2>
-        
+    <h2 class="text-center">Available Orders</h2>
+    <h6>Select order to add to your queue.</h6>
+    
+    <div v-if="orders.length<1" class="border m-5 p-4">No orders right now, check back later</div>
     <div class="text-left p-3 m-3 mx-auto">
       <div class="box1" v-for="o in sortedOrders" :key="o">
         <div class="item">
@@ -11,9 +14,10 @@
           <br>
           Song: {{o.song}}
           <br>
-          Created: {{moment(o.created_at).format('MM-DD-YYYY')}}
+          Type: {{o.type}}
           <br>
-          Status: {{o.status}}
+          Created: {{moment(o.created_at).format('MM-DD-YYYY')}}
+          <div class="btn btn-primary" @click="addOrder(o._id)">Add to Queue</div>
         </div>
       </div>
             
@@ -27,7 +31,7 @@
 import axios from 'axios';
 import moment from 'moment'
 export default {
-    name: 'Order',
+    name: 'GreeterOrders',
     components: {},
     inject: [],
     data() {      
@@ -65,20 +69,34 @@ export default {
           const token = this.$auth.getTokenSilently();
           console.log(token);
           axios.get(url)
+        },
+        async addOrder(id) {
+          console.log(id);
+          const token = await this.$auth.getTokenSilently();
+          axios.put("https://insong-066b.restdb.io/rest/orders/"+id,
+          {
+            status: "In Queue",
+            greeter: this.$auth.user
           },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`    // send the access token through the 'Authorization' header
+            }
+          }).then(this.$router.push({path: "/switchboard"}));
+        },
         async getOrders() {
           const token = await this.$auth.getTokenSilently();
           const { data } = await axios.get("https://insong-066b.restdb.io/rest/orders", {
             headers: {
-              Authorization: `Bearer ${token}`    // send the access token through the 'Authorization' header
+              Authorization: `Bearer ${token}`
             }
           });
           for(var i=0; i<data.length; i++) {
-            if(data[i].auth0_user_id == this.$auth.user.sub) {
+            if(data[i].status == 'Posted') {
               this.orders.push(data[i])
             }
           }
-          this.sortedOrders = this.orders.slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+          this.sortedOrders = this.orders.slice().sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
         },
         async postOrders() {
           const token = await this.$auth.getTokenSilently();

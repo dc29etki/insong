@@ -23,6 +23,11 @@ import Profile from "./views/Profile.vue";
 import more from "./views/more.vue";
 import MyOrders from "./views/MyOrders.vue";
 import checkout from "./views/checkout.vue";
+import birthday from "./views/BirthdayGreeting.vue";
+import coverpartial from "./views/CoverPartialGreeting.vue";
+import coverfull from "./views/CoverFullGreeting.vue";
+import greeterorders from "./views/GreeterOrders.vue";
+
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
@@ -119,6 +124,26 @@ const router = new VueRouter({
             path: "/checkout",
             name: "checkout",
             component: checkout,
+        },
+        {
+            path: "/birthday",
+            name: "birthday",
+            component: birthday,
+        },
+        {
+            path: "/cover-partial",
+            name: "coverpartial",
+            component: coverpartial,
+        },
+        {
+            path: "/cover-full",
+            name: "coverfull",
+            component: coverfull,
+        },
+        {
+            path: "/switchboard",
+            name: "GreeterOrders",
+            component: greeterorders,
         }
   ]
 });

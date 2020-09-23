@@ -11,12 +11,38 @@
 
 <template>
   <div id="order" class="has-footer has-header">
-    <h2 class="text-center">Select a Greeting</h2>
-    <div class="greetings">
-      <router-link to="/birthday"><div class="item"><span>Happy Birthday</span></div></router-link>
-      <router-link to="/cover-partial"><div class="item"><span>Cover Song (partial)</span></div></router-link>
-      <router-link to="/cover-full"><div class="item"><span>Cover Song (full)</span></div></router-link>
+    
+    <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">    
+    <h2 class="text-center">Happy Birthday</h2>
+    <h6 id="fill-out">Fill out the form below to send a greeting now!</h6>
+    <h6 id="pay-now">Complete your payment with PayPal to access the order form.
+      <div class="p-3">Price: $9.95</div></h6>
+    <div class="formf border py-4 m-1" id="formf" style="margin-bottom: 100px;">
+        <form>
+        <div class="row p-2 m-0">
+          <div class="col-12"><input type="text" placeholder="Recipient Name" v-model="formData.recipient_name" class="span3 w-100"></div>
+          <br>
+        </div>
+        <div class="row p-2 m-0">
+          <div class="col-12"><input type="text" placeholder="Recipient Phone" v-model="formData.recipient_phone" class="span3 w-100"></div>
+          <br>
+        </div>
+        
+        <div class="row pt-2">
+          <div class="col-12"><input type="submit" value="Submit" @click="postOrders()" class="btn btn-lg btn-light pull-right"></div>
+        </div>
+          <div class="clearfix"></div>
+        </form>
+    </div>    
+    
+    
+    <div class="mx-5">
+      <div id="paypal-button-container"></div>
     </div>
+    
+    
+    </div>
+    
   </div>
 </template>
 
@@ -85,6 +111,7 @@ export default {
             sender: this.$auth.user.name,
             auth0_user_id: this.$auth.user.sub,
             created_at: Date.now(),
+            type: "Birthday",
             status: "Posted"
           },
           {
@@ -99,7 +126,28 @@ export default {
       this.getOrders();
     },
     mounted () {
-      
+      paypal.Buttons({
+          createOrder: function(data, actions) {
+            // This function sets up the details of the transaction, including the amount and line item details.
+            return actions.order.create({
+              purchase_units: [{
+                amount: {
+                  value: '9.95'
+                }
+              }]
+            });
+          },
+          onApprove: function(data, actions) {
+            // This function captures the funds from the transaction.
+            return actions.order.capture()
+              .then(function(details) {
+                document.getElementById("formf").style.display = "block";
+                document.getElementById("fill-out").style.display = "block";
+                document.getElementById("pay-now").style.display = "none";
+                document.getElementById("paypal-button-container").style.display = "none";
+            });
+          }
+        }).render('#paypal-button-container');
     }
     
   }
@@ -126,23 +174,6 @@ export default {
     font-size: 18px;
     .label {
       float: left;
-    }
-  }
-  .greetings {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    .item {
-      border: 3px solid white;
-      border-radius: 50%;
-      height: 150px;
-      width: 150px;
-      margin: 25px 0;
-      text-align: center;
-      display: flex; /* or inline-flex */
-      align-items: center; 
-      justify-content: center;
     }
   }
 </style>

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <template>
   <div id="more" class="has-footer has-header">
     
@@ -23,7 +24,7 @@
           <div class="col-4 my-auto text-center">
             <font-awesome-icon :icon="['fa', 'microphone']" />
           </div>
-          <div class="col-8 my-auto text-right">Greeter Center</div>
+          <div class="col-8 my-auto text-right"><router-link to="/switchboard">Greeter Switchboard</router-link></div>
         </div>
       </div>
     </div>
@@ -50,13 +51,17 @@ export default {
 </script>
 <style lang="scss">
   #more {
-    height: auto;
-    background: #14213d;
+    height: 90vh;
+    background: black;
     overflow: scroll !important;
     color: white;
   }
+
   h1 {
     font-weight:900;
+  }
+  a {
+    color: white !important;
   }
   h2 {
     color: #fca311;
@@ -76,9 +81,9 @@ export default {
       padding: 10px;
       .row{height: 10vh;}
     }
-    font-size: 24px;
+    font-size: 20px;
     svg {
-      font-size: 40px;
+      font-size: 36px;
     }
     &:hover {
       background: #ccc;
