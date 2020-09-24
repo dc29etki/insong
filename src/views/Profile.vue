@@ -1,5 +1,7 @@
 <template>
   <div id="profile">
+  <div class="pb-5 mb-5"> </div>
+  
     <h2 class="text-center m-3">Profile</h2>
     <div class="p-3 m-3 border text-center">
       <img style="height:10vh;" :src="$auth.user.picture">

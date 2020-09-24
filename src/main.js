@@ -3,7 +3,6 @@ import VueRouter from 'vue-router';
 import App from './App.vue'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import * as firebase from "firebase";
 import store from "./store";
 import VueAxios from './plugins/axios'
 import { authGuard } from "./auth/authGuard";

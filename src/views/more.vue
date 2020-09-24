@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <template>
   <div id="more" class="has-footer has-header">
-    <div class="pb-5 mb-5"> </div>
+    <div class="pb-4 mb-5"> </div>
     
     
     <div class="box">
@@ -10,7 +10,7 @@
           <div class="col-4 my-auto text-center">
             <font-awesome-icon :icon="['fa', 'user']" />
           </div>
-          <div class="col-8 my-auto text-right">My Profile</div>
+          <div class="col-8 my-auto text-right"><router-link to="profile">My Profile</router-link></div>
         </div>
       </div>
       <div class="item">
@@ -53,17 +53,15 @@ export default {
 </script>
 <style lang="scss">
   #more {
-    background: black;
     overflow: scroll !important;
     color: white;
+    height: 100vh;
+    background: black;
   }
-
   h1 {
     font-weight:900;
   }
-  a {
-    color: white !important;
-  }
+  
   h2 {
     color: #fca311;
   }
@@ -76,11 +74,14 @@ export default {
     align-items: center;
     .item {
       width: 100%;
-      background: black;
-      border-bottom: 2px solid white;
-      border-top: 2px solid white;
-      padding: 10px;
+      background: white;
+      color: black !important;
+      border-bottom: 2px solid black;
+      border-top: 2px solid black;
       .row{height: 10vh;}
+      a {
+        color: black !important;
+      }
     }
     font-size: 20px;
     svg {

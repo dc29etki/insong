@@ -3,8 +3,8 @@
     <div class="container">
       <span><img style="height: 6vh;" src=".././assets/logo.png"/></span>
       <router-link to="/" class="navbar-brand">InSong</router-link>
-      <button
-        class="navbar-toggler"
+      <div
+        class="user-button"
         type="button"
         data-toggle="collapse"
         data-target="#navbarSupportedContent"
@@ -12,8 +12,8 @@
         aria-expanded="false"
         aria-label
       >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <span><font-awesome-icon :icon="['fa', 'user']" /></span>
+      </div>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto"></ul>
         <ul class="navbar-nav ml-auto">
@@ -56,6 +56,19 @@ export default {
 </script>
 
 <style lang="scss">
+  .user-button {
+    border-radius:50%;
+    background: white;
+    color: black;
+    display: flex;
+    padding: 10px;
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+    .collapse, .collapsed {
+      border: none !important;
+    }
+  }
   .navbar {
     color: white;
     background: black;   
@@ -66,9 +79,6 @@ export default {
     }
     a {
       color: white !important;
-    }
-    button {
-      background: white !important;
     }
   }
   .navbar-brand {
