@@ -3,14 +3,13 @@
   <div id="order" class="has-footer has-header">
     
     <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">    
-    <h2 class="text-center">Available Orders</h2>
-    <h6>Select order to add to your queue.</h6>
+    <h2 class="text-center">My Orders</h2>
     
     <router-link to="/switchboard" class="btn btn-dark">Back to Switchboard</router-link>
     
     <div v-if="orders.length<1" class="border m-5 p-4">No orders right now, check back later</div>
     <div class="text-left p-3 m-3 mx-auto">
-      <div class="box1" v-for="o in sortedOrders" :key="o">
+      <div class="box1" v-for="o in orders" :key="o">
         <div class="item">
           Sent to: {{o.recipient_name}}
           <br>
@@ -18,8 +17,8 @@
           <br>
           Type: {{o.type}}
           <br>
-          Created: {{moment(o.created_at).format('MM-DD-YYYY')}}
-          <div class="btn btn-primary" @click="addOrder(o._id)">Add to Queue</div>
+          Created: {{moment(o.created_at).format('MM-DD-YYYY')}}<br>
+          <router-link class="btn btn-primary" :to="{ name: 'GreeterOrder', params: { id: o._id }}">View Order</router-link>
         </div>
       </div>
             
@@ -33,7 +32,7 @@
 import axios from 'axios';
 import moment from 'moment'
 export default {
-    name: 'GreeterOrders',
+    name: 'GreeterMyOrders',
     components: {},
     inject: [],
     data() {      
@@ -110,8 +109,10 @@ export default {
             }
           });
           for(var i=0; i<data.length; i++) {
-            if(data[i].status == 'Posted') {
-              this.orders.push(data[i])
+            if(data[i].greeter == this.greeter.email) {
+              if(data[i].status=='In Queue'){
+                this.orders.push(data[i])
+              }
             }
           }
           this.sortedOrders = this.orders.slice().sort((a, b) => new Date(a.created_at) - new Date(b.created_at))

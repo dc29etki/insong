@@ -27,6 +27,10 @@ import birthday from "./views/BirthdayGreeting.vue";
 import coverpartial from "./views/CoverPartialGreeting.vue";
 import coverfull from "./views/CoverFullGreeting.vue";
 import greeterorders from "./views/GreeterOrders.vue";
+import switchboard from "./views/Switchboard.vue";
+import greetermyorders from "./views/GreeterMyOrders.vue";
+import greeterorder from "./views/GreeterOrder.vue";
+
 
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -141,9 +145,24 @@ const router = new VueRouter({
             component: coverfull,
         },
         {
-            path: "/switchboard",
+            path: "/greeter-orders",
             name: "GreeterOrders",
             component: greeterorders,
+        },
+        {
+            path: "/switchboard",
+            name: "Switchboard",
+            component: switchboard,
+        },
+        {
+            path: "/greeter-myorders",
+            name: "GreeterMyOrders",
+            component: greetermyorders,
+        },
+        {
+            path: '/greeter-order/:id',
+            name: "GreeterOrder",
+            component: greeterorder,
         }
   ]
 });

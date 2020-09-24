@@ -3,37 +3,24 @@
   <div id="order" class="has-footer has-header">
     
     <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">    
-    <h2 class="text-center">Available Orders</h2>
-    <h6>Select order to add to your queue.</h6>
     
-    <router-link to="/switchboard" class="btn btn-dark">Back to Switchboard</router-link>
-    
-    <div v-if="orders.length<1" class="border m-5 p-4">No orders right now, check back later</div>
-    <div class="text-left p-3 m-3 mx-auto">
-      <div class="box1" v-for="o in sortedOrders" :key="o">
-        <div class="item">
-          Sent to: {{o.recipient_name}}
-          <br>
-          Song: {{o.song}}
-          <br>
-          Type: {{o.type}}
-          <br>
-          Created: {{moment(o.created_at).format('MM-DD-YYYY')}}
-          <div class="btn btn-primary" @click="addOrder(o._id)">Add to Queue</div>
-        </div>
+    <h2 class="text-center">Welcome greeter!</h2>
+    <div>
+      {{this.greeter.orders_completed}} orders completed for a total of ${{this.greeter.money_earned}}
+    </div>
+      <div class="buttons">
+        <router-link to="/greeter-myorders" class="btn btn-lg btn-dark">My orders</router-link>
+        <router-link to="/greeter-orders" class="btn btn-lg btn-dark">Available orders</router-link>
       </div>
-            
     </div>
-    
-    </div>
-    
+        
   </div>
 </template>
 <script>
 import axios from 'axios';
 import moment from 'moment'
 export default {
-    name: 'GreeterOrders',
+    name: 'Switchboard',
     components: {},
     inject: [],
     data() {      
@@ -41,12 +28,14 @@ export default {
       var sortedOrders = [];
       var objectkeys = {};
       var user = "";
+      var greeter = "";
       return {
         moment,
         orders,
         sortedOrders,
         objectkeys,
         user,
+        greeter,
         apiMessage: "",
         formData: {
           recipient: '',
@@ -81,7 +70,7 @@ export default {
           if(this.greeter == ""){
             this.$router.push({path: '/'});
           }
-        },   
+        },
         postOrder(){
           var url = "https://insong-066b.restdb.io/rest/";
           const token = this.$auth.getTokenSilently();
@@ -94,7 +83,7 @@ export default {
           axios.put("https://insong-066b.restdb.io/rest/orders/"+id,
           {
             status: "In Queue",
-            greeter: this.greeter.email
+            greeter: this.$auth.user
           },
           {
             headers: {
@@ -134,9 +123,12 @@ export default {
 
         }
     },
-    created() {
-      this.getOrders();
+    mounted() {
       this.getGreeters();
+      
+    },
+    created() {
+
     }
     
   }
@@ -147,6 +139,15 @@ export default {
     background: #14213d;
     overflow: scroll !important;
     color: white;
+  }
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .btn {
+      margin: 10px;
+      padding: 10px;
+    }
   }
   h1 {
     font-weight:900;

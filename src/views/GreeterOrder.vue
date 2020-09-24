@@ -3,26 +3,24 @@
   <div id="order" class="has-footer has-header">
     
     <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">    
-    <h2 class="text-center">Available Orders</h2>
-    <h6>Select order to add to your queue.</h6>
+    <h2 class="text-center">Order</h2>
     
     <router-link to="/switchboard" class="btn btn-dark">Back to Switchboard</router-link>
-    
-    <div v-if="orders.length<1" class="border m-5 p-4">No orders right now, check back later</div>
     <div class="text-left p-3 m-3 mx-auto">
-      <div class="box1" v-for="o in sortedOrders" :key="o">
-        <div class="item">
-          Sent to: {{o.recipient_name}}
-          <br>
-          Song: {{o.song}}
-          <br>
-          Type: {{o.type}}
-          <br>
-          Created: {{moment(o.created_at).format('MM-DD-YYYY')}}
-          <div class="btn btn-primary" @click="addOrder(o._id)">Add to Queue</div>
-        </div>
-      </div>
-            
+     <div class="order-info">
+       Created: {{moment(this.order.created_at).format('MM-DD-YYYY')}}<br>
+       Song: {{this.order.song}}<br>
+       Type: {{this.order.type}}<br>
+       <div class="border p-2">Recipient:<br>
+         Name: {{this.order.recipient_name}}<br>
+         Phone: {{this.order.recipient_phone}}
+       </div>
+     </div>
+     <div class="buttons">
+       <div @click="completeOrder(1)" class="btn btn-dark">Completed on First Call</div>
+       <div @click="completeOrder(2)" class="btn btn-dark">Completed on Second Call</div>
+       <div @click="completeOrder(3)" class="btn btn-dark">Completed on Third Call</div>
+    </div>      
     </div>
     
     </div>
@@ -33,17 +31,19 @@
 import axios from 'axios';
 import moment from 'moment'
 export default {
-    name: 'GreeterOrders',
+    name: 'GreeterMyOrders',
     components: {},
     inject: [],
     data() {      
       var orders = [];
+      var order = "";
       var sortedOrders = [];
       var objectkeys = {};
       var user = "";
       return {
         moment,
         orders,
+        order,
         sortedOrders,
         objectkeys,
         user,
@@ -102,6 +102,43 @@ export default {
             }
           }).then(this.$router.push({path: "/switchboard"}));
         },
+        
+        async completeOrder(calls) {
+          var id = this.$route.params.id;
+          const token = await this.$auth.getTokenSilently();
+          axios.put("https://insong-066b.restdb.io/rest/orders/"+id,
+          {
+            status: "Completed",
+            calls: calls
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`    // send the access token through the 'Authorization' header
+            }
+          })
+          var greeterID = this.greeter.id;
+          var amount = 0;
+          if(this.order.type=='Birthday'){
+            amount = 9.95
+          }
+          else if(this.order.type=='Cover (partial)'){
+            amount = 13.95
+          }
+          else if(this.order.type=='Happy (full)'){
+            amount = 19.95
+          }
+          axios.put("https://insong-066b.restdb.io/rest/greeters/"+this.greeter._id,
+          {
+            orders_completed: this.greeter.orders_completed + 1,
+            money_earned: this.greeter.money_earned + amount
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`    // send the access token through the 'Authorization' header
+            }
+          }).then(this.$router.push({path: "/switchboard"}));
+        },
+        
         async getOrders() {
           const token = await this.$auth.getTokenSilently();
           const { data } = await axios.get("https://insong-066b.restdb.io/rest/orders", {
@@ -110,11 +147,10 @@ export default {
             }
           });
           for(var i=0; i<data.length; i++) {
-            if(data[i].status == 'Posted') {
-              this.orders.push(data[i])
+            if(data[i]._id==this.$route.params.id){
+              this.order = data[i];
             }
           }
-          this.sortedOrders = this.orders.slice().sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
         },
         async postOrders() {
           const token = await this.$auth.getTokenSilently();
@@ -147,6 +183,13 @@ export default {
     background: #14213d;
     overflow: scroll !important;
     color: white;
+  }
+  .buttons {
+    display: flex;
+  }
+  .order-info {
+    border: 3px solid white;
+    padding: 10px;
   }
   h1 {
     font-weight:900;
