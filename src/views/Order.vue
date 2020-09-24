@@ -12,7 +12,7 @@
 <template>
   <div id="order" class="has-footer has-header">
     <h2 class="text-center">Select a Greeting</h2>
-    <div class="greetings">
+    <div class="greetings mb-5 pb-3">
       <router-link to="/birthday"><div class="item"><span>Happy Birthday</span></div></router-link>
       <router-link to="/cover-partial"><div class="item"><span>Cover Song (partial)</span></div></router-link>
       <router-link to="/cover-full"><div class="item"><span>Cover Song (full)</span></div></router-link>
