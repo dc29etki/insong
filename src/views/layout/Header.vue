@@ -46,6 +46,9 @@
   }
 </script>
 <style lang="scss">
+  .navbar {
+    position: fixed !important;
+  }
   #header {
     z-index: 1;
     background:black;

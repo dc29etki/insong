@@ -2,7 +2,9 @@
 <template>
   <div id="order" class="has-footer has-header">
     
-    <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">    
+    <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">
+      <div class="pb-5 mb-5"> </div>
+          
     
     <h2 class="text-center">Welcome greeter!</h2>
     <div>

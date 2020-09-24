@@ -33,7 +33,7 @@
           </template>
         </ul>
       </div>
-    </div>
+    </div>    
   </nav>
 </template>
 <script>
@@ -59,6 +59,8 @@ export default {
   .navbar {
     color: white;
     background: black;   
+    position: fixed !important;
+    width: 100%;
     .navbar-brand {
       color: #fca311 !important;
     }

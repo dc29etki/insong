@@ -2,7 +2,9 @@
 <template>
   <div id="order" class="has-footer has-header">
     
-    <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">    
+    <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">  
+      <div class="pb-5 mb-5"> </div>
+        
     <h2 class="text-center">Order</h2>
     
     <router-link to="/switchboard" class="btn btn-dark">Back to Switchboard</router-link>
@@ -109,7 +111,8 @@ export default {
           axios.put("https://insong-066b.restdb.io/rest/orders/"+id,
           {
             status: "Completed",
-            calls: calls
+            calls: calls,
+            completed_at: Date.now()
           },
           {
             headers: {

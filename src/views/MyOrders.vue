@@ -1,5 +1,8 @@
+<!DOCTYPE html>
 <template>
   <div id="order" class="has-footer has-header">
+    <div class="pb-5 mb-5"> </div>
+    
     
     <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">    
     <h2 class="text-center">My Orders</h2>
@@ -14,6 +17,9 @@
           Created: {{moment(o.created_at).format('MM-DD-YYYY')}}
           <br>
           Status: {{o.status}}
+          <div v-if="o.status === 'Completed'">
+            Completed at: {{o.completed_at}}
+          </div>
         </div>
       </div>
             

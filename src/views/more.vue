@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <template>
   <div id="more" class="has-footer has-header">
+    <div class="pb-5 mb-5"> </div>
+    
     
     <div class="box">
       <div class="item">
@@ -51,7 +53,6 @@ export default {
 </script>
 <style lang="scss">
   #more {
-    height: 90vh;
     background: black;
     overflow: scroll !important;
     color: white;

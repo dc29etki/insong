@@ -1,5 +1,8 @@
+<!DOCTYPE html> 
 <template>
   <div id="home" class="has-footer has-header">    
+    <div class="pb-5 mb-5"> </div>
+    
     <div class="home-area m-2 text-center">
     <img style="height: 20vh;" src=".././assets/logo.png"/>
     
@@ -25,7 +28,7 @@
           <hr>
           <h4>Welcome back, {{$auth.user.name}}!</h4>
           <router-link to="/order" class="btn btn-dark m-2">Send a greeting now!</router-link>
-          <router-link class="btn btn-dark m-2" to="/profile">Profile</router-link>
+          <router-link class="btn btn-dark m-2" to="/my-orders">My Orders</router-link>
         </div>
       
         <div class="s3">

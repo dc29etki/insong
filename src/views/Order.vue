@@ -11,6 +11,8 @@
 
 <template>
   <div id="order" class="has-footer has-header">
+    <div class="pb-5 mb-5"> </div>
+    
     <h2 class="text-center">Select a Greeting</h2>
     <div class="greetings mb-5 pb-3">
       <router-link to="/birthday"><div class="item"><span>Happy Birthday</span></div></router-link>
