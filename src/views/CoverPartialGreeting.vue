@@ -11,6 +11,7 @@
 
 <template>
   <div id="order" class="has-footer has-header">
+    <div class="pb-5 mb-5"> </div>
     
     <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">    
     <h2 class="text-center">Cover Song (Partial)</h2>
