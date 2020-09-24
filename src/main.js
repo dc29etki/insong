@@ -153,6 +153,7 @@ const router = new VueRouter({
             path: "/switchboard",
             name: "Switchboard",
             component: switchboard,
+            beforeEnter: authGuard
         },
         {
             path: "/greeter-myorders",
