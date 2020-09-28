@@ -72,7 +72,6 @@ export default {
         },
         async getGreeters() {
           const token = await this.$auth.getTokenSilently();
-          const p1 = this.$auth.user.email;
           let url = new URL('https://insong-066b.restdb.io/rest/greeters')
           let json = {
             "user_email": this.$auth.user_email
@@ -84,10 +83,12 @@ export default {
             }
           });
           this.greeter = data[0];
+          console.log(this.greeter._id)
           if(this.greeter == ""){
             this.$router.push({path: '/'});
           }
-        },   
+          else {this.getOrders();}
+        },     
         postOrder(){
           var url = "https://insong-066b.restdb.io/rest/";
           const token = this.$auth.getTokenSilently();

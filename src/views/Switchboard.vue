@@ -8,7 +8,7 @@
     
     <h2 class="text-center">Welcome greeter!</h2>
     <div>
-      {{this.greeter.orders_completed}} orders completed for a total of ${{this.greeter.money_earned}}
+      {{this.greeter.orders_completed}} orders completed for a total of ${{this.greeter.money_earned.toFixed(2)}}
     </div>
       <div class="buttons">
         <router-link to="/greeter-myorders" class="btn btn-lg btn-dark">My orders</router-link>
@@ -59,20 +59,21 @@ export default {
         },
         async getGreeters() {
           const token = await this.$auth.getTokenSilently();
-          const { data } = await axios.get("https://insong-066b.restdb.io/rest/greeters", {
+          let url = new URL('https://insong-066b.restdb.io/rest/greeters')
+          let json = {
+            "user_email": this.$auth.user_email
+          };
+          url.searchParams.set('q', JSON.stringify(json))
+          const { data } = await axios.get(url, {
             headers: {
               Authorization: `Bearer ${token}`
             }
           });
-          for(var i=0; i<data.length; i++) {
-            if(data[i].user_email == this.$auth.user.email) {
-              this.greeter = data[i];
-            }
-          }
+          this.greeter = data[0];
           if(this.greeter == ""){
             this.$router.push({path: '/'});
           }
-        },
+        },  
         postOrder(){
           var url = "https://insong-066b.restdb.io/rest/";
           const token = this.$auth.getTokenSilently();

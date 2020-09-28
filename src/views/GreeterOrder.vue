@@ -70,20 +70,22 @@ export default {
         },
         async getGreeters() {
           const token = await this.$auth.getTokenSilently();
-          const { data } = await axios.get("https://insong-066b.restdb.io/rest/greeters", {
+          let url = new URL('https://insong-066b.restdb.io/rest/greeters')
+          let json = {
+            "user_email": this.$auth.user_email
+          };
+          url.searchParams.set('q', JSON.stringify(json))
+          const { data } = await axios.get(url, {
             headers: {
               Authorization: `Bearer ${token}`
             }
           });
-          for(var i=0; i<data.length; i++) {
-            if(data[i].user_email == this.$auth.user.email) {
-              this.greeter = data[i];
-            }
-          }
+          this.greeter = data[0];
+          console.log(this.greeter._id)
           if(this.greeter == ""){
             this.$router.push({path: '/'});
           }
-          else {this.getOrders()}
+          else {this.getOrders();}
         },   
         postOrder(){
           var url = "https://insong-066b.restdb.io/rest/";
