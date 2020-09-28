@@ -20,7 +20,7 @@
           <br>
           Type: {{o.type}}
           <br>
-          Created: {{moment(o.created_at).format('MM-DD-YYYY')}}
+          Created: {{moment(o.created_at).format('MM-DD-YYYY')}}<br>
           <div class="btn btn-primary" @click="addOrder(o._id)">Add to Queue</div>
         </div>
       </div>
@@ -42,6 +42,7 @@ export default {
       var orders = [];
       var sortedOrders = [];
       var objectkeys = {};
+      var greeter = "";
       var user = "";
       return {
         moment,
@@ -49,6 +50,7 @@ export default {
         sortedOrders,
         objectkeys,
         user,
+        greeter,
         apiMessage: "",
         formData: {
           recipient: '',
@@ -70,16 +72,18 @@ export default {
         },
         async getGreeters() {
           const token = await this.$auth.getTokenSilently();
-          const { data } = await axios.get("https://insong-066b.restdb.io/rest/greeters", {
+          const p1 = this.$auth.user.email;
+          let url = new URL('https://insong-066b.restdb.io/rest/greeters')
+          let json = {
+            "user_email": this.$auth.user_email
+          };
+          url.searchParams.set('q', JSON.stringify(json))
+          const { data } = await axios.get(url, {
             headers: {
               Authorization: `Bearer ${token}`
             }
           });
-          for(var i=0; i<data.length; i++) {
-            if(data[i].user_email == this.$auth.user.email) {
-              this.greeter = data[i];
-            }
-          }
+          this.greeter = data[0];
           if(this.greeter == ""){
             this.$router.push({path: '/'});
           }
@@ -91,12 +95,12 @@ export default {
           axios.get(url)
         },
         async addOrder(id) {
-          console.log(id);
+          console.log(this.greeter);
           const token = await this.$auth.getTokenSilently();
           axios.put("https://insong-066b.restdb.io/rest/orders/"+id,
           {
             status: "In Queue",
-            greeter: this.greeter.email
+            greeter: this.greeter.user_email
           },
           {
             headers: {
@@ -106,16 +110,13 @@ export default {
         },
         async getOrders() {
           const token = await this.$auth.getTokenSilently();
-          const { data } = await axios.get("https://insong-066b.restdb.io/rest/orders", {
+          const { data } = await axios.get('https://insong-066b.restdb.io/rest/orders?q={"status":"Posted"}', {
             headers: {
               Authorization: `Bearer ${token}`
             }
           });
-          for(var i=0; i<data.length; i++) {
-            if(data[i].status == 'Posted') {
-              this.orders.push(data[i])
-            }
-          }
+          this.orders = data;
+          
           this.sortedOrders = this.orders.slice().sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
         },
         async postOrders() {
@@ -137,8 +138,8 @@ export default {
         }
     },
     created() {
-      this.getOrders();
       this.getGreeters();
+      this.getOrders();
     }
     
   }

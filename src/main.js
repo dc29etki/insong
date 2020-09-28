@@ -29,6 +29,8 @@ import greeterorders from "./views/GreeterOrders.vue";
 import switchboard from "./views/Switchboard.vue";
 import greetermyorders from "./views/GreeterMyOrders.vue";
 import greeterorder from "./views/GreeterOrder.vue";
+import completedorders from "./views/CompletedOrders.vue";
+
 
 
 
@@ -40,6 +42,8 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { faList } from '@fortawesome/free-solid-svg-icons'
 import { faMicrophone } from '@fortawesome/free-solid-svg-icons'
+import { faQuestion } from '@fortawesome/free-solid-svg-icons'
+
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -50,6 +54,8 @@ library.add(faBars)
 library.add(faUser)
 library.add(faList)
 library.add(faMicrophone)
+library.add(faQuestion)
+
 
 
 // Import the plugin here
@@ -163,6 +169,11 @@ const router = new VueRouter({
             path: '/greeter-order/:id',
             name: "GreeterOrder",
             component: greeterorder,
+        },
+        {
+            path: '/completed-orders',
+            name: "CompletedOrders",
+            component: completedorders,
         }
   ]
 });

@@ -69,19 +69,22 @@ export default {
         },
         async getGreeters() {
           const token = await this.$auth.getTokenSilently();
-          const { data } = await axios.get("https://insong-066b.restdb.io/rest/greeters", {
+          let url = new URL('https://insong-066b.restdb.io/rest/greeters')
+          let json = {
+            "user_email": this.$auth.user_email
+          };
+          url.searchParams.set('q', JSON.stringify(json))
+          const { data } = await axios.get(url, {
             headers: {
               Authorization: `Bearer ${token}`
             }
           });
-          for(var i=0; i<data.length; i++) {
-            if(data[i].user_email == this.$auth.user.email) {
-              this.greeter = data[i];
-            }
-          }
+          this.greeter = data[0];
+          console.log(this.greeter._id)
           if(this.greeter == ""){
             this.$router.push({path: '/'});
           }
+          else {this.getOrders();}
         },   
         postOrder(){
           var url = "https://insong-066b.restdb.io/rest/";
@@ -105,18 +108,25 @@ export default {
         },
         async getOrders() {
           const token = await this.$auth.getTokenSilently();
-          const { data } = await axios.get("https://insong-066b.restdb.io/rest/orders", {
+          let url = new URL('https://insong-066b.restdb.io/rest/orders')
+          let json = {
+            "greeter": this.greeter.user_email
+          };
+          url.searchParams.set('q', JSON.stringify(json))
+          console.log(url)
+          const { data } = await axios.get(url, {
             headers: {
               Authorization: `Bearer ${token}`
             }
           });
-          for(var i=0; i<data.length; i++) {
-            if(data[i].greeter == this.greeter.email) {
-              if(data[i].status=='In Queue'){
-                this.orders.push(data[i])
-              }
-            }
-          }
+          this.orders = data;
+          // for(var i=0; i<data.length; i++) {
+//             if(data[i].greeter == this.greeter.email) {
+//               if(data[i].status=='In Queue'){
+//                 this.orders.push(data[i])
+//               }
+//             }
+//           }
           this.sortedOrders = this.orders.slice().sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
         },
         async postOrders() {
@@ -138,9 +148,8 @@ export default {
         }
     },
     created() {
-      this.getOrders();
       this.getGreeters();
-    }
+    },
     
   }
 </script>

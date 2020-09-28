@@ -2,27 +2,32 @@
 <template>
   <div id="order" class="has-footer has-header">
     
-    <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">  
+    <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;"> 
       <div class="pb-5 mb-5"> </div>
-        
-    <h2 class="text-center">Order</h2>
+         
+    <h2 class="text-center">My Orders</h2>
     
     <router-link to="/switchboard" class="btn btn-dark">Back to Switchboard</router-link>
+    
     <div class="text-left p-3 m-3 mx-auto">
-     <div class="order-info">
-       Created: {{moment(this.order.created_at).format('MM-DD-YYYY')}}<br>
-       Song: {{this.order.song}}<br>
-       Type: {{this.order.type}}<br>
-       <div class="border p-2">Recipient:<br>
-         Name: {{this.order.recipient_name}}<br>
-         Phone: {{this.order.recipient_phone}}
-       </div>
-     </div>
-     <div class="buttons">
-       <div @click="completeOrder(1)" class="btn btn-dark">Completed on First Call</div>
-       <div @click="completeOrder(2)" class="btn btn-dark">Completed on Second Call</div>
-       <div @click="completeOrder(3)" class="btn btn-dark">Completed on Third Call</div>
-    </div>      
+      <div class="box1" v-for="o in orders" :key="o">
+        <div class="item">
+          Sent to: {{o.recipient_name}}
+          <br>
+          Song: {{o.song}}
+          <br>
+          Type: {{o.type}}
+          <br>
+          Created: {{moment(o.created_at).format('MM-DD-YYYY | hh:mm a')}}
+          <br>
+          Completed: {{moment(o.completed_at).format('MM-DD-YYYY | hh:mm a')}}
+          <br>
+          Price: <span v-if="o.type=='Birthday'">$9.95</span>
+          <span v-if="o.type=='Cover (partial)'">$13.95</span>
+          <span v-if="o.type=='Cover (full)'">$19.95</span>
+        </div>
+      </div>
+            
     </div>
     
     </div>
@@ -33,19 +38,17 @@
 import axios from 'axios';
 import moment from 'moment'
 export default {
-    name: 'GreeterMyOrders',
+    name: 'CompletedOrders',
     components: {},
     inject: [],
     data() {      
       var orders = [];
-      var order = "";
       var sortedOrders = [];
       var objectkeys = {};
       var user = "";
       return {
         moment,
         orders,
-        order,
         sortedOrders,
         objectkeys,
         user,
@@ -83,7 +86,6 @@ export default {
           if(this.greeter == ""){
             this.$router.push({path: '/'});
           }
-          else {this.getOrders()}
         },   
         postOrder(){
           var url = "https://insong-066b.restdb.io/rest/";
@@ -105,57 +107,21 @@ export default {
             }
           }).then(this.$router.push({path: "/switchboard"}));
         },
-        
-        async completeOrder(calls) {
-          var id = this.$route.params.id;
-          const token = await this.$auth.getTokenSilently();
-          axios.put("https://insong-066b.restdb.io/rest/orders/"+id,
-          {
-            status: "Completed",
-            calls: calls,
-            completed_at: Date.now()
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`    // send the access token through the 'Authorization' header
-            }
-          })
-          var greeterID = this.greeter._id;
-          var amount = 0;
-          if(this.order.type=='Birthday'){
-            amount = 9.95
-          }
-          else if(this.order.type=='Cover (partial)'){
-            amount = 13.95
-          }
-          else if(this.order.type=='Happy (full)'){
-            amount = 19.95
-          }
-          axios.put("https://insong-066b.restdb.io/rest/greeters/"+this.greeter._id,
-          {
-            orders_completed: this.greeter.orders_completed + 1,
-            money_earned: this.greeter.money_earned + amount
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`    // send the access token through the 'Authorization' header
-            }
-          }).then(this.$router.push({path: "/switchboard"}));
-        },
-        
         async getOrders() {
           const token = await this.$auth.getTokenSilently();
-          let url = new URL('https://insong-066b.restdb.io/rest/orders')
-          let json = {
-            "_id": this.$route.params.id 
-          };
-          url.searchParams.set('q', JSON.stringify(json))
-          const { data } = await axios.get(url, {
+          const { data } = await axios.get("https://insong-066b.restdb.io/rest/orders", {
             headers: {
               Authorization: `Bearer ${token}`
             }
           });
-          this.order = data[0]
+          for(var i=0; i<data.length; i++) {
+            if(data[i].greeter == this.greeter.email) {
+              if(data[i].status=='Completed'){
+                this.orders.push(data[i])
+              }
+            }
+          }
+          this.sortedOrders = this.orders.slice().sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
         },
         async postOrders() {
           const token = await this.$auth.getTokenSilently();
@@ -175,7 +141,8 @@ export default {
 
         }
     },
-    created() { 
+    created() {
+      this.getOrders();
       this.getGreeters();
     }
     
@@ -187,13 +154,6 @@ export default {
     background: #14213d;
     overflow: scroll !important;
     color: white;
-  }
-  .buttons {
-    display: flex;
-  }
-  .order-info {
-    border: 3px solid white;
-    padding: 10px;
   }
   h1 {
     font-weight:900;

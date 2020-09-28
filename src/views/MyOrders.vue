@@ -14,11 +14,11 @@
           <br>
           Song: {{o.song}}
           <br>
-          Created: {{moment(o.created_at).format('MM-DD-YYYY')}}
+          Created: {{moment(o.created_at).format('MM-DD-YYYY | hh:mm a')}}
           <br>
           Status: {{o.status}}
-          <div v-if="o.status === 'Completed'">
-            Completed at: {{o.completed_at}}
+          <div v-if="o.status === 'Completed' && o.completed_at">
+            Completed at: {{moment(o.completed_at).format('MM-DD-YYYY | hh:mm a')}}
           </div>
         </div>
       </div>

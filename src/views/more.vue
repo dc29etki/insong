@@ -29,6 +29,14 @@
           <div class="col-8 my-auto text-right"><router-link to="/switchboard">Greeter Switchboard</router-link></div>
         </div>
       </div>
+      <div class="item">
+        <div class="row">
+          <div class="col-4 my-auto text-center">
+            <font-awesome-icon :icon="['fa', 'question']" />
+          </div>
+          <div class="col-8 my-auto text-right"><router-link to="/switchboard">Help</router-link></div>
+        </div>
+      </div>
     </div>
     
     

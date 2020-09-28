@@ -13,9 +13,9 @@
       <div class="buttons">
         <router-link to="/greeter-myorders" class="btn btn-lg btn-dark">My orders</router-link>
         <router-link to="/greeter-orders" class="btn btn-lg btn-dark">Available orders</router-link>
+        <router-link to="/completed-orders" class="btn btn-lg btn-dark">Completed orders</router-link>
       </div>
-    </div>
-        
+    </div>        
   </div>
 </template>
 <script>
