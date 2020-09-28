@@ -86,7 +86,8 @@ export default {
           if(this.greeter == ""){
             this.$router.push({path: '/'});
           }
-        },   
+          else {this.getOrders()}
+        },     
         postOrder(){
           var url = "https://insong-066b.restdb.io/rest/";
           const token = this.$auth.getTokenSilently();
@@ -109,18 +110,18 @@ export default {
         },
         async getOrders() {
           const token = await this.$auth.getTokenSilently();
-          const { data } = await axios.get("https://insong-066b.restdb.io/rest/orders", {
+          let url = new URL('https://insong-066b.restdb.io/rest/orders')
+          let json = {
+            "greeter": this.greeter.user_email,
+            "status": "Completed"
+          };
+          url.searchParams.set('q', JSON.stringify(json))
+          const { data } = await axios.get(url, {
             headers: {
               Authorization: `Bearer ${token}`
             }
           });
-          for(var i=0; i<data.length; i++) {
-            if(data[i].greeter == this.greeter.email) {
-              if(data[i].status=='Completed'){
-                this.orders.push(data[i])
-              }
-            }
-          }
+          this.orders = data;
           this.sortedOrders = this.orders.slice().sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
         },
         async postOrders() {
@@ -142,7 +143,6 @@ export default {
         }
     },
     created() {
-      this.getOrders();
       this.getGreeters();
     }
     
