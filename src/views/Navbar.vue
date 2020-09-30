@@ -12,7 +12,7 @@
         aria-expanded="false"
         aria-label
       >
-        <span><font-awesome-icon :icon="['fa', 'user-circle']" /></span>
+        <font-awesome-icon :icon="['fa', 'user-circle']" />
       </div>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto"></ul>
