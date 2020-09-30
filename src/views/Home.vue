@@ -38,8 +38,10 @@
         </div>
         
       </div>
+      
     
     </div>
+    <div class="pb-5 mb-5"> </div>
     
   </div>
 </template>
@@ -84,7 +86,6 @@ export default {
   #home {
     height: auto;
     background: white;
-    overflow: hidden !important;
     color: black !important;
     p {
       color: black;
