@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <template>
-  <div id="order" class="has-footer has-header">
+  <div id="corder" class="has-footer has-header">
     
     <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;"> 
       <div class="pb-5 mb-5"> </div>
          
-    <h2 class="text-center">My Orders</h2>
+    <h2 class="text-center">My Completed Orders</h2>
+    
     
     <router-link to="/switchboard" class="btn btn-dark">Back to Switchboard</router-link>
     
-    <div class="text-left p-3 m-3 mx-auto">
-      <div class="box1" v-for="o in orders" :key="o">
+    <div class="pt-3">
+      {{this.greeter.orders_completed}} orders completed for a total of ${{this.greeter.money_earned.toFixed(2)}}
+    </div>
+    <div class="text-left p-3 mx-3 mx-auto">
+      <div class="box2" v-for="o in orders" :key="o">
         <div class="item">
           Sent to: {{o.recipient_name}}
           <br>
@@ -18,9 +22,9 @@
           <br>
           Type: {{o.type}}
           <br>
-          Created: {{moment(o.created_at).format('MM-DD-YYYY | hh:mm a')}}
+          Created: {{new Date(o.created_at).toLocaleString()}}
           <br>
-          Completed: {{moment(o.completed_at).format('MM-DD-YYYY | hh:mm a')}}
+          Created: {{new Date(o.completed_at).toLocaleString()}}
           <br>
           Price: <span v-if="o.type=='Birthday'">$9.95</span>
           <span v-if="o.type=='Cover (partial)'">$13.95</span>
@@ -46,12 +50,14 @@ export default {
       var sortedOrders = [];
       var objectkeys = {};
       var user = "";
+      var greeter = "";
       return {
         moment,
         orders,
         sortedOrders,
         objectkeys,
         user,
+        greeter,
         apiMessage: "",
         formData: {
           recipient: '',
@@ -143,18 +149,18 @@ export default {
 
         }
     },
-    created() {
+    mounted() {
       this.getGreeters();
     }
     
   }
 </script>
 <style lang="scss">
-  #order {
+  #corder {
     height: auto;
-    background: #14213d;
+    background: white;
     overflow: scroll !important;
-    color: white;
+    color: #232323;
   }
   h1 {
     font-weight:900;
@@ -169,10 +175,10 @@ export default {
       float: left;
     }
   }
-  .box1 {
+  .box3 {
     display: flex;
     .item {
-      border: 3px solid white;
+      border: 3px solid #333;
       width: 100%;
       padding: 10px;
       margin: 10px;

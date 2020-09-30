@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <template>
-  <div id="order" class="has-footer has-header">
+  <div id="myorders" class="has-footer has-header">
     
     <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;"> 
       <div class="pb-5 mb-5"> </div>
@@ -11,7 +11,7 @@
     
     <div v-if="orders.length<1" class="border m-5 p-4">No orders right now, check back later</div>
     <div class="text-left p-3 m-3 mx-auto">
-      <div class="box1" v-for="o in orders" :key="o">
+      <div class="box2" v-for="o in orders" :key="o">
         <div class="item">
           Sent to: {{o.recipient_name}}
           <br>
@@ -19,7 +19,7 @@
           <br>
           Type: {{o.type}}
           <br>
-          Created: {{moment(o.created_at).format('MM-DD-YYYY')}}<br>
+          Created: {{new Date(o.created_at).toDateString()}}<br>
           <router-link class="btn btn-primary" :to="{ name: 'GreeterOrder', params: { id: o._id }}">View Order</router-link>
         </div>
       </div>
@@ -154,17 +154,11 @@ export default {
   }
 </script>
 <style lang="scss">
-  #order {
-    height: auto;
-    background: #14213d;
-    overflow: scroll !important;
-    color: white;
-  }
   h1 {
     font-weight:900;
   }
   h2 {
-    color: #fca311;
+    color: #232323;
   }
   .formf {
     color: white;
@@ -173,10 +167,10 @@ export default {
       float: left;
     }
   }
-  .box1 {
+  .box2 {
     display: flex;
     .item {
-      border: 3px solid white;
+      border: 3px solid black;
       width: 100%;
       padding: 10px;
       margin: 10px;

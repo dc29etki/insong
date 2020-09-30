@@ -1,24 +1,60 @@
 <!DOCTYPE html>
 <template>
-  <div id="order" class="has-footer has-header">
+  <div id="myorders" class="has-footer has-header">
     <div class="pb-5 mb-5"> </div>
     
     
     <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">    
-    <h2 class="text-center">My Orders</h2>
+    <h2 class="text-center">My Greetings</h2>
         
     <div class="text-left p-3 m-3 mx-auto">
-      <div class="box1" v-for="o in sortedOrders" :key="o">
-        <div class="item">
+      <div class="box2" v-for="o in sortedOrders" :key="o">
+        <div v-if="o.status=='Completed'" class="item completed">
           Sent to: {{o.recipient_name}}
           <br>
           Song: {{o.song}}
           <br>
-          Created: {{moment(o.created_at).format('MM-DD-YYYY | hh:mm a')}}
+          Created: {{new Date(o.created_at).toLocaleString()}}
           <br>
           Status: {{o.status}}
           <div v-if="o.status === 'Completed' && o.completed_at">
-            Completed at: {{moment(o.completed_at).format('MM-DD-YYYY | hh:mm a')}}
+            Completed at: {{new Date(o.completed_at).toLocaleString()}}
+          </div>
+        </div>
+        <div v-if="o.status=='In Queue'" class="item queue">
+          Sent to: {{o.recipient_name}}
+          <br>
+          Song: {{o.song}}
+          <br>
+          Created: {{new Date(o.created_at).toLocaleString()}}
+          <br>
+          Status: {{o.status}}
+          <div v-if="o.status === 'Completed' && o.completed_at">
+            Completed at: {{new Date(o.completed_at).toLocaleString()}}
+          </div>
+        </div>
+        <div v-if="o.status=='Posted'" class="item posted">
+          Sent to: {{o.recipient_name}}
+          <br>
+          Song: {{o.song}}
+          <br>
+          Created: {{new Date(o.created_at).toLocaleString()}}
+          <br>
+          Status: {{o.status}}
+          <div v-if="o.status === 'Completed' && o.completed_at">
+            Completed at: {{new Date(o.completed_at).toLocaleString()}}
+          </div>
+        </div>
+        <div v-if="o.status=='Attempted'" class="item attempted">
+          Sent to: {{o.recipient_name}}
+          <br>
+          Song: {{o.song}}
+          <br>
+          Created: {{new Date(o.created_at).toLocaleString()}}
+          <br>
+          Status: {{o.status}}
+          <div v-if="o.status === 'Completed' && o.completed_at">
+            Completed at: {{new Date(o.completed_at).toLocaleString()}}
           </div>
         </div>
       </div>
@@ -74,16 +110,17 @@ export default {
           },
         async getOrders() {
           const token = await this.$auth.getTokenSilently();
-          const { data } = await axios.get("https://insong-066b.restdb.io/rest/orders", {
+          let url = new URL('https://insong-066b.restdb.io/rest/orders')
+          let json = {
+            "auth0_user_id": this.$auth.user.sub
+          };
+          url.searchParams.set('q', JSON.stringify(json))
+          const { data } = await axios.get(url, {
             headers: {
               Authorization: `Bearer ${token}`    // send the access token through the 'Authorization' header
             }
           });
-          for(var i=0; i<data.length; i++) {
-            if(data[i].auth0_user_id == this.$auth.user.sub) {
-              this.orders.push(data[i])
-            }
-          }
+          this.orders = data;
           this.sortedOrders = this.orders.slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
         },
         async postOrders() {
@@ -111,11 +148,11 @@ export default {
   }
 </script>
 <style lang="scss">
-  #order {
+  #myorders {
     height: auto;
-    background: #14213d;
+    background: white;
     overflow: scroll !important;
-    color: white;
+    color: #232323;
   }
   h1 {
     font-weight:900;
@@ -130,13 +167,32 @@ export default {
       float: left;
     }
   }
-  .box1 {
+  .box2 {
     display: flex;
     .item {
-      border: 3px solid white;
       width: 100%;
       padding: 10px;
       margin: 10px;
+      &.completed {
+        border: 5px solid darkgreen;
+        background-color:rgba(10, 83, 1, 0.2);
+        color: #232323;
+      }
+      &.posted {
+        border: 5px solid #FF9A00;
+        background-color:rgba(255, 144, 0, 0.2);
+        color: #232323;
+      }
+      &.queue {
+        border: 5px solid darkblue;
+        background-color:rgba(7, 0, 120, 0.2);
+        color: #232323;
+      }
+      &.attempted {
+        border: 5px solid darkred;
+        background-color:rgba(255, 0, 0, 0.2);
+        color: #232323;
+      }
     }
   }
 </style>

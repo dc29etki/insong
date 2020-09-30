@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <template>
-  <div id="order" class="has-footer has-header">
+  <div id="g-order" class="has-footer has-header">
     
     <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">  
       <div class="pb-5 mb-5"> </div>
@@ -10,18 +10,30 @@
     <router-link to="/switchboard" class="btn btn-dark">Back to Switchboard</router-link>
     <div class="text-left p-3 m-3 mx-auto">
      <div class="order-info">
-       Created: {{moment(this.order.created_at).format('MM-DD-YYYY')}}<br>
+       <div class="border p-2"><strong>Recipient:</strong><br>
+         Name: {{this.order.recipient_name}}<br>
+         Phone: {{this.order.recipient_phone}}<br>
+         Date to call: {{this.order.date_requested}}<br>
+         Best Time to call: {{this.order.date_requested}}
+       </div>
+       Created: {{new Date(this.order.created_at).toLocaleString()}}<br>
        Song: {{this.order.song}}<br>
        Type: {{this.order.type}}<br>
-       <div class="border p-2">Recipient:<br>
-         Name: {{this.order.recipient_name}}<br>
+       Message: {{this.order.message}}
+       <div class=""><strong>Sender:</strong><br>
+         Name: {{this.order.sender}}<br>
          Phone: {{this.order.recipient_phone}}
        </div>
+       
      </div>
      <div class="buttons">
-       <div @click="completeOrder(1)" class="btn btn-dark">Completed on First Call</div>
-       <div @click="completeOrder(2)" class="btn btn-dark">Completed on Second Call</div>
-       <div @click="completeOrder(3)" class="btn btn-dark">Completed on Third Call</div>
+       <div v-if="this.order.calls==0" @click="completeOrder(1, false)" class="btn btn-danger item">Attempted First Call</div>
+       <div v-if="this.order.calls==1" @click="completeOrder(2, false)" class="btn btn-danger item">Attempted Second Call</div>
+       <div v-if="this.order.calls==2" @click="completeOrder(3, false)" class="btn btn-danger item">Attempted Third Call</div>
+       <div v-if="this.order.calls==0" @click="completeOrder(1, true)" class="btn btn-success item">Completed on First Call</div>
+       <div v-if="this.order.calls==1" @click="completeOrder(2, true)" class="btn btn-success item">Completed on Second Call</div>
+       <div v-if="this.order.calls==2" @click="completeOrder(3, true)" class="btn btn-success item">Completed on Third Call</div>
+       <div v-if="this.order.calls>2" @click="completeOrder(99, true)" class="btn btn-success item">Voicemail left</div>
     </div>      
     </div>
     
@@ -81,7 +93,6 @@ export default {
             }
           });
           this.greeter = data[0];
-          console.log(this.greeter._id)
           if(this.greeter == ""){
             this.$router.push({path: '/'});
           }
@@ -108,12 +119,19 @@ export default {
           }).then(this.$router.push({path: "/switchboard"}));
         },
         
-        async completeOrder(calls) {
+        async completeOrder(calls, completed) {
+          var status = '';
+          if(completed) {
+            status = "Completed"
+          }
+          if(!completed) {
+            status = "Attempted"
+          }
           var id = this.$route.params.id;
           const token = await this.$auth.getTokenSilently();
           axios.put("https://insong-066b.restdb.io/rest/orders/"+id,
           {
-            status: "Completed",
+            status: status,
             calls: calls,
             completed_at: Date.now()
           },
@@ -133,6 +151,7 @@ export default {
           else if(this.order.type=='Happy (full)'){
             amount = 19.95
           }
+          else {amount = 9.95}
           axios.put("https://insong-066b.restdb.io/rest/greeters/"+this.greeter._id,
           {
             orders_completed: this.greeter.orders_completed + 1,
@@ -177,21 +196,26 @@ export default {
 
         }
     },
-    created() { 
+    mounted() { 
       this.getGreeters();
     }
     
   }
 </script>
 <style lang="scss">
-  #order {
+  #g-order {
     height: auto;
-    background: #14213d;
+    background: white;
     overflow: scroll !important;
-    color: white;
+    color: #232323;
   }
   .buttons {
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    .item {
+      width: 150px;
+    }
   }
   .order-info {
     border: 3px solid white;

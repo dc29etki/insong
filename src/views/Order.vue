@@ -16,12 +16,12 @@
     <h2 class="text-center">All Greetings</h2>
     <h5 class="text-center">Click to Choose</h5>
     <div class="greetings pb-3">
-      <router-link to="/birthday"><img src=".././assets/greeting-icons/birthday.png"/></router-link>
-      <router-link to="/cover-partial"><img src=".././assets/greeting-icons/anniversary.png"/></router-link>
-      <router-link to="/cover-full"><img src=".././assets/greeting-icons/miss.png"/></router-link>
-      <router-link to="/birthday"><img src=".././assets/greeting-icons/thinking.png"/></router-link>
-      <router-link to="/cover-partial"><img src=".././assets/greeting-icons/love.png"/></router-link>
-      <router-link to="/cover-full"><img src=".././assets/greeting-icons/sorry.png"/></router-link>
+      <router-link to="/send-greeting/birthday"><img src=".././assets/greeting-icons/birthday.png"/></router-link>
+      <router-link to="/send-greeting/anniversary"><img src=".././assets/greeting-icons/anniversary.png"/></router-link>
+      <router-link to="/send-greeting/missyou"><img src=".././assets/greeting-icons/miss.png"/></router-link>
+      <router-link to="/send-greeting/thinking"><img src=".././assets/greeting-icons/thinking.png"/></router-link>
+      <router-link to="/send-greeting/love"><img src=".././assets/greeting-icons/love.png"/></router-link>
+      <router-link to="/send-greeting/sorry"><img src=".././assets/greeting-icons/sorry.png"/></router-link>
     </div>
   </div>
 </template>s
@@ -29,6 +29,7 @@
 <script>
 import axios from 'axios';
 import PayPal from 'vue-paypal-checkout'
+import moment from 'moment'
 export default {
     name: 'Order',
     components: {},
@@ -41,6 +42,7 @@ export default {
         orders,
         objectkeys,
         user,
+        moment,
         apiMessage: "",
         formData: {
           recipient_name: '',

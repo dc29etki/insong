@@ -21,20 +21,20 @@
         <div v-if="!$auth.isAuthenticated" class="s2">
           <hr>
           <h4>Login or Create an Account Today!</h4>
-          <a @click="login" class="btn btn-dark m-2">Login</a>
-          <a @click="login" class="btn btn-dark m-2">Sign Up</a>
+          <a @click="login" class="btn btn-orange m-2">Login</a>
+          <a @click="login" class="btn btn-orange m-2">Sign Up</a>
         </div>
         <div v-else class="s2">
           <hr>
           <h4>Welcome back, {{$auth.user.name}}!</h4>
-          <router-link to="/order" class="btn btn-dark m-2">Send a greeting now!</router-link>
-          <router-link class="btn btn-dark m-2" to="/my-orders">My Orders</router-link>
+          <router-link to="/order" class="btn btn-orange m-2">Send a greeting now!</router-link>
+          <router-link class="btn btn-orange m-2" to="/my-orders">My Greetings</router-link>
         </div>
       
         <div class="s3">
           <hr>
           <h4>Interested in Being a Greeter?</h4>
-          <a @click="login" class="btn btn-dark m-2 text-white">Apply Now</a>
+          <a href="mailto:walter@walterburmer.com?subject=Greeter Application" class="btn btn-info m-2 text-white">Apply Now</a>
         </div>
         
       </div>
@@ -97,7 +97,7 @@ export default {
     font-weight:900;
   }
   h2 {
-    color: #fca311;
+    color: #FF9A00;
   }
   .home-area {    
   }
@@ -125,4 +125,10 @@ export default {
     background: black;
     color: #232323;
   }
+  .btn-orange {
+    background: #FF9A00;
+  }
+  .btn-orange:hover{
+      color: white;
+    }
 </style>

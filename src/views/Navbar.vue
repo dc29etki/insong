@@ -73,6 +73,7 @@ export default {
     margin-left: 10px;
   }
   .navbar {
+    z-index: 99;
     color: white;
     background: #EFEFEF;   
     position: fixed !important;

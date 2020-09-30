@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <template>
-  <div id="order" class="has-footer has-header">
+  <div id="switchboard" class="has-footer has-header">
     
     <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">
       <div class="pb-5 mb-5"> </div>
@@ -10,7 +10,7 @@
     <div>
       {{this.greeter.orders_completed}} orders completed for a total of ${{this.greeter.money_earned.toFixed(2)}}
     </div>
-      <div class="buttons">
+      <div class="buttons3">
         <router-link to="/greeter-myorders" class="btn btn-lg btn-dark">My orders</router-link>
         <router-link to="/greeter-orders" class="btn btn-lg btn-dark">Available orders</router-link>
         <router-link to="/completed-orders" class="btn btn-lg btn-dark">Completed orders</router-link>
@@ -137,13 +137,13 @@ export default {
   }
 </script>
 <style lang="scss">
-  #order {
+  #switchboard {
     height: auto;
-    background: #14213d;
+    background: white;
     overflow: scroll !important;
-    color: white;
+    color: #232323;
   }
-  .buttons {
+  .buttons3 {
     display: flex;
     flex-direction: column;
     justify-content: center;

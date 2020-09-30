@@ -30,6 +30,11 @@ import switchboard from "./views/Switchboard.vue";
 import greetermyorders from "./views/GreeterMyOrders.vue";
 import greeterorder from "./views/GreeterOrder.vue";
 import completedorders from "./views/CompletedOrders.vue";
+import sendgreeting from "./views/SendGreeting.vue";
+import thankyou from "./views/ThankYou.vue";
+import help from "./views/Help.vue";
+
+
 
 
 
@@ -177,6 +182,21 @@ const router = new VueRouter({
             path: '/completed-orders',
             name: "CompletedOrders",
             component: completedorders,
+        },
+        {
+            path: '/send-greeting/:type',
+            name: "SendGreeting",
+            component: sendgreeting,
+        },
+        {
+            path: '/thank-you',
+            name: "ThankYou",
+            component: thankyou,
+        },
+        {
+            path: '/help',
+            name: "Help",
+            component: help,
         }
   ]
 });

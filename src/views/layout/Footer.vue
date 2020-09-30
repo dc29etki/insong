@@ -34,19 +34,19 @@
           label: "Greetings Menu",
           icon: "circle",
           component: "order",
-          path: "/order"
+          path: "/my-orders"
         },
         {
           label: "Greeter Switchboard",
           icon: "microphone",
           component: "order",
-          path: "/order"
+          path: "/switchboard"
         },
         {
           label: "Help",
           icon: "question",
           component: "more",
-          path: "/more"
+          path: "/help"
         }
       ];
       return {
@@ -69,7 +69,7 @@
 </script>
 <style lang="scss">
   #footer {
-    z-index: 1;
+    z-index: 99;
     background-color: #EFEFEF;
     color: #545454;
     padding:10px 0;
