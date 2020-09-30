@@ -5,7 +5,6 @@
       <span><img class="p-0 m-0" style="height: 9vh;" src=".././assets/logo-top.png"/></span>
       <div
         class="user-button mx-2"
-        type="button"
         data-toggle="collapse"
         data-target="#navbarSupportedContent"
       >
