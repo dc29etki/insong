@@ -8,9 +8,6 @@
         type="button"
         data-toggle="collapse"
         data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label
       >
         <font-awesome-icon :icon="['fa', 'user-circle']" />
       </div>
