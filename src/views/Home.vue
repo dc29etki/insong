@@ -82,11 +82,13 @@ export default {
   html, body {
     height: 100%;
     background: white;
+    overflow: scroll;
   }
   #home {
     height: auto;
     background: white;
     color: black !important;
+    overflow: scroll;
     p {
       color: black;
     }
