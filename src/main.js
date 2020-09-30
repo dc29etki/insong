@@ -39,10 +39,12 @@ import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { faNewspaper } from '@fortawesome/free-solid-svg-icons'
 import { faStore } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { faList } from '@fortawesome/free-solid-svg-icons'
 import { faMicrophone } from '@fortawesome/free-solid-svg-icons'
 import { faQuestion } from '@fortawesome/free-solid-svg-icons'
+import { faHandshake } from '@fortawesome/free-solid-svg-icons'
+import { faCircle } from '@fortawesome/free-solid-svg-icons'
 
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -51,11 +53,12 @@ library.add(faHome)
 library.add(faNewspaper)
 library.add(faStore)
 library.add(faBars)
-library.add(faUser)
+library.add(faUserCircle)
 library.add(faList)
 library.add(faMicrophone)
 library.add(faQuestion)
-
+library.add(faHandshake)
+library.add(faCircle)
 
 
 // Import the plugin here

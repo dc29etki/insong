@@ -10,17 +10,21 @@
   </script>
 
 <template>
-  <div id="order" class="has-footer has-header">
+  <div id="greeting" class="has-footer has-header">
     <div class="pb-5 mb-5"> </div>
     
-    <h2 class="text-center">Select a Greeting</h2>
-    <div class="greetings mb-5 pb-3">
-      <router-link to="/birthday"><div class="item"><span>Happy Birthday</span></div></router-link>
-      <router-link to="/cover-partial"><div class="item"><span>Cover Song (partial)</span></div></router-link>
-      <router-link to="/cover-full"><div class="item"><span>Cover Song (full)</span></div></router-link>
+    <h2 class="text-center">All Greetings</h2>
+    <h5 class="text-center">Click to Choose</h5>
+    <div class="greetings pb-3">
+      <router-link to="/birthday"><img src=".././assets/greeting-icons/birthday.png"/></router-link>
+      <router-link to="/cover-partial"><img src=".././assets/greeting-icons/anniversary.png"/></router-link>
+      <router-link to="/cover-full"><img src=".././assets/greeting-icons/miss.png"/></router-link>
+      <router-link to="/birthday"><img src=".././assets/greeting-icons/thinking.png"/></router-link>
+      <router-link to="/cover-partial"><img src=".././assets/greeting-icons/love.png"/></router-link>
+      <router-link to="/cover-full"><img src=".././assets/greeting-icons/sorry.png"/></router-link>
     </div>
   </div>
-</template>
+</template>s
 
 <script>
 import axios from 'axios';
@@ -107,17 +111,17 @@ export default {
   }
 </script>
 <style lang="scss">
-  #order {
+  #greeting {
     height: auto;
-    background: #14213d;
+    background: white;
     overflow: scroll;
     color: white;
   }
   h1 {
     font-weight:900;
   }
-  h2 {
-    color: #fca311;
+  h2, h5 {
+    color: #232323 !important;
   }
   #fill-out {
     display: none;
@@ -132,15 +136,21 @@ export default {
   }
   .greetings {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    background: white;
+    margin-bottom: 100px !important;
+    img {
+      height: 22vh;
+    }
     .item {
-      border: 3px solid white;
+      border: 3px solid #333;
       border-radius: 50%;
       height: 150px;
       width: 150px;
-      margin: 25px 0;
+      margin: 15px 25px;
       text-align: center;
       display: flex; /* or inline-flex */
       align-items: center; 

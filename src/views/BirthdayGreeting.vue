@@ -10,7 +10,7 @@
   </script>
 
 <template>
-  <div id="order" class="has-footer has-header">
+  <div id="greeting-order" class="has-footer has-header">
     <div class="pb-5 mb-5"> </div>
     
     <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">    
@@ -19,7 +19,130 @@
     <h6 id="pay-now">Complete your payment with PayPal to access the order form.
       <div class="p-3">Price: $9.95</div></h6>
     <div class="formf border py-4 m-1" id="formf" style="margin-bottom: 100px;">
+      <div class="page1">
         <form>
+          <div v-if="step === 1">
+
+            <h4>When is their birthday?</h4>
+           <div class="form-group">
+             <div class="w-75 mx-auto">
+               <input class="form-control" type="date" value="2011-08-19T13:45:00" id="example-datetime-local-input" v-model="formData.date_requested">
+             </div>
+           </div>
+            
+              <div class="clearfix"></div>
+              
+            <div class="form-buttons">  
+              <button class="btn btn-lg btn-light" @click.prevent="next()">Next</button>
+            </div>
+            <div class="indicators">
+              <div class="item active"></div>
+              <div class="item active"></div>
+              <div class="item"></div>
+              <div class="item"></div>
+              <div class="item"></div>
+            </div>
+    
+          </div>
+
+          <div v-if="step === 2">
+            <h4>Who is this for?</h4>
+            <div class="row p-2 m-0">
+              <div class="col-12"><input type="text" placeholder="Recipient Name" v-model="formData.recipient_name" class="span3 w-100 form-control"></div>
+              <br>
+            </div>
+            <div class="row p-2 m-0">
+              <div class="col-12"><input type="text" placeholder="Recipient Phone" v-model="formData.recipient_phone" class="span3 w-100 form-control"></div>
+              <br>
+            </div>
+            <div class="time-zone w-50 mx-auto">
+              <h5>Time Zone</h5>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" value="eastern" v-model="formData.timezone" checked>
+                <label class="form-check-label" for="exampleRadios1">
+                  Eastern Time
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" value="central" v-model="formData.timezone">
+                <label class="form-check-label" for="exampleRadios2">
+                  Central Time
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" value="mountain" v-model="formData.timezone">
+                <label class="form-check-label" for="exampleRadios3">
+                  Mountain Time
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" value="pacific" v-model="formData.timezone">
+                <label class="form-check-label" for="exampleRadios3">
+                  Pacific Time
+                </label>
+              </div>
+            </div>
+
+              <div class="clearfix"></div>
+                            
+              <div class="form-buttons">  
+                <div><button class="btn btn-lg btn-light" @click.prevent="prev()">Back</button></div>
+                <div><button class="btn btn-lg btn-light" @click.prevent="next()">Next</button></div>
+              </div>
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+              </div>
+
+          </div>
+          <div v-if="step === 3">
+            <h5>What would you like to say?</h5>
+            <p class="mx-3" style="font-size: 12px;">Type a personalizied message or keep it blank and leave it up to us. Your greeter will read this to your recipient prior to performing the greeting song.</p>
+            <div class="form-group">
+              <textarea v-model="text" class="form-control w-75 mx-auto" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+              <div class="clearfix"></div>
+
+            <div class="form-buttons">  
+              <div><button class="btn btn-lg btn-light" @click.prevent="prev()">Back</button></div>
+              <div><button class="btn btn-lg btn-light" @click.prevent="next()">Next</button></div>
+            </div>
+            <div class="indicators">
+              <div class="item active"></div>
+              <div class="item active"></div>
+              <div class="item active"></div>
+              <div class="item active"></div>
+              <div class="item"></div>
+            </div>
+          </div>
+
+          <div v-if="step === 4">
+              <h5>Review your order</h5>
+              <div>
+                From: {{this.$auth.user.first_name}}
+              </div>
+
+              <div class="clearfix"></div>
+
+            <div class="form-buttons">  
+              <div><button class="btn btn-lg btn-light" @click.prevent="prev()">Back</button></div>
+              <div><button class="btn btn-lg btn-light btn-submit" @click="postOrders()">Submit</button></div>
+            </div>
+            <div class="indicators">
+              <div class="item active"></div>
+              <div class="item active"></div>
+              <div class="item active"></div>
+              <div class="item active"></div>
+              <div class="item active"></div>
+            </div>
+    
+          </div>
+          </form>
+        </div>
+        <!-- <form>
         <div class="row p-2 m-0">
           <div class="col-12"><input type="text" placeholder="Recipient Name" v-model="formData.recipient_name" class="span3 w-100"></div>
           <br>
@@ -28,17 +151,23 @@
           <div class="col-12"><input type="text" placeholder="Recipient Phone" v-model="formData.recipient_phone" class="span3 w-100"></div>
           <br>
         </div>
-        
+
         <div class="row pt-2">
           <div class="col-12"><input type="submit" value="Submit" @click="postOrders()" class="btn btn-lg btn-light pull-right"></div>
         </div>
           <div class="clearfix"></div>
-        </form>
+        </form> -->
     </div>    
     
     
     <div class="mx-5">
       <div id="paypal-button-container"></div>
+      <div class="indicators">
+        <div class="item active"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+      </div>
     </div>
     
     
@@ -59,13 +188,17 @@ export default {
       var objectkeys = {};
       var user = "";
       return {
+        step:1,
         orders,
         objectkeys,
         user,
         apiMessage: "",
         formData: {
+          date_requested: '',
           recipient_name: '',
           recipient_phone: '',
+          timezone: '',
+          text: ''
         },
         paypal: {
           sandbox: 'Aac4_TjyjB8UrAMqoDjik6EdmYriqFxBT2qMyWxwRUg7ZUyh6EnOZn3abeZsaPfBVdchl8KmYONL3Fxa',
@@ -76,6 +209,12 @@ export default {
 
       },
     methods: {
+      prev() {
+            this.step--;
+          },
+          next() {
+            this.step++;
+          },
         login() {
           this.$auth.loginWithRedirect();
         },
@@ -148,33 +287,72 @@ export default {
                 document.getElementById("paypal-button-container").style.display = "none";
             });
           }
-        }).render('#paypal-button-container');
+        }).render('#paypal-button-container'); 
     }
     
   }
 </script>
 <style lang="scss">
-  #order {
+  #greeting-order {
     height: auto;
-    background: #14213d;
+    background: white;
     overflow: scroll;
-    color: white;
+    color: #232323;
   }
   h1 {
     font-weight:900;
+    color: #232323;
   }
-  h2 {
-    color: #fca311;
+  h2, h3, h4 {
+    color: #232323;
   }
   #fill-out {
     display: none;
   }
   .formf {
     display: none;
-    color: white;
+    color: #232323 !important;
     font-size: 18px;
     .label {
       float: left;
+    }
+  }
+  .indicators {
+    padding: 5px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    .item {
+      padding: 10px;
+      margin: 10px;
+      background: #999;
+      height: 5px;
+      width: 5px;
+      border-radius: 50%;
+      &.active {
+        background: #FF9A00;
+      }
+    }
+  }
+  .form-buttons {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px;
+    button {
+      width: 17vw;
+      margin: 0 10px;
+      background: #FF9A00;
+      height: 17vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      color: white;  
+    }
+    .btn-submit {
+      background: darkgreen;
     }
   }
 </style>

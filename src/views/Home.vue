@@ -34,7 +34,7 @@
         <div class="s3">
           <hr>
           <h4>Interested in Being a Greeter?</h4>
-          <a @click="login" class="btn btn-dark m-2">Apply Now</a>
+          <a @click="login" class="btn btn-dark m-2 text-white">Apply Now</a>
         </div>
         
       </div>
@@ -79,12 +79,16 @@ export default {
 <style lang="scss">
   html, body {
     height: 100%;
-    background: #14213d;
+    background: white;
   }
   #home {
     height: auto;
-    background: #14213d;
+    background: white;
     overflow: hidden !important;
+    color: black !important;
+    p {
+      color: black;
+    }
     .hidden {
       display: none;
     }
@@ -100,10 +104,10 @@ export default {
   .sections {
     text-align: center;
     margin: 10px;
-    color: #e5e5e5;
+    color: #232323;
     .s1 {
       h4 {
-        color: white;
+        color: #232323;
         font-size: 22px;
       }
       margin-left: auto;
@@ -112,12 +116,13 @@ export default {
     }
     .s2, .s3 {
       h4 {
-        color: white;
+        color: #232323;
         font-size: 18px;
       }
     }
   }
   hr {
-    background: white;
+    background: black;
+    color: #232323;
   }
 </style>

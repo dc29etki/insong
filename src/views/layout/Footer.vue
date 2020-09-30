@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <template>
   <div id="footer">
     <nav>
@@ -24,22 +25,29 @@
           path: "/"
         },
         {
-          label: "Articles",
-          icon: "newspaper",
-          component: "articles"
-        },
-        {
-          label: "Order",
-          icon: "store",
+          label: "Greetings Center",
+          icon: "handshake",
           component: "order",
           path: "/order"
         },
         {
-          label: "More",
-          icon: "bars",
+          label: "Greetings Menu",
+          icon: "circle",
+          component: "order",
+          path: "/order"
+        },
+        {
+          label: "Greeter Switchboard",
+          icon: "microphone",
+          component: "order",
+          path: "/order"
+        },
+        {
+          label: "Help",
+          icon: "question",
           component: "more",
           path: "/more"
-        },
+        }
       ];
       return {
         links
@@ -62,7 +70,8 @@
 <style lang="scss">
   #footer {
     z-index: 1;
-    background-color:black;
+    background-color: #EFEFEF;
+    color: #545454;
     padding:10px 0;
     padding-bottom: calc(env(safe-area-inset-bottom) + 10px);
     position:fixed;
@@ -74,12 +83,12 @@
       flex-wrap: nowrap;
       justify-content: space-between;
       list-style-type:none;
-      color:white;
-      margin:0;
-      padding:0;
+      color: #545454 ;
+      margin: 0;
+      padding: 0;
       li {
         flex:1;
-        margin:0;
+        margin:0 10px;
         padding:0;
         font-size:10px;
         text-align:center;
