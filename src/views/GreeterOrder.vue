@@ -155,7 +155,8 @@ export default {
           axios.put("https://insong-066b.restdb.io/rest/greeters/"+this.greeter._id,
           {
             orders_completed: this.greeter.orders_completed + 1,
-            money_earned: this.greeter.money_earned + amount
+            money_earned: this.greeter.money_earned + amount,
+            money_owed: this.greeter.money_earned + amount
           },
           {
             headers: {

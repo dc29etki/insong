@@ -7,8 +7,9 @@
           
     
     <h2 class="text-center">Welcome greeter!</h2>
-    <div>
+    <div class="border">
       {{this.greeter.orders_completed}} orders completed for a total of ${{this.greeter.money_earned.toFixed(2)}}
+      <br>Money Owed: ${{this.greeter.money_owed}}
     </div>
       <div class="buttons3">
         <router-link to="/greeter-myorders" class="btn btn-lg btn-dark">My orders</router-link>
@@ -126,12 +127,9 @@ export default {
 
         }
     },
-    mounted() {
+    created() {
       this.getGreeters();
       
-    },
-    created() {
-
     }
     
   }

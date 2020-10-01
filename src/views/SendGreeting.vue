@@ -433,7 +433,7 @@
     </div>    
     
     
-    <div class="mx-5" id="ppal">
+    <div class="mx-5" id="ppal" style="position: relative; z-index: 1;">
       <div id="paypal-button-container"></div>
       <div class="indicators">
         <div class="item active"></div>
