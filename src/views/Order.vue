@@ -18,7 +18,8 @@
     <div class="pb-5 mb-5"> </div>
     
     <h3 class="text-center">Click to Choose</h3>
-    <div class="greetings my-5 pb-3">
+    <div class="outside">
+    <div class="greetings my-auto">
       <div id="demo" class="carousel slide" data-ride="carousel">
 
         <!-- Indicators -->
@@ -63,7 +64,8 @@
       </div>
     </div>
   </div>
-</template>s
+  </div>
+</template>
 
 <script>
 import axios from 'axios';
@@ -239,6 +241,13 @@ export default {
 
   .carousel-control-next-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%232323' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+  }
+  .outside{
+    display: flex;
+    height: 60vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
   
 </style>
