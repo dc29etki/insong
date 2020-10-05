@@ -4,18 +4,18 @@
     <div class="pb-5 mb-5"> </div>
     
     <div class="home-area m-2 text-center">
-    <img style="height: 20vh;" src=".././assets/logo.png"/>
+    <img style="height:17.5vh;" src=".././assets/logo-main.png"/>
     
-    <h2 class="text-center">Welcome to InSong</h2>
       
       <button @click="logout()" class="hidden">signout</button>
       
       <div class="sections">
         
         <div class="s1">
-          <hr>
-          <h4>Who We Are</h4>
-          <p>InSong is an on-demand live-audio greeting delivery service. Well-qualified singing greeters call that special someone in your life and perform a surprise greeting of your choice live over the phone. InSong delivers regular or customized greetings, in song form. </p>
+          <p>
+            InSong Greetings is an on-demand greeting service. Well-qualified singing greeters call that special someone in your life to perform a personalized greeting designed by you and sing to them a song of your choice live over the phone! Our greeters let your loved ones know they are important and recognized on their special occasion!
+          </p>
+          <h5 class="font-italic">"When you write them, they feel recognized. When you serenade them, they feel like a monarch."</h5>
         </div>
       
         <div v-if="!$auth.isAuthenticated" class="s2">
@@ -34,7 +34,7 @@
         <div class="s3">
           <hr>
           <h4>Interested in Being a Greeter?</h4>
-          <a href="mailto:walter@walterburmer.com?subject=Greeter Application" class="btn btn-info m-2 text-white">Apply Now</a>
+          <a href="mailto:walter@walterburmer.com?subject=Greeter Application" class="btn btn-orange m-2 text-white">Apply Now</a>
         </div>
         
       </div>

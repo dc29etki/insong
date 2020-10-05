@@ -33,7 +33,7 @@ import completedorders from "./views/CompletedOrders.vue";
 import sendgreeting from "./views/SendGreeting.vue";
 import thankyou from "./views/ThankYou.vue";
 import help from "./views/Help.vue";
-
+import greetingscenter from "./views/GreetingsCenter.vue";
 
 
 
@@ -197,6 +197,11 @@ const router = new VueRouter({
             path: '/help',
             name: "Help",
             component: help,
+        },
+        {
+            path: '/greetings-center',
+            name: "Greetings Center",
+            component: greetingscenter,
         }
   ]
 });

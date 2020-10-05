@@ -28,13 +28,7 @@
           label: "Greetings Center",
           icon: "handshake",
           component: "order",
-          path: "/order"
-        },
-        {
-          label: "Greetings Menu",
-          icon: "circle",
-          component: "order",
-          path: "/my-orders"
+          path: "/greetings-center"
         },
         {
           label: "Greeter Switchboard",
