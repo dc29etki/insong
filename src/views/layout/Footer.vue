@@ -3,26 +3,43 @@
   <div id="footer">
     <nav>
       <ul class="footer-navigation">
-        <li v-bind:class="{'current': isCurrent(link)}" v-for="link in links" :key="link.label" v-on:click="routeTo(link.path)">
+      <div class="d-flex justify-content-center" v-if="!this.isGreeter">
+        <li v-bind:class="{'current': isCurrent(link)}" v-for="link in links.slice(0,3)" :key="link.label" v-on:click="routeTo(link.path)">
           <div style="font-size: 1.5rem;" class="mb-2"><font-awesome-icon :icon="link.icon" /><br></div>
           <span class="label">{{link.label}}</span>
         </li>
+      </div>
+      <div class="d-flex justify-content-center" v-if="this.isGreeter">
+        <li v-bind:class="{'current': isCurrent(link)}" v-for="link in links.slice(0,4)" :key="link.label" v-on:click="routeTo(link.path)">
+          <div style="font-size: 1.5rem;" class="mb-2"><font-awesome-icon :icon="link.icon" /><br></div>
+          <span class="label">{{link.label}}</span>
+        </li>
+      </div>
       </ul>
     </nav>
   </div>
 </template>
 <script>
   import router from '../../router'
+  import axios from 'axios';
   export default {
     name: 'Footer',
     inject: [],
     data() {
-      let links = [
+      var isGreeter = false;
+      var greeter = '';
+      var links = [
         {
           label: "Home",
           icon: "home",
           component: "home",
           path: "/"
+        },
+        {
+          label: "Greetings Menu",
+          icon: "circle",
+          component: "order",
+          path: "/my-orders"
         },
         {
           label: "Greetings Center",
@@ -35,19 +52,59 @@
           icon: "microphone",
           component: "order",
           path: "/switchboard"
-        },
-        {
-          label: "Help",
-          icon: "question",
-          component: "more",
-          path: "/help"
         }
       ];
       return {
-        links
+        links,
+        axios,
+        isGreeter,
+        greeter
       }
     },
     methods: {
+      async getGreeters() {
+        const token = await this.$auth.getTokenSilently();
+        let url = new URL('https://insong-066b.restdb.io/rest/greeters')
+        let json = {
+          "user_email": this.$auth.user_email
+        };
+        url.searchParams.set('q', JSON.stringify(json))
+        const { data } = await axios.get(url, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        this.greeter = data[0];
+        if(this.greeter != ''){
+          this.isGreeter = true;
+          this.links = [
+            {
+              label: "Home",
+              icon: "home",
+              component: "home",
+              path: "/"
+            },
+            {
+              label: "Greetings Menu",
+              icon: "circle",
+              component: "order",
+              path: "/my-orders"
+            },
+            {
+              label: "Greetings Center",
+              icon: "handshake",
+              component: "order",
+              path: "/greetings-center"
+            },
+            {
+              label: "Greeter Switchboard",
+              icon: "microphone",
+              component: "order",
+              path: "/switchboard"
+            }
+          ];
+        }
+      }, 
       routeTo(path) {
         if(path=="/"){
           this.$router.push('home');
@@ -58,7 +115,9 @@
         return router.currentRoute.name === link.component;
       }
     },
-    mounted() {}
+    mounted() {
+      this.getGreeters();
+    }
   }
 </script>
 <style lang="scss">
@@ -72,10 +131,6 @@
     bottom:0;
     width:100vw;
     .footer-navigation {
-      display:flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      justify-content: space-between;
       list-style-type:none;
       color: #545454 ;
       margin: 0;

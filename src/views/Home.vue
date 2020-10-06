@@ -21,27 +21,31 @@
         <div v-if="!$auth.isAuthenticated" class="s2">
           <hr>
           <h4>Login or Create an Account Today!</h4>
-          <a @click="login" class="btn btn-orange m-2">Login</a>
-          <a @click="login" class="btn btn-orange m-2">Sign Up</a>
+          <div class="d-flex flex-row justify-content-center">
+            <a @click="login" class="btn btn-insong2 m-2">Login</a>
+            <a @click="login" class="btn btn-insong2 m-2">Sign Up</a>
+          </div>
         </div>
         <div v-else class="s2">
           <hr>
           <h4>Welcome back, {{$auth.user.name}}!</h4>
-          <router-link to="/order" class="btn btn-orange m-2">Send a greeting now!</router-link>
-          <router-link class="btn btn-orange m-2" to="/my-orders">My Greetings</router-link>
+          <div class="d-flex flex-row justify-content-center">
+            <router-link to="/order" class="btn btn-insong2 m-2">New Greeting</router-link>
+            <router-link class="btn btn-insong2 m-2" to="/my-orders">My Greetings</router-link>
+          </div>
         </div>
       
         <div class="s3">
           <hr>
-          <h4>Interested in Being a Greeter?</h4>
-          <a href="mailto:walter@walterburmer.com?subject=Greeter Application" class="btn btn-orange m-2 text-white">Apply Now</a>
+          <h4>Interested in Becoming a Greeter?</h4>
+          <a href="mailto:walter@walterburmer.com?subject=Greeter Application" class="apply">Apply Here</a>
         </div>
         
       </div>
       
     
     </div>
-    <div class="pb-5 mb-5"> </div>
+    <div class="pb-5 mb-3"> </div>
     
   </div>
 </template>
@@ -133,5 +137,27 @@ export default {
   }
   .btn-orange:hover{
       color: white;
-    }
+  }
+  .btn-insong2 {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    width: 10vh;
+    border-radius: 50%;
+    background: #FF9A00;
+    color: white !important;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 10px;
+  }
+  .apply {
+    font-weight: 800;
+    color: #FF9A00;
+    font-size: 20px;
+  }
+  hr {
+    background: #FF9A00;
+  }
 </style>

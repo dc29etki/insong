@@ -27,6 +27,9 @@
               <a @click="register" class="nav-link">Register</a>
             </li>
           </template>
+          <li class="nav-item">
+            <router-link to="/help" class="nav-link">Help</router-link>
+          </li>
         </ul>
       </div>
     </div>    
@@ -34,6 +37,7 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
+import axios from 'axios';
 export default {
   methods: {
   login() {
@@ -47,7 +51,10 @@ export default {
               returnTo: window.location.origin
             });
     }
-  }
+  },
+    created() {
+      
+    }
 };
 </script>
 
