@@ -3,13 +3,13 @@
   <div id="footer">
     <nav>
       <ul class="footer-navigation">
-      <div class="d-flex justify-content-center" v-if="!this.isGreeter" :key="this.isGreeter">
+      <div class="d-flex justify-content-center" v-if="!this.isGreeter">
         <li v-bind:class="{'current': isCurrent(link)}" v-for="link in links.slice(0,3)" :key="link.label" v-on:click="routeTo(link.path)">
           <div style="font-size: 1.5rem;" class="mb-2"><font-awesome-icon :icon="link.icon" /><br></div>
           <span class="label">{{link.label}}</span>
         </li>
       </div>
-      <div class="d-flex justify-content-center" v-if="this.isGreeter">
+      <div class="d-flex justify-content-center" v-else>
         <li v-bind:class="{'current': isCurrent(link)}" v-for="link in links.slice(0,4)" :key="link.label" v-on:click="routeTo(link.path)">
           <div style="font-size: 1.5rem;" class="mb-2"><font-awesome-icon :icon="link.icon" /><br></div>
           <span class="label">{{link.label}}</span>
@@ -62,7 +62,7 @@
       }
     },
     methods: {
-      async getGreeters() {
+      async isaGreeter() {
         const token = await this.$auth.getTokenSilently();
         let url = new URL('https://insong-066b.restdb.io/rest/greeters')
         let json = {
@@ -74,9 +74,8 @@
             Authorization: `Bearer ${token}`
           }
         });
-        this.greeter = data[0];
-        if(this.greeter){this.isGreeter = true;}
-        console.log(this.isGreeter)
+        if(data[0]){return true;}
+        else{return false;}
       }, 
       routeTo(path) {
         if(path=="/"){
@@ -88,8 +87,13 @@
         return router.currentRoute.name === link.component;
       }
     },
-    beforeMount() {
-      this.getGreeters();
+    mounted() {
+      if(this.$auth.user){
+        this.isGreeter = this.isaGreeter();
+      }
+      else {
+        this.isGreeter = false;
+      }
     }
   }
 </script>
