@@ -3,7 +3,7 @@
   <div id="footer">
     <nav>
       <ul class="footer-navigation">
-      <div class="d-flex justify-content-center" v-if="!this.isGreeter">
+      <div class="d-flex justify-content-center" v-if="!this.isGreeter" :key="this.isGreeter">
         <li v-bind:class="{'current': isCurrent(link)}" v-for="link in links.slice(0,3)" :key="link.label" v-on:click="routeTo(link.path)">
           <div style="font-size: 1.5rem;" class="mb-2"><font-awesome-icon :icon="link.icon" /><br></div>
           <span class="label">{{link.label}}</span>
@@ -88,7 +88,7 @@
         return router.currentRoute.name === link.component;
       }
     },
-    mounted() {
+    beforeMount() {
       this.getGreeters();
     }
   }
