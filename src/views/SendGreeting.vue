@@ -400,6 +400,7 @@
           <div v-if="step === 7">
             <h5>Complete Your Payment With Paypal</h5>
             <p>Then click submit to send your greeting!</p>
+            <div class="font-weight-bold p-3">Price: $9.95</div>
               <div id="submit-hidden" class="btn btn-insong2 disabled">Submit</div>
               <div class="btn btn-insong2" id="submit-button" @click="postOrders()">Submit</div>
               <!-- <div id="paypal-button-container"></div> -->
