@@ -13,24 +13,25 @@
        <div class="border p-2"><strong>Recipient:</strong><br>
          Name: {{this.order.recipient_name}}<br>
          Phone: {{this.order.recipient_phone}}<br>
-         Date to call: {{this.order.date_requested}}<br>
-         Best Time to call: {{this.order.date_requested}}
+         Date to call: {{new Date(this.order.date_requested).toLocaleString()}}<br>
+         Best Time to call: {{this.order.best_time}}<br>
+         Time Zone: {{this.order.timezone}}
        </div>
        Created: {{new Date(this.order.created_at).toLocaleString()}}<br>
        Song: {{this.order.song}}<br>
-       Type: {{this.order.type}}<br>
        Message: {{this.order.message}}
        <div class=""><strong>Sender:</strong><br>
          Name: {{this.order.sender}}<br>
-         Phone: {{this.order.recipient_phone}}
+         Also from: {{this.order.also_from}}<br>
+         Anonymous? {{this.order.anonymous}}
        </div>
        
      </div>
      <div class="buttons">
-       <div v-if="this.order.calls==0" @click="completeOrder(1, false)" class="btn btn-danger item">Attempted First Call</div>
+       <div v-if="this.order.calls==0 || !this.order.calls" @click="completeOrder(1, false)" class="btn btn-danger item">Attempted First Call</div>
        <div v-if="this.order.calls==1" @click="completeOrder(2, false)" class="btn btn-danger item">Attempted Second Call</div>
        <div v-if="this.order.calls==2" @click="completeOrder(3, false)" class="btn btn-danger item">Attempted Third Call</div>
-       <div v-if="this.order.calls==0" @click="completeOrder(1, true)" class="btn btn-success item">Completed on First Call</div>
+       <div v-if="this.order.calls==0 || !this.order.calls" @click="completeOrder(1, true)" class="btn btn-success item">Completed on First Call</div>
        <div v-if="this.order.calls==1" @click="completeOrder(2, true)" class="btn btn-success item">Completed on Second Call</div>
        <div v-if="this.order.calls==2" @click="completeOrder(3, true)" class="btn btn-success item">Completed on Third Call</div>
        <div v-if="this.order.calls>2" @click="completeOrder(99, true)" class="btn btn-success item">Voicemail left</div>
@@ -213,9 +214,10 @@ export default {
   .buttons {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: none;
     .item {
-      width: 150px;
+      width: auto;
+      margin: 0 10px;
     }
   }
   .order-info {

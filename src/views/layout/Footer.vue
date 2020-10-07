@@ -39,7 +39,7 @@
           label: "Greetings Menu",
           icon: "circle",
           component: "order",
-          path: "/my-orders"
+          path: "/order"
         },
         {
           label: "Greetings Center",
@@ -75,35 +75,8 @@
           }
         });
         this.greeter = data[0];
-        if(this.greeter != ''){
-          this.isGreeter = true;
-          this.links = [
-            {
-              label: "Home",
-              icon: "home",
-              component: "home",
-              path: "/"
-            },
-            {
-              label: "Greetings Menu",
-              icon: "circle",
-              component: "order",
-              path: "/my-orders"
-            },
-            {
-              label: "Greetings Center",
-              icon: "handshake",
-              component: "order",
-              path: "/greetings-center"
-            },
-            {
-              label: "Greeter Switchboard",
-              icon: "microphone",
-              component: "order",
-              path: "/switchboard"
-            }
-          ];
-        }
+        if(this.greeter){this.isGreeter = true;}
+        console.log(this.isGreeter)
       }, 
       routeTo(path) {
         if(path=="/"){

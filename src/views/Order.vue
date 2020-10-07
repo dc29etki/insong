@@ -19,7 +19,7 @@
     
     <h3 class="text-center">Click to Choose</h3>
     <div class="outside">
-    <div class="greetings my-auto">
+    <div id="car-view" v-if="this.view=='car'" class="greetings my-auto">
       <div id="demo" class="carousel slide" data-ride="carousel">
 
         <!-- Indicators -->
@@ -63,6 +63,27 @@
         </a>
       </div>
     </div>
+    
+    <div id="grid-view" v-if="this.view=='grid'">
+      <div class="item"><router-link to="/send-greeting/birthday"><img src=".././assets/greeting-icons/birthday.png"/></router-link></div>
+      <div class="item"><router-link to="/send-greeting/anniversary"><img src=".././assets/greeting-icons/anniversary.png"/></router-link></div>
+      <div class="item"><router-link to="/send-greeting/missyou"><img src=".././assets/greeting-icons/miss.png"/></router-link></div>
+      <div class="item"><router-link to="/send-greeting/thinking"><img src=".././assets/greeting-icons/thinking.png"/></router-link></div>
+      <div class="item"><router-link to="/send-greeting/love"><img src=".././assets/greeting-icons/love.png"/></router-link></div>
+      <div class="item"><router-link to="/send-greeting/sorry"><img src=".././assets/greeting-icons/sorry.png"/></router-link></div>
+    </div>
+    
+    <div class="switch-button">
+      <label class="toggle-label">
+      <input type="checkbox">
+      <span @click="switchview()" class="back">
+      <span class="toggle"></span>
+      <span class="label on">CAROUSEL</span>
+      <span class="label off">GRID</span>
+      </span>
+      </label>
+    </div>
+    
   </div>
   </div>
 </template>
@@ -79,11 +100,13 @@ export default {
       var orders = {};
       var objectkeys = {};
       var user = "";
+      var view = 'car';
       return {
         orders,
         objectkeys,
         user,
         moment,
+        view,
         apiMessage: "",
         formData: {
           recipient_name: '',
@@ -98,6 +121,10 @@ export default {
 
       },
     methods: {
+        switchview() {
+          if(this.view=='grid'){this.view='car'}
+          else if(this.view=='car'){this.view='grid'}
+        },
         login() {
           this.$auth.loginWithRedirect();
         },
@@ -244,10 +271,89 @@ export default {
   }
   .outside{
     display: flex;
-    height: 60vh;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
+  #grid-view {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    img {
+      height: 20vh;
+      width: 20vh;
+    }
+  }
   
+  .toggle-label {
+    position: relative;
+    width: 300px;
+    height: 30px;
+    margin-top: 10px;
+  }
+  .toggle-label input[type=checkbox] { 
+      opacity: 0;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+  }
+  .toggle-label input[type=checkbox]+.back {
+      position: absolute;
+      width: 100%;
+      height: 30px;
+      left: 0;
+      top: 0;
+      border-radius: 50px;
+      border: 1px solid #000;
+      transition: background 150ms linear;
+  }
+  .toggle-label input[type=checkbox]:checked+.back {
+      border: 1px solid #000;
+      cursor: pointer;
+  }
+
+  .toggle-label input[type=checkbox]+.back .toggle {
+    display: block;
+    position: absolute;
+    content: ' ';
+    background: #000;
+    width: 50%; 
+    height: 100%;
+    transition: margin 150ms linear;
+    border: 0px solid #808080;
+    border-radius: 50px;
+  }
+  .toggle-label input[type=checkbox]:checked+.back .toggle {
+    margin-left: 150px;
+  }
+  .toggle-label .label {
+    display: block;
+    position: absolute;
+    width: 50%;
+    color: #000;
+    line-height: 24px;
+    text-align: center;
+    font-size: 10px;
+  }
+  .toggle-label .label.on { left: 0px; }
+  .toggle-label .label.off { right: 0px; }
+
+  .toggle-label input[type=checkbox]:checked+.back .label.on {
+    color: #000;
+  }
+  .toggle-label input[type=checkbox]+.back .label.off {
+    color: #000;
+      cursor: pointer;
+  }
+  .toggle-label input[type=checkbox]:checked+.back .label.off {
+    color: #000;
+  }
+  .toggle {
+    background: #FF9A00 !important;
+    z-index: 0;
+  }
 </style>

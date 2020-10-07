@@ -20,81 +20,11 @@
     <h2 v-if="this.type=='missyou'" class="text-center">I Miss You</h2>
     <h2 v-if="this.type=='thinking'" class="text-center">Thinking of You</h2>
     <h2 v-if="this.type=='love'" class="text-center">I Love You</h2>
-    <h2 v-if="this.type=='sorry'" class="text-center">I'm Sorry'</h2>
+    <h2 v-if="this.type=='sorry'" class="text-center">I'm Sorry</h2>
     
     <h6 id="fill-out">Fill out the form below to send a greeting now!</h6>
-    <div id="pay-now">Complete your payment with PayPal to access the order form.
-    <div>Available Songs:</div>
-    <div class="border songs">
-      
-      <div v-if="this.type=='birthday'" >
-        <div class="list">
-          <div class="l-item">Happy Birthday</div>
-        </div>
-      </div>
-      
-      <div v-if="this.type=='anniversary'" >
-        <div class="list">
-          <div class="l-item">Happy Together - The Turtles</div>
-          <div class="l-item">Just the Way You Are - Bruno Mars</div>
-          <div class="l-item">If I Ain’t Got You - Alecia Keys</div>
-          <div class="l-item">I’m Yours - Jason Mraz</div>
-          <div class="l-item">How Deep Is Your Love - Bee Gees</div>
-          <div class="l-item">I Don’t Want to Miss a Thing - Aerosmith</div>
-          <div class="l-item">Thinking Out Loud - Ed Sheeran</div>
-        </div>
-      </div>
-      
-      <div v-if="this.type=='missyou'" >
-        <div class="list">
-          <div class="l-item">Come on Get Higher - Matt Nathanson</div>
-          <div class="l-item">Better Together - Jack Johnson</div>
-          <div class="l-item">One Call Away - Charlie Puth</div>
-          <div class="l-item">Ain’t No Sunshine - Bill Withers</div>
-          <div class="l-item">I Don’t Want to Miss a Thing - Aerosmith</div>
-          <div class="l-item">Home - Michael Buble</div>
-          <div class="l-item">Back to December - Taylor Swift</div>
-        </div>
-      </div>
-      
-      <div v-if="this.type=='thinking'" >
-        <div class="list">
-          <div class="l-item">Chasing Cars - Snow Patrol</div>
-          <div class="l-item">I Won’t Give Up - Jason Mraz</div>
-          <div class="l-item">Somewhere Over The Rainbow - Judy Garland</div>
-          <div class="l-item">Three Little Birds - Bob Marley and The Wailers</div>
-          <div class="l-item">Human - Christina Perri</div>
-          <div class="l-item">Let It Be - The Beatles</div>
-          <div class="l-item">Fight Song - Rachael Platten</div>
-        </div>
-      </div>
-      
-      <div v-if="this.type=='sorry'" >
-        <div class="list">
-          <div class="l-item">I Won’t Give Up - Jason Mraz</div>
-          <div class="l-item">Sorry - Justin Bieber</div>
-          <div class="l-item">If I Could Turn Back Time - Cher</div>
-          <div class="l-item">Please Forgive Me - Bryan Adams</div>
-          <div class="l-item">Back to December - Taylor Swift</div>
-          <div class="l-item">Hello - Adele</div>
-          <div class="l-item">Purple Rain - Prince</div>
-        </div>
-      </div>
-      
-      <div v-if="this.type=='love'" >
-        <div class="list">
-          <div class="l-item">ily (i love you baby) [feat. Emilee] - Surf Mesa</div>
-          <div class="l-item">Stand by Me - Ben E. King</div>
-          <div class="l-item">Happy Together - The Turtles</div>
-          <div class="l-item">Wouldn’t it be Nice - The Beach Boys</div>
-          <div class="l-item">Making Memories of Us - Keith Urban</div>
-          <div class="l-item">How Deep Is Your Love - Bee Gees</div>
-          <div class="l-item">I Don’t Want to Miss a Thing - Aerosmith</div>
-        </div>
-      </div>
-      
-    </div>
-    <div class="font-weight-bold p-3">Price: $9.95</div>
+    <div class="mx-5 mt-5 mb-2" id="ppal" style="position: relative; z-index: 1;">
+      <div id="paypal-button-container"></div>
     </div>
     <div class="formf border py-4 m-1" id="formf" style="margin-bottom: 100px;">
       <div class="page1">
@@ -172,11 +102,13 @@
             <div class="clearfix"></div>
               
             <div class="form-buttons">  
-              <button class="btn btn-lg btn-light" @click.prevent="next()">Next</button>
+              <button v-if="this.formData.song" class="btn btn-lg " @click.prevent="next()">Next</button>
+              <button v-else class="btn btn-lg  disabled">Next</button>
             </div>
             <div class="indicators">
               <div class="item active"></div>
-              <div class="item active"></div>
+              <div class="item"></div>
+              <div class="item"></div>
               <div class="item"></div>
               <div class="item"></div>
               <div class="item"></div>
@@ -195,21 +127,29 @@
            </div>
            
            <h4>What is the best time to call?</h4>
-           <div class="row p-2 m-0">
-             <div class="w-75 mx-auto"><input type="text" placeholder="Example: between 2 and 4 pm" v-model="formData.best_time" class="form-control"></div>
-           </div>  
+           <div class="form-group w-75 mx-auto">
+             <select class="form-control" id="sel1" v-model="formData.best_time">
+               <option>8am - 11am</option>
+               <option>11am - 2pm</option>
+               <option>2pm - 5pm</option>
+               <option>5pm - 8pm</option>
+               <option>8pm - 11pm</option>
+             </select>
+           </div>
             
               <div class="clearfix"></div>
               
             <div class="form-buttons">  
-              <div><button class="btn btn-lg btn-light" @click.prevent="prev()">Back</button></div>
+              <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
               
-              <button class="btn btn-lg btn-light" @click.prevent="next()">Next</button>
+              <button v-if="this.formData.date_requested && this.formData.best_time" class="btn btn-lg " @click.prevent="next()">Next</button>
+              <button v-else class="btn btn-lg  disabled">Next</button>
             </div>
             <div class="indicators">
               <div class="item active"></div>
               <div class="item active"></div>
-              <div class="item active"></div>
+              <div class="item"></div>
+              <div class="item"></div>
               <div class="item"></div>
               <div class="item"></div>
               <div class="item"></div>
@@ -224,11 +164,12 @@
               <br>
             </div>
             <div class="row p-2 m-0">
-              <div class="col-12"><input type="text" placeholder="Recipient Phone" v-model="formData.recipient_phone" class="span3 w-100 form-control"></div>
+              <div class="col-12"><input type="tel" placeholder="Recipient Phone (with area code)" v-model="formData.recipient_phone" class="span3 w-100 form-control"></div>
               <br>
             </div>
+            <h5>What is their timezone?</h5>
             <div class="time-zone w-50 mx-auto">
-              <h5>Time Zone</h5>
+              
               <div class="form-check">
                 <input class="form-check-input" type="radio" value="eastern" v-model="formData.timezone" checked>
                 <label class="form-check-label" for="exampleRadios1">
@@ -258,8 +199,48 @@
               <div class="clearfix"></div>
                             
               <div class="form-buttons">  
-                <div><button class="btn btn-lg btn-light" @click.prevent="prev()">Back</button></div>
-                <div><button class="btn btn-lg btn-light" @click.prevent="next()">Next</button></div>
+                <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+                <div>
+                  <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==10 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
+                  <button v-else class="btn btn-lg  disabled">Next</button>
+                </div>
+              </div>
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+              </div>
+              
+          </div>
+          
+          <div v-if="step === 4">
+            <h4>Who is this from?</h4>
+            <div class="row p-2 m-0">
+              <div class="col-12"><input type="text" placeholder="Your Name" v-model="formData.from" class="span3 w-100 form-control"></div>
+              <br>
+            </div>
+            <div class="row p-2 m-0">
+              <div class="col-12"><input type="text" placeholder="Additional senders" v-model="formData.also_from" class="span3 w-100 form-control"></div>
+              <br>
+            </div>
+            or
+            <div class="form-check">
+              <input type="checkbox" class="m-2" id="exampleCheck1" v-model="formData.anonymous">
+              <label class="form-check-label"  for="exampleCheck1">Send Anonymously</label>
+            </div>
+
+              <div class="clearfix"></div>
+                            
+              <div class="form-buttons">  
+                <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+                <div>
+                  <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg " @click.prevent="next()">Next</button>
+                  <button v-else class="btn btn-lg  disabled">Next</button>
+                </div>
               </div>
               <div class="indicators">
                 <div class="item active"></div>
@@ -268,10 +249,12 @@
                 <div class="item active"></div>
                 <div class="item"></div>
                 <div class="item"></div>
+                <div class="item"></div>
               </div>
               
           </div>
-          <div v-if="step === 4">
+          
+          <div v-if="step === 5">
             <h5>What would you like to say?</h5>
             <p class="mx-3" style="font-size: 12px;">Type a personalizied message or keep it blank and leave it up to us. Your greeter will read this to your recipient prior to performing the greeting song.</p>
             <div class="form-group">
@@ -280,8 +263,11 @@
               <div class="clearfix"></div>
 
             <div class="form-buttons">  
-              <div><button class="btn btn-lg btn-light" @click.prevent="prev()">Back</button></div>
-              <div><button class="btn btn-lg btn-light" @click.prevent="next()">Next</button></div>
+              <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+              <div>
+                <button v-if="this.formData.message.length<300" class="btn btn-lg " @click.prevent="next()">Next</button>
+                <button v-else class="btn btn-lg  disabled">Next</button>
+              </div>
             </div>
             <div class="indicators">
               <div class="item active"></div>
@@ -290,14 +276,15 @@
               <div class="item active"></div>
               <div class="item active"></div>
               <div class="item"></div>
+              <div class="item"></div>
             </div>
           </div>
 
-          <div v-if="step === 5">
+          <div v-if="step === 6">
               <h5>Review your order</h5>
-              <div>
+              <div class="px-3">
                 <div class="row">
-                  <div class="col-4 text-right">
+                  <div class="col-3 text-right">
                     From:
                   </div>
                   <div class="col-8 text-left">
@@ -306,18 +293,13 @@
                 </div>
                 
                 <div class="row">
-                  <div class="col-4 text-right">
+                  <div class="col-3 text-right">
                   </div>
-                  <div class="col-8 text-left">
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1" v-model="formData.anonymous">
-                      <label class="form-check-label" for="exampleCheck1">Send Anonymously</label>
-                    </div>
-                  </div>
+
                 </div>
                 
                 <div class="row">
-                  <div class="col-4 text-right">
+                  <div class="col-3 text-right">
                     Song:
                   </div>
                   <div class="col-8 text-left">
@@ -326,40 +308,40 @@
                 </div>
                 
                 <div class="row">
-                  <div class="col-4 text-right">
+                  <div class="col-3 text-right">
                     To:
                   </div>
-                  <div class="col-8 text-left">
+                  <div class="col-9 text-left">
                     <div class="border">
                     <div class="row">
-                      <div class="col-6 text-right">
+                      <div class="col-5 text-right">
                         Name:
                       </div>
-                      <div class="col-6 text-left">
+                      <div class="col-7 text-left">
                         {{formData.recipient_name}}
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-6 text-right">
+                      <div class="col-5 text-right">
                         Phone:
                       </div>
-                      <div class="col-6 text-left">
+                      <div class="col-7 text-left">
                         {{formData.recipient_phone}}
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-6 text-right">
+                      <div class="col-5 text-right">
                         Time Zone:
                       </div>
-                      <div class="col-6 text-left">
+                      <div class="col-7 text-left">
                         {{formData.timezone}}
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-6 text-right">
+                      <div class="col-5 text-right">
                         Best Time:
                       </div>
-                      <div class="col-6 text-left">
+                      <div class="col-7 text-left">
                         {{formData.best_time}}
                       </div>
                     </div>
@@ -400,8 +382,8 @@
               <div class="clearfix"></div>
 
             <div class="form-buttons">  
-              <div><button class="btn btn-lg btn-light" @click.prevent="prev()">Back</button></div>
-              <div><button class="btn btn-lg btn-light btn-submit" @click="postOrders()">Submit</button></div>
+              <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+              <div><button class="btn btn-lg  btn-submit" @click="paypalset()">$</button></div>
             </div>
             <div class="indicators">
               <div class="item active"></div>
@@ -410,9 +392,30 @@
               <div class="item active"></div>
               <div class="item active"></div>
               <div class="item active"></div>
+              <div class="item"></div>
             </div>
     
           </div>
+          
+          <div v-if="step === 7">
+            <h5>Complete Your Payment With Paypal</h5>
+            <p>Then click submit to send your greeting!</p>
+              <div id="submit-hidden" class="btn btn-insong2 disabled">Submit</div>
+              <div class="btn btn-insong2" id="submit-button" @click="postOrders()">Submit</div>
+              <!-- <div id="paypal-button-container"></div> -->
+              <div class="clearfix"></div>
+
+            <div class="indicators">
+              <div class="item active"></div>
+              <div class="item active"></div>
+              <div class="item active"></div>
+              <div class="item active"></div>
+              <div class="item active"></div>
+              <div class="item active"></div>
+              <div class="item active"></div>
+            </div>
+          </div>
+          
           </form>
         </div>
         <!-- <form>
@@ -426,23 +429,14 @@
         </div>
 
         <div class="row pt-2">
-          <div class="col-12"><input type="submit" value="Submit" @click="postOrders()" class="btn btn-lg btn-light pull-right"></div>
+          <div class="col-12"><input type="submit" value="Submit" @click="postOrders()" class="btn btn-lg  pull-right"></div>
         </div>
           <div class="clearfix"></div>
         </form> -->
     </div>    
     
     
-    <div class="mx-5" id="ppal" style="position: relative; z-index: 1;">
-      <div id="paypal-button-container"></div>
-      <div class="indicators">
-        <div class="item active"></div>
-        <div class="item"></div>
-        <div class="item"></div>
-        <div class="item"></div>
-        <div class="item"></div>
-      </div>
-    </div>
+    
     
     
     </div>
@@ -476,6 +470,9 @@ export default {
           timezone: '',
           message: '',
           song: '',
+          best_time: '',
+          from: this.$auth.user.name,
+          also_from: '',
           anonymous: false
         },
         paypal: {
@@ -527,10 +524,12 @@ export default {
             recipient_phone: this.formData.recipient_phone,
             date_requested: this.formData.date_requested,
             timezone: this.formData.timezone,
+            best_time: this.formData.besttime,
             message: this.formData.message,
             anonymous: this.formData.anonymous,
             song: this.formData.song,
-            sender: this.$auth.user.name,
+            sender: this.formData.from,
+            also_from: this.formData.also_from,
             sender_email: this.$auth.user.email,
             auth0_user_id: this.$auth.user.sub,
             created_at: Date.now(),
@@ -543,6 +542,31 @@ export default {
             }
           }).then(this.$router.push({path: "/thank-you"}));
 
+        },
+        paypalset() {
+          this.next();
+          paypal.Buttons({
+              createOrder: function(data, actions) {
+                // This function sets up the details of the transaction, including the amount and line item details.
+                return actions.order.create({
+                  purchase_units: [{
+                    amount: {
+                      value: '9.95'
+                    }
+                  }]
+                });
+              },
+              onApprove: function(data, actions) {
+                // This function captures the funds from the transaction.
+                return actions.order.capture()
+                  .then(function(details) {
+                    document.getElementById('submit-button').style.display="flex";
+                    document.getElementById('ppal').style.display="none";
+                    document.getElementById('submit-hidden').style.display="none";
+                });
+              }
+            }).render('#paypal-button-container'); 
+            
         }
     },
     created() {
@@ -550,28 +574,6 @@ export default {
       this.type = this.$route.params.type;
     },
     mounted () {
-      paypal.Buttons({
-          createOrder: function(data, actions) {
-            // This function sets up the details of the transaction, including the amount and line item details.
-            return actions.order.create({
-              purchase_units: [{
-                amount: {
-                  value: '9.95'
-                }
-              }]
-            });
-          },
-          onApprove: function(data, actions) {
-            // This function captures the funds from the transaction.
-            return actions.order.capture()
-              .then(function(details) {
-                document.getElementById("formf").style.display = "block";
-                document.getElementById("fill-out").style.display = "block";
-                document.getElementById("pay-now").style.display = "none";
-                document.getElementById("ppal").style.display = "none";
-            });
-          }
-        }).render('#paypal-button-container'); 
     }
     
   }
@@ -583,6 +585,9 @@ export default {
     overflow: scroll;
     color: #232323;
   }
+  #submit-button {
+    display: none;
+  }
   h1 {
     font-weight:900;
     color: #232323;
@@ -591,10 +596,10 @@ export default {
     color: #232323;
   }
   #fill-out {
-    display: none;
+    display: block;
   }
   .formf {
-    display: none;
+    display: block;
     color: #232323 !important;
     font-size: 18px;
     .label {
@@ -607,8 +612,8 @@ export default {
     display: flex;
     justify-content: center;
     .item {
-      padding: 10px;
-      margin: 10px;
+      padding: 8px;
+      margin: 5px;
       background: #999;
       height: 5px;
       width: 5px;
@@ -645,5 +650,90 @@ export default {
       padding: 0 15px;
     }
   }
-  
+  .disabled {
+    background: #ccc !important;
+  }
+  .btn:hover {
+    color: white !important;
+  }
 </style>
+
+
+
+
+
+<!--
+    <div id="pay-now">
+      Complete your payment with PayPal to access the order form.
+    <div>Available Songs:</div>
+    <div class="border songs">
+
+      <div v-if="this.type=='birthday'" >
+        <div class="list">
+          <div class="l-item">Happy Birthday</div>
+        </div>
+      </div>
+
+      <div v-if="this.type=='anniversary'" >
+        <div class="list">
+          <div class="l-item">Happy Together - The Turtles</div>
+          <div class="l-item">Just the Way You Are - Bruno Mars</div>
+          <div class="l-item">If I Ain’t Got You - Alecia Keys</div>
+          <div class="l-item">I’m Yours - Jason Mraz</div>
+          <div class="l-item">How Deep Is Your Love - Bee Gees</div>
+          <div class="l-item">I Don’t Want to Miss a Thing - Aerosmith</div>
+          <div class="l-item">Thinking Out Loud - Ed Sheeran</div>
+        </div>
+      </div>
+
+      <div v-if="this.type=='missyou'" >
+        <div class="list">
+          <div class="l-item">Come on Get Higher - Matt Nathanson</div>
+          <div class="l-item">Better Together - Jack Johnson</div>
+          <div class="l-item">One Call Away - Charlie Puth</div>
+          <div class="l-item">Ain’t No Sunshine - Bill Withers</div>
+          <div class="l-item">I Don’t Want to Miss a Thing - Aerosmith</div>
+          <div class="l-item">Home - Michael Buble</div>
+          <div class="l-item">Back to December - Taylor Swift</div>
+        </div>
+      </div>
+
+      <div v-if="this.type=='thinking'" >
+        <div class="list">
+          <div class="l-item">Chasing Cars - Snow Patrol</div>
+          <div class="l-item">I Won’t Give Up - Jason Mraz</div>
+          <div class="l-item">Somewhere Over The Rainbow - Judy Garland</div>
+          <div class="l-item">Three Little Birds - Bob Marley and The Wailers</div>
+          <div class="l-item">Human - Christina Perri</div>
+          <div class="l-item">Let It Be - The Beatles</div>
+          <div class="l-item">Fight Song - Rachael Platten</div>
+        </div>
+      </div>
+
+      <div v-if="this.type=='sorry'" >
+        <div class="list">
+          <div class="l-item">I Won’t Give Up - Jason Mraz</div>
+          <div class="l-item">Sorry - Justin Bieber</div>
+          <div class="l-item">If I Could Turn Back Time - Cher</div>
+          <div class="l-item">Please Forgive Me - Bryan Adams</div>
+          <div class="l-item">Back to December - Taylor Swift</div>
+          <div class="l-item">Hello - Adele</div>
+          <div class="l-item">Purple Rain - Prince</div>
+        </div>
+      </div>
+
+      <div v-if="this.type=='love'" >
+        <div class="list">
+          <div class="l-item">ily (i love you baby) [feat. Emilee] - Surf Mesa</div>
+          <div class="l-item">Stand by Me - Ben E. King</div>
+          <div class="l-item">Happy Together - The Turtles</div>
+          <div class="l-item">Wouldn’t it be Nice - The Beach Boys</div>
+          <div class="l-item">Making Memories of Us - Keith Urban</div>
+          <div class="l-item">How Deep Is Your Love - Bee Gees</div>
+          <div class="l-item">I Don’t Want to Miss a Thing - Aerosmith</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="font-weight-bold p-3">Price: $9.95</div>
+    </div> -->
