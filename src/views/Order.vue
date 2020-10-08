@@ -77,9 +77,9 @@
       <label class="toggle-label">
       <input type="checkbox">
       <span @click="switchview()" class="back">
-      <span class="toggle"></span>
-      <span class="label on">CAROUSEL</span>
-      <span class="label off">GRID</span>
+        <span class="toggle"></span>
+        <span class="label on">CAROUSEL</span>
+        <span class="label off">GRID</span>
       </span>
       </label>
     </div>
@@ -249,6 +249,7 @@ export default {
     width: 100%;
     img {
       width: 75%;
+      margin: 5vh;
     }
   }
   
@@ -281,9 +282,11 @@ export default {
     flex-wrap: wrap;
     width: 100%;
     justify-content: center;
+    margin: 25px;
     img {
-      height: 20vh;
-      width: 20vh;
+      height: 18vh;
+      width: 18vh;
+      margin: 5px;
     }
   }
   
@@ -308,11 +311,11 @@ export default {
       left: 0;
       top: 0;
       border-radius: 50px;
-      border: 1px solid #000;
+      border: 4px solid #FF9A00;
       transition: background 150ms linear;
   }
   .toggle-label input[type=checkbox]:checked+.back {
-      border: 1px solid #000;
+      border: 4px solid #FF9A00;
       cursor: pointer;
   }
 
@@ -334,7 +337,8 @@ export default {
     display: block;
     position: absolute;
     width: 50%;
-    color: #000;
+    color: white;
+    font-weight: bold;
     line-height: 24px;
     text-align: center;
     font-size: 10px;
@@ -343,17 +347,19 @@ export default {
   .toggle-label .label.off { right: 0px; }
 
   .toggle-label input[type=checkbox]:checked+.back .label.on {
-    color: #000;
+    color: #FF9A00;
   }
   .toggle-label input[type=checkbox]+.back .label.off {
-    color: #000;
+    color: #FF9A00;
       cursor: pointer;
   }
   .toggle-label input[type=checkbox]:checked+.back .label.off {
-    color: #000;
+    color: white;
   }
   .toggle {
     background: #FF9A00 !important;
     z-index: 0;
+    //border: 1px solid black !important;
   }
+
 </style>
