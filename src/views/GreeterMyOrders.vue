@@ -71,7 +71,7 @@ export default {
           const token = await this.$auth.getTokenSilently();
           let url = new URL('https://insong-066b.restdb.io/rest/greeters')
           let json = {
-            "user_email": this.$auth.user_email
+            "user_email": this.$auth.user.email
           };
           url.searchParams.set('q', JSON.stringify(json))
           const { data } = await axios.get(url, {
