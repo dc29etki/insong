@@ -5,9 +5,9 @@
   
     <h2 class="text-center m-3">Help and Support</h2>
     <div class="buttons2">
-      <a href="mailto:walter@walterburmer.com?subject=Order Help" class="btn btn-dark">Help with an order</a>
-      <a href="mailto:walter@walterburmer.com?subject=App Help" class="btn btn-dark">Help with the app</a>
-      <a href="mailto:walter@walterburmer.com?subject=Greeter Support" class="btn btn-dark">Greeter Support</a>
+      <a href="mailto:contact@insonggreetings.com?subject=Order Help" class="btn btn-dark">Help with an order</a>
+      <a href="mailto:contact@insonggreetings.com?subject=App Help" class="btn btn-dark">Help with the app</a>
+      <a href="mailto:contact@insonggreetings.com?subject=Greeter Support" class="btn btn-dark">Greeter Support</a>
     </div>
   </div>
 </template>
