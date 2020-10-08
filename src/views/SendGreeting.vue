@@ -43,7 +43,7 @@
               <select class="form-control" id="sel1" v-model="formData.song">
                 <option>Happy Together - The Turtles</option>
                 <option>Just the Way You Are - Bruno Mars</option>
-                <option>If I Ain’t Got You - Alecia Keys</option>
+                <option>If I Ain’t Got You - Alicia Keys</option>
                 <option>I’m Yours - Jason Mraz</option>
                 <option>How Deep Is Your Love - Bee Gees</option>
                 <option>I Don’t Want to Miss a Thing - Aerosmith</option>
