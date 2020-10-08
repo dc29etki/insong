@@ -21,7 +21,7 @@
     <h3 class="text-center">Click to Choose</h3>
     <div class="outside">
     <div id="car-view" v-if="this.view=='car'" class="greetings my-auto">
-      <div id="carousel1" class="carousel slide" data-ride="false" data-pause="false">
+      <div id="carousel1" class="carousel slide" data-ride="carousel" data-pause="false">
 
         <!-- Indicators -->
         <ul class="carousel-indicators">
