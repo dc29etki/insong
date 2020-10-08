@@ -3,9 +3,10 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Ensures optimal rendering on mobile devices. -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!-- Optimal Internet Explorer compatibility -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+   
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
  </head>
 
@@ -20,16 +21,16 @@
     <h3 class="text-center">Click to Choose</h3>
     <div class="outside">
     <div id="car-view" v-if="this.view=='car'" class="greetings my-auto">
-      <div id="demo" class="carousel slide" data-ride="carousel">
+      <div id="carousel" class="carousel slide" data-ride="carousel">
 
         <!-- Indicators -->
         <ul class="carousel-indicators">
-          <li data-target="#demo" data-slide-to="0" class="active"></li>
-          <li data-target="#demo" data-slide-to="1"></li>
-          <li data-target="#demo" data-slide-to="2"></li>
-          <li data-target="#demo" data-slide-to="3"></li>
-          <li data-target="#demo" data-slide-to="4"></li>
-          <li data-target="#demo" data-slide-to="5"></li>
+          <li data-target="#carousel" data-interval="1" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel" data-interval="1" data-slide-to="1"></li>
+          <li data-target="#carousel" data-interval="1" data-slide-to="2"></li>
+          <li data-target="#carousel" data-interval="1" data-slide-to="3"></li>
+          <li data-target="#carousel" data-interval="1" data-slide-to="4"></li>
+          <li data-target="#carousel" data-interval="1" data-slide-to="5"></li>
         </ul>
   
         <!-- The slideshow -->
@@ -55,10 +56,10 @@
         </div>
   
         <!-- Left and right controls -->
-        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <a class="carousel-control-prev" href="#carousel" data-slide="prev">
          <span class="carousel-control-prev-icon"></span>
         </a>
-        <a class="carousel-control-next" href="#demo" data-slide="next">
+        <a class="carousel-control-next" href="#carousel" data-slide="next">
           <span class="carousel-control-next-icon"></span>
         </a>
       </div>
@@ -87,6 +88,10 @@
   </div>
   </div>
 </template>
+
+<script>
+  $('.carousel').carousel()
+</script>
 
 <script>
 import axios from 'axios';
@@ -175,7 +180,6 @@ export default {
       this.getOrders();
     },
     mounted () {
-      
     }
     
   }
