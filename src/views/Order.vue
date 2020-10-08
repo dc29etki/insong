@@ -3,16 +3,16 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Ensures optimal rendering on mobile devices. -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!-- Optimal Internet Explorer compatibility -->
-   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-   
- </head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
 
   <script
     src="https://www.paypal.com/sdk/js?client-id=Aac4_TjyjB8UrAMqoDjik6EdmYriqFxBT2qMyWxwRUg7ZUyh6EnOZn3abeZsaPfBVdchl8KmYONL3Fxa"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
   </script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 <template>
   <div id="greeting" class="has-footer has-header">
@@ -21,7 +21,7 @@
     <h3 class="text-center">Click to Choose</h3>
     <div class="outside">
     <div id="car-view" v-if="this.view=='car'" class="greetings my-auto">
-      <div id="carousel1" class="carousel slide" data-ride="carousel" data-pause="false">
+      <div id="carousel1" class="carousel slide" data-ride="carousel">
 
         <!-- Indicators -->
         <ul class="carousel-indicators">
@@ -35,22 +35,22 @@
   
         <!-- The slideshow -->
         <div class="carousel-inner text-center mb-3">
-          <div class="carousel-item active" data-interval="3000">
+          <div class="carousel-item active" data-interval="2000">
             <div class="b-item"><router-link to="/send-greeting/birthday"><img src=".././assets/greeting-icons/birthday.png"/></router-link></div>
           </div>
-          <div class="carousel-item" data-interval="3000">
+          <div class="carousel-item" data-interval="2000">
             <div class="b-item"><router-link to="/send-greeting/anniversary"><img src=".././assets/greeting-icons/anniversary.png"/></router-link></div>
           </div>
-          <div class="carousel-item" data-interval="3000">
+          <div class="carousel-item" data-interval="2000">
             <div class="b-item"><router-link to="/send-greeting/missyou"><img src=".././assets/greeting-icons/miss.png"/></router-link></div>
           </div>
-          <div class="carousel-item" data-interval="3000">
+          <div class="carousel-item" data-interval="2000">
             <div class="b-item"><router-link to="/send-greeting/thinking"><img src=".././assets/greeting-icons/thinking.png"/></router-link></div>
           </div>
-          <div class="carousel-item" data-interval="3000">
+          <div class="carousel-item" data-interval="2000">
             <div class="b-item"><router-link to="/send-greeting/love"><img src=".././assets/greeting-icons/love.png"/></router-link></div>
           </div>
-          <div class="carousel-item" data-interval="3000">
+          <div class="carousel-item" data-interval="2000">
             <div class="b-item"><router-link to="/send-greeting/sorry"><img src=".././assets/greeting-icons/sorry.png"/></router-link></div>
           </div>
         </div>
