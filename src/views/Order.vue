@@ -25,32 +25,32 @@
 
         <!-- Indicators -->
         <ul class="carousel-indicators">
-          <li data-target="#carousel" data-interval="1" data-slide-to="0" class="active"></li>
-          <li data-target="#carousel" data-interval="1" data-slide-to="1"></li>
-          <li data-target="#carousel" data-interval="1" data-slide-to="2"></li>
-          <li data-target="#carousel" data-interval="1" data-slide-to="3"></li>
-          <li data-target="#carousel" data-interval="1" data-slide-to="4"></li>
-          <li data-target="#carousel" data-interval="1" data-slide-to="5"></li>
+          <li data-target="#carousel" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel" data-slide-to="1"></li>
+          <li data-target="#carousel" data-slide-to="2"></li>
+          <li data-target="#carousel" data-slide-to="3"></li>
+          <li data-target="#carousel" data-slide-to="4"></li>
+          <li data-target="#carousel" data-slide-to="5"></li>
         </ul>
   
         <!-- The slideshow -->
         <div class="carousel-inner text-center mb-3">
-          <div class="carousel-item active">
+          <div class="carousel-item active" data-interval="1">
             <div class="b-item"><router-link to="/send-greeting/birthday"><img src=".././assets/greeting-icons/birthday.png"/></router-link></div>
           </div>
-          <div class="carousel-item">
+          <div class="carousel-item" data-interval="1">
             <div class="b-item"><router-link to="/send-greeting/anniversary"><img src=".././assets/greeting-icons/anniversary.png"/></router-link></div>
           </div>
-          <div class="carousel-item">
+          <div class="carousel-item" data-interval="1">
             <div class="b-item"><router-link to="/send-greeting/missyou"><img src=".././assets/greeting-icons/miss.png"/></router-link></div>
           </div>
-          <div class="carousel-item">
+          <div class="carousel-item" data-interval="1">
             <div class="b-item"><router-link to="/send-greeting/thinking"><img src=".././assets/greeting-icons/thinking.png"/></router-link></div>
           </div>
-          <div class="carousel-item">
+          <div class="carousel-item" data-interval="1">
             <div class="b-item"><router-link to="/send-greeting/love"><img src=".././assets/greeting-icons/love.png"/></router-link></div>
           </div>
-          <div class="carousel-item">
+          <div class="carousel-item" data-interval="1">
             <div class="b-item"><router-link to="/send-greeting/sorry"><img src=".././assets/greeting-icons/sorry.png"/></router-link></div>
           </div>
         </div>
@@ -177,7 +177,6 @@ export default {
         }
     },
     created() {
-      this.getOrders();
     },
     mounted () {
     }
