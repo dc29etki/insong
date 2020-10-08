@@ -35,22 +35,22 @@
   
         <!-- The slideshow -->
         <div class="carousel-inner text-center mb-3">
-          <div class="carousel-item active" data-interval="2000">
+          <div class="carousel-item active" data-interval="2500">
             <div class="b-item"><router-link to="/send-greeting/birthday"><img src=".././assets/greeting-icons/birthday.png"/></router-link></div>
           </div>
-          <div class="carousel-item" data-interval="2000">
+          <div class="carousel-item" data-interval="2500">
             <div class="b-item"><router-link to="/send-greeting/anniversary"><img src=".././assets/greeting-icons/anniversary.png"/></router-link></div>
           </div>
-          <div class="carousel-item" data-interval="2000">
+          <div class="carousel-item" data-interval="2500">
             <div class="b-item"><router-link to="/send-greeting/missyou"><img src=".././assets/greeting-icons/miss.png"/></router-link></div>
           </div>
-          <div class="carousel-item" data-interval="2000">
+          <div class="carousel-item" data-interval="2500">
             <div class="b-item"><router-link to="/send-greeting/thinking"><img src=".././assets/greeting-icons/thinking.png"/></router-link></div>
           </div>
-          <div class="carousel-item" data-interval="2000">
+          <div class="carousel-item" data-interval="2500">
             <div class="b-item"><router-link to="/send-greeting/love"><img src=".././assets/greeting-icons/love.png"/></router-link></div>
           </div>
-          <div class="carousel-item" data-interval="2000">
+          <div class="carousel-item" data-interval="2500">
             <div class="b-item"><router-link to="/send-greeting/sorry"><img src=".././assets/greeting-icons/sorry.png"/></router-link></div>
           </div>
         </div>
@@ -94,6 +94,7 @@
 import axios from 'axios';
 import PayPal from 'vue-paypal-checkout'
 import moment from 'moment'
+import $ from 'jquery'
 export default {
     name: 'Order',
     components: {},
@@ -176,6 +177,7 @@ export default {
     created() {
     },
     mounted () {
+      $(".carousel").carousel({ interval: 2500 });
     }
     
   }
