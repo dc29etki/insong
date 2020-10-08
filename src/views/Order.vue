@@ -90,10 +90,6 @@
 </template>
 
 <script>
-  $('.carousel').carousel()
-</script>
-
-<script>
 import axios from 'axios';
 import PayPal from 'vue-paypal-checkout'
 import moment from 'moment'
