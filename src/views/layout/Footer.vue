@@ -66,7 +66,7 @@
         const token = await this.$auth.getTokenSilently();
         let url = new URL('https://insong-066b.restdb.io/rest/greeters')
         let json = {
-          "user_email": this.$auth.user_email
+          "user_email": this.$auth.user.email
         };
         url.searchParams.set('q', JSON.stringify(json))
         const { data } = await axios.get(url, {
@@ -74,8 +74,11 @@
             Authorization: `Bearer ${token}`
           }
         });
-        if(data[0]){return true;}
-        else{return false;}
+        if(data[0]){
+          this.isGreeter = true;
+          return true;
+        }
+        else{this.isGreeter = false; return false;}
       }, 
       routeTo(path) {
         if(path=="/"){
@@ -107,6 +110,7 @@
     position:fixed;
     bottom:0;
     width:100vw;
+    height: 10vh;
     .footer-navigation {
       list-style-type:none;
       color: #545454 ;

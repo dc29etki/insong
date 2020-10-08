@@ -15,12 +15,12 @@
     
     <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">   
        
-    <h2 v-if="this.type=='birthday'" class="text-center">Happy Birthday</h2>
-    <h2 v-if="this.type=='anniversary'" class="text-center">Happy Anniversary</h2>
-    <h2 v-if="this.type=='missyou'" class="text-center">I Miss You</h2>
-    <h2 v-if="this.type=='thinking'" class="text-center">Thinking of You</h2>
-    <h2 v-if="this.type=='love'" class="text-center">I Love You</h2>
-    <h2 v-if="this.type=='sorry'" class="text-center">I'm Sorry</h2>
+    <h2 style="color: #FF9A00!important;" v-if="this.type=='birthday'" class="text-center">Happy Birthday</h2>
+    <h2 style="color: #D44545!important;" v-if="this.type=='anniversary'" class="text-center">Happy Anniversary</h2>
+    <h2 style="color: #37AF03!important;" v-if="this.type=='missyou'" class="text-center">I Miss You</h2>
+    <h2 style="color: #FFD93B!important;" v-if="this.type=='thinking'" class="text-center">Thinking of You</h2>
+    <h2 style="color: #8E67DD!important;" v-if="this.type=='love'" class="text-center">I Love You</h2>
+    <h2 style="color: #2C6ABD!important;" v-if="this.type=='sorry'" class="text-center">I'm Sorry</h2>
     
     <h6 id="fill-out">Fill out the form below to send a greeting now!</h6>
     <div class="mx-5 mt-5 mb-2" id="ppal" style="position: relative; z-index: 1;">
@@ -525,7 +525,7 @@ export default {
             recipient_phone: this.formData.recipient_phone,
             date_requested: this.formData.date_requested,
             timezone: this.formData.timezone,
-            best_time: this.formData.besttime,
+            best_time: this.formData.best_time,
             message: this.formData.message,
             anonymous: this.formData.anonymous,
             song: this.formData.song,
@@ -573,6 +573,28 @@ export default {
     created() {
       this.getOrders();
       this.type = this.$route.params.type;
+      switch(this.type) {
+        case "birthday":
+          this.formData.message = "They would like you to know you are in their thoughts on your special day! They asked me to perform this song for you and sing your best wishes true! We hope it makes you smile!";
+          break;
+        case "anniversary":
+          this.formData.message = "They would like you to know how much they love you! They asked me to perform this song for you to let you know how they are feeling on this special day. We hope it makes you smile!";
+          break;
+        case "missyou":
+          this.formData.message = "They would like you to know you are in their thoughts and they miss you! They asked me to perform this song for you to let you know how they are feeling right now. We hope it makes you smile!";
+          break;
+        case "thinking":
+          this.formData.message = "They would like you to know you are in their thoughts and they care about you a lot! They asked me to perform this song for you to let you know how they are feeling right now. We hope it makes you smile!";
+          break;
+        case "love":
+          this.formData.message = "They would like you to know you are in their thoughts and they love you! They asked me to perform this song for you to let you know how they are feeling right now. We hope it makes you smile!";
+          break;
+        case "sorry":
+          this.formData.message = "They would like you to know you are in their thoughts and they are very sorry! They asked me to perform this song for you to let you know how they are feeling right now. We hope this makes it easier for you to forgive them!";
+          break;
+        default:
+          // code block
+      }
     },
     mounted () {
     }

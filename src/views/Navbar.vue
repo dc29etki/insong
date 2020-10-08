@@ -14,7 +14,9 @@
         <ul class="navbar-nav mr-auto"></ul>
         <ul class="navbar-nav ml-auto">
           <template v-if="$auth.isAuthenticated">
-            <router-link to="/profile" class="nav-item font-weight-bold" style="margin-left:10px; color: #FF9A00;">Profile</router-link>
+            <li class="nav-item">
+            <router-link to="/profile" class="nav-link font-weight-bold" style="margin-left:10px; color: #FF9A00 !important;">Profile</router-link>
+          </li>
             <li class="nav-item">
               <a class="nav-link" @click="signOut">Sign out</a>
             </li>
@@ -88,5 +90,11 @@ export default {
   }
   .navbar-brand {
     color: white;
+  }
+  
+  @media only screen and (min-width: 767px) {
+    .user-button {
+      display: none;
+    }
   }
 </style>

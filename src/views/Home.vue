@@ -1,7 +1,7 @@
 <!DOCTYPE html> 
 <template>
   <div id="home" class="has-footer has-header">    
-    <div class="pb-5 mb-5"> </div>
+    <div class="pb-5 mt-5"> </div>
     
     <div class="home-area m-2 text-center">
     <img style="height:17.5vh;" src=".././assets/logo-main.png"/>
@@ -22,13 +22,13 @@
           <hr>
           <h4>Login or Create an Account Today!</h4>
           <div class="d-flex flex-row justify-content-center">
-            <a @click="login" class="btn btn-insong2 m-2">Login</a>
-            <a @click="login" class="btn btn-insong2 m-2">Sign Up</a>
+            <a @click="login" class="login btn btn-insong2 m-2">Login</a>
+            <a @click="login" class="login btn btn-insong2 m-2">Sign Up</a>
           </div>
         </div>
         <div v-else class="s2">
           <hr>
-          <h4>Welcome back, {{$auth.user.name}}!</h4>
+          <h4>Welcome back, {{$auth.user.name.split(" ")[0]}}!</h4>
           <div class="d-flex flex-row justify-content-center">
             <router-link to="/order" class="btn btn-insong2 m-2">New Greeting</router-link>
             <router-link class="btn btn-insong2 m-2" to="/my-orders">My Greetings</router-link>
@@ -45,7 +45,7 @@
       
     
     </div>
-    <div class="pb-5 mb-3"> </div>
+    <div class="pb-5 mb-5"> </div>
     
   </div>
 </template>
@@ -149,8 +149,8 @@ export default {
     background: #FF9A00;
     color: white !important;
     font-weight: 700;
-    font-size: 14px;
-    padding: 10px;
+    font-size: 1.5vh;
+    padding: 25px;
   }
   .apply {
     font-weight: 800;
@@ -159,5 +159,8 @@ export default {
   }
   hr {
     background: #FF9A00;
+  }
+  .login {
+    font-size: 2vh;
   }
 </style>

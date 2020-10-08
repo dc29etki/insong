@@ -18,13 +18,23 @@
          Time Zone: {{this.order.timezone}}
        </div>
        Created: {{new Date(this.order.created_at).toLocaleString()}}<br>
-       Song: {{this.order.song}}<br>
-       Message: {{this.order.message}}
+       {{this.order}}
        <div class=""><strong>Sender:</strong><br>
          Name: {{this.order.sender}}<br>
          Also from: {{this.order.also_from}}<br>
          Anonymous? {{this.order.anonymous}}
        </div>
+       <div class="border">
+        <span class="font-weight-bold">Song:</span> {{this.order.song}}<br>
+        <div class="font-weight-bold">Script:</div>
+          Hi, is this {{this.order.recipient_name}}?<br>
+          — — —<br>
+          Hi, {{this.order.recipient_name.split(" ")[0]}}! This is {{this.$auth.user.name}} from InSong Greetings calling you on behalf of 
+          <span v-if="this.order.anonymous">an anonymous person</span><span v-else>{{this.order.sender}}</span><span v-if="this.order.also_from"> and {{this.order.also_from}}</span> who is the reason you’re receiving this greeting gift.<br>
+          <div class="font-italic">{{this.order.message}}</div>
+          <div class="font-weight-bold">[Sing <span class="font-italic">{{this.order.song}}</span>]</div>
+          We hope you enjoyed this InSong greeting! <span v-if="this.order.type=='birthday'">Have a great birthday!</span><span v-else>Have a great day/night!</span>
+        </div>
        
      </div>
      <div class="buttons">

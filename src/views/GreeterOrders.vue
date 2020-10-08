@@ -13,7 +13,8 @@
     <div v-if="orders.length<1" class="border m-5 p-4">No orders right now, check back later</div>
     <div class="text-left p-3 m-3 mx-auto">
       <div class="box2" v-for="o in sortedOrders" :key="o">
-        <div class="item">
+        Todays Orders:
+        <div v-if="new Date(o.date_requested).getDate()+2 == new Date().getDate() && new Date(o.date_requested).getMonth() == new Date().getMonth()" class="item">
           Sent to: {{o.recipient_name}}
           <br>
           Song: {{o.song}}
@@ -23,6 +24,36 @@
           Created: {{new Date(o.created_at).toDateString()}}<br>
           Date Requested: {{new Date(o.date_requested).toDateString()}}<br>
           <div class="btn btn-primary" @click="addOrder(o._id)">Add to Queue</div>
+        </div>
+      </div>
+      <hr>
+      <div class="box2" v-for="o in sortedOrders" :key="o">
+        Future Orders:
+        <div v-if="(new Date(o.date_requested).getDate() > new Date().getDate() && new Date(o.date_requested).getMonth() >= new Date().getMonth()) || new Date(o.date_requested).getMonth() > new Date().getMonth()" class="item">
+          Sent to: {{o.recipient_name}}
+          <br>
+          Song: {{o.song}}
+          <br>
+          Type: {{o.type}}
+          <br>
+          Created: {{new Date(o.created_at).toDateString()}}<br>
+          Date Requested: {{new Date(o.date_requested).toDateString()}}<br>
+          <div class="btn btn-primary" @click="addOrder(o._id)">Add to Queue</div>
+        </div>
+        <div v-else>
+          <hr>
+          <h4 style="color:red;">Missed Orders:</h4>
+          <div style="border:5px solid red; padding: 10px;">
+          Sent to: {{o.recipient_name}}
+          <br>
+          Song: {{o.song}}
+          <br>
+          Type: {{o.type}}
+          <br>
+          Created: {{new Date(o.created_at).toDateString()}}<br>
+          Date Requested: {{new Date(o.date_requested).toDateString()}}<br>
+          <div class="btn btn-primary" @click="addOrder(o._id)">Add to Queue</div>
+          </div>
         </div>
       </div>
             
@@ -112,7 +143,12 @@ export default {
         },
         async getOrders() {
           const token = await this.$auth.getTokenSilently();
-          const { data } = await axios.get('https://insong-066b.restdb.io/rest/orders?q={"status":"Posted"}', {
+          let url = new URL('https://insong-066b.restdb.io/rest/orders')
+          let json = {
+            "status": "Posted",
+          };
+          url.searchParams.set('q', JSON.stringify(json))
+          const { data } = await axios.get(url, {
             headers: {
               Authorization: `Bearer ${token}`
             }
@@ -168,6 +204,7 @@ export default {
   }
   .box2 {
     display: flex;
+    flex-direction: column;
     .item {
       border: 3px solid #232323;
       width: 100%;
