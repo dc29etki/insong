@@ -3,14 +3,14 @@
   <div id="footer">
     <nav>
       <ul class="footer-navigation">
-      <div class="d-flex justify-content-center" v-if="!this.isGreeter">
-        <li v-bind:class="{'current': isCurrent(link)}" v-for="link in links.slice(0,3)" :key="link.label" v-on:click="routeTo(link.path)">
+      <div class="d-flex justify-content-center" v-if="this.isGreeter">
+        <li v-bind:class="{'current': isCurrent(link)}" v-for="link in links.slice(0,4)" :key="link.label" v-on:click="routeTo(link.path)">
           <div style="font-size: 1.5rem;" class="mb-2"><font-awesome-icon :icon="link.icon" /><br></div>
           <span class="label">{{link.label}}</span>
         </li>
       </div>
       <div class="d-flex justify-content-center" v-else>
-        <li v-bind:class="{'current': isCurrent(link)}" v-for="link in links.slice(0,4)" :key="link.label" v-on:click="routeTo(link.path)">
+        <li v-bind:class="{'current': isCurrent(link)}" v-for="link in links.slice(0,3)" :key="link.label" v-on:click="routeTo(link.path)">
           <div style="font-size: 1.5rem;" class="mb-2"><font-awesome-icon :icon="link.icon" /><br></div>
           <span class="label">{{link.label}}</span>
         </li>

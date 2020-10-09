@@ -400,7 +400,8 @@
           <div v-if="step === 7">
             <h5>Complete Your Payment With Paypal</h5>
             <p>Then click submit to send your greeting!</p>
-            <div class="font-weight-bold p-3">Price: $9.95</div>
+            <div v-if="this.type=='birthday'" class="font-weight-bold p-3">Price: $9.95</div>
+            <div v-else class="font-weight-bold p-3">Price: $14.95</div>
               <div id="submit-hidden" class="btn btn-insong2 disabled">Submit</div>
               <div class="btn btn-insong2" id="submit-button" @click="postOrders()">Submit</div>
               <!-- <div id="paypal-button-container"></div> -->
@@ -546,13 +547,20 @@ export default {
         },
         paypalset() {
           this.next();
+          var price = 0.00;
+          if(this.type == 'birthday'){
+            price = 9.95;
+          }
+          else {
+            price = 14.95;
+          }
           paypal.Buttons({
               createOrder: function(data, actions) {
                 // This function sets up the details of the transaction, including the amount and line item details.
                 return actions.order.create({
                   purchase_units: [{
                     amount: {
-                      value: '9.95'
+                      value: price,
                     }
                   }]
                 });

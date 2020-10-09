@@ -22,9 +22,9 @@
           <br>
           Type: {{o.type}}
           <br>
-          Created: {{new Date(o.created_at).toLocaleString()}}
+          Created: {{o.created_at.split("T")[0]}}
           <br>
-          Created: {{new Date(o.completed_at).toLocaleString()}}
+          Completed: {{o.completed_at.split("T")[0]}}
           <br>
           Price: <span v-if="o.type=='Birthday'">$9.95</span>
           <span v-if="o.type=='Cover (partial)'">$13.95</span>

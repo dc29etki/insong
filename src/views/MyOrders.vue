@@ -14,11 +14,11 @@
           <br>
           Song: {{o.song}}
           <br>
-          Created: {{new Date(o.created_at).toLocaleString()}}
+          Created: {{o.created_at.split("T")[0]}}
           <br>
           Status: {{o.status}}
           <div v-if="o.status === 'Completed' && o.completed_at">
-            Completed at: {{new Date(o.completed_at).toLocaleString()}}
+            Completed at: {{o.completed_at.split("T")[0]}}
           </div>
         </div>
         <div v-if="o.status=='In Queue'" class="item queue">
@@ -26,11 +26,11 @@
           <br>
           Song: {{o.song}}
           <br>
-          Created: {{new Date(o.created_at).toLocaleString()}}
+          Created: {{o.created_at.split("T")[0]}}
           <br>
           Status: {{o.status}}
           <div v-if="o.status === 'Completed' && o.completed_at">
-            Completed at: {{new Date(o.completed_at).toLocaleString()}}
+            Completed at: {{o.completed_at.split("T")[0]}}
           </div>
         </div>
         <div v-if="o.status=='Posted'" class="item posted">
@@ -38,11 +38,11 @@
           <br>
           Song: {{o.song}}
           <br>
-          Created: {{new Date(o.created_at).toLocaleString()}}
+          Created: {{o.created_at.split("T")[0]}}
           <br>
           Status: {{o.status}}
           <div v-if="o.status === 'Completed' && o.completed_at">
-            Completed at: {{new Date(o.completed_at).toLocaleString()}}
+            Completed at: {{o.completed_at.split("T")[0]}}
           </div>
         </div>
         <div v-if="o.status=='Attempted'" class="item attempted">
@@ -50,11 +50,11 @@
           <br>
           Song: {{o.song}}
           <br>
-          Created: {{new Date(o.created_at).toLocaleString()}}
+          Created: {{o.created_at.split("T")[0]}}
           <br>
           Status: {{o.status}}
           <div v-if="o.status === 'Completed' && o.completed_at">
-            Completed at: {{new Date(o.completed_at).toLocaleString()}}
+            Completed at: {{o.completed_at.split("T")[0]}}
           </div>
         </div>
       </div>

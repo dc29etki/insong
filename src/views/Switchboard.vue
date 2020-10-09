@@ -9,7 +9,8 @@
     <h2 class="text-center">Welcome greeter!</h2>
     <div class="border" v-if="this.greeter">
       {{this.greeter.orders_completed}} orders completed for a total of ${{this.greeter.money_earned.toFixed(2)}}
-      <br>Money Owed: ${{this.greeter.money_owed}}
+      <br>Money Earned Birthday: ${{this.greeter.money_owed_birthday}}
+      <br>Money Earned Other: ${{this.greeter.money_owed_other}}
     </div>
       <div class="buttons3">
         <router-link to="/greeter-myorders" class="btn btn-lg btn-dark">My orders</router-link>

@@ -13,12 +13,11 @@
        <div class="border p-2"><strong>Recipient:</strong><br>
          Name: {{this.order.recipient_name}}<br>
          Phone: {{this.order.recipient_phone}}<br>
-         Date to call: {{new Date(this.order.date_requested).toLocaleString()}}<br>
+         Date to call: {{this.order.date_requested.split("T")[0]}}<br>
          Best Time to call: {{this.order.best_time}}<br>
          Time Zone: {{this.order.timezone}}
        </div>
        Created: {{new Date(this.order.created_at).toLocaleString()}}<br>
-       {{this.order}}
        <div class=""><strong>Sender:</strong><br>
          Name: {{this.order.sender}}<br>
          Also from: {{this.order.also_from}}<br>
@@ -152,28 +151,27 @@ export default {
             }
           })
           var greeterID = this.greeter._id;
-          var amount = 0;
+          var birthdayamount = 0.00;
+          var amount = 0.00;
           if(this.order.type=='Birthday'){
-            amount = 9.95
+            birthdayamount = 9.95
           }
-          else if(this.order.type=='Cover (partial)'){
-            amount = 13.95
-          }
-          else if(this.order.type=='Happy (full)'){
-            amount = 19.95
-          }
-          else {amount = 9.95}
-          axios.put("https://insong-066b.restdb.io/rest/greeters/"+this.greeter._id,
-          {
-            orders_completed: this.greeter.orders_completed + 1,
-            money_earned: this.greeter.money_earned + amount,
-            money_owed: this.greeter.money_earned + amount
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`    // send the access token through the 'Authorization' header
-            }
-          }).then(this.$router.push({path: "/switchboard"}));
+          else {amount = 14.95}
+          if(completed){
+            axios.put("https://insong-066b.restdb.io/rest/greeters/"+this.greeter._id,
+            {
+              orders_completed: this.greeter.orders_completed + 1,
+              money_earned: this.greeter.money_earned + birthdayamount + amount,
+              money_owed: this.greeter.money_earned + birthdayamount + amount,
+              money_owed_birthday: this.money_owed_birthday + birthdayamount,
+              money_owed_other:  this.money_owed_other + amount,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`    // send the access token through the 'Authorization' header
+              }
+            }).then(this.$router.push({path: "/switchboard"}));
+          }else {this.$router.push({path: "/switchboard"})}
         },
         
         async getOrders() {

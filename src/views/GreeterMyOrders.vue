@@ -12,14 +12,15 @@
     <div v-if="orders.length<1" class="border m-5 p-4">No orders right now, check back later</div>
     <div class="text-left p-3 m-3 mx-auto">
       <div class="box2" v-for="o in orders" :key="o">
-        <div class="item">
+        <div class="item" v-if="o">
           Sent to: {{o.recipient_name}}
           <br>
           Song: {{o.song}}
           <br>
           Type: {{o.type}}
           <br>
-          Created: {{new Date(o.created_at).toDateString()}}<br>
+          Created: {{o.created_at.split("T")[0]}}<br>
+          Requested: <span v-if="o.date_requested">{{o.date_requested.split("T")[0]}}</span><br>
           <router-link class="btn btn-primary" :to="{ name: 'GreeterOrder', params: { id: o._id }}">View Order</router-link>
         </div>
       </div>
