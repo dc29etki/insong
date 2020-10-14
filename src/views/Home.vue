@@ -38,7 +38,7 @@
         <div class="s3">
           <hr>
           <h4>Interested in Becoming a Greeter?</h4>
-          <a href="mailto:walter@walterburmer.com?subject=Greeter Application" class="apply">Apply Here</a>
+          <a href="mailto:contact@insonggreetings.com?subject=Greeter Application" class="apply">Apply Here</a>
         </div>
         
       </div>
