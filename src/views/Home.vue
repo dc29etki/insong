@@ -115,7 +115,7 @@ export default {
     .s1 {
       h4 {
         color: #232323;
-        font-size: 22px;
+        font-size: 4vw;
       }
       margin-left: auto;
       margin-right: auto;
@@ -124,7 +124,7 @@ export default {
     .s2, .s3 {
       h4 {
         color: #232323;
-        font-size: 18px;
+        font-size: 3.5vw;;
       }
     }
   }
