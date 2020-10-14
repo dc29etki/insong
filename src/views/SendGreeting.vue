@@ -122,10 +122,9 @@
            <h4 v-else>When should we send this greeting?</h4>
            <div class="form-group">
              <div class="w-75 mx-auto">
-               <input class="form-control" type="date" value="2011-08-19T13:45:00" id="example-datetime-local-input" v-model="formData.date_requested">
+               <input class="form-control" type="date" value="2011-08-19" id="example-datetime-local-input" v-model="formData.date_requested">
              </div>
            </div>
-           
            <h4>What is the best time to call?</h4>
            <div class="form-group w-75 mx-auto">
              <select class="form-control" id="sel1" v-model="formData.best_time">
@@ -142,7 +141,7 @@
             <div class="form-buttons">  
               <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
               
-              <button v-if="this.formData.date_requested && this.formData.best_time" class="btn btn-lg " @click.prevent="next()">Next</button>
+              <button v-if="this.formData.date_requested>=moment().format('YYYY-MM-DD') && this.formData.best_time" class="btn btn-lg " @click.prevent="next()">Next</button>
               <button v-else class="btn btn-lg  disabled">Next</button>
             </div>
             <div class="indicators">
@@ -259,7 +258,11 @@
             <p class="mx-3" style="font-size: 12px;">Type a personalizied message or keep it blank and leave it up to us. Your greeter will read this to your recipient prior to performing the greeting song.</p>
             <div class="form-group">
               <textarea v-model="formData.message" class="form-control w-75 mx-auto" id="exampleFormControlTextarea1" rows="3"></textarea>
+              <div v-if="this.formData.message.length<=300" class="w-75 mx-auto text-right" style="font-size: 14px !important;">{{formData.message.length}}/300</div>
+              <div v-else class="w-75 mx-auto text-right" style="font-size: 14px !important; color:red !important;">{{formData.message.length}}/300</div>
+              
             </div>
+            
               <div class="clearfix"></div>
 
             <div class="form-buttons">  
@@ -280,7 +283,7 @@
             </div>
           </div>
 
-          <div v-if="step === 6">
+          <div v-if="step === 6" style="font-size: 2.5vw !important;">
               <h5>Review your order</h5>
               <div class="px-3">
                 <div class="row">
@@ -398,7 +401,7 @@
           </div>
           
           <div v-if="step === 7">
-            <h5>Complete Your Payment With Paypal</h5>
+            <h5>Complete Your Payment</h5>
             <p>Then click submit to send your greeting!</p>
             <div v-if="this.type=='birthday'" class="font-weight-bold p-3">Price: $9.95</div>
             <div v-else class="font-weight-bold p-3">Price: $14.95</div>
@@ -449,6 +452,8 @@
 <script>
 import axios from 'axios';
 import PayPal from 'vue-paypal-checkout'
+import moment from 'moment'
+
 export default {
     name: 'Order',
     components: {},
@@ -464,6 +469,7 @@ export default {
         objectkeys,
         user,
         type,
+        moment,
         apiMessage: "",
         formData: {
           date_requested: '',
@@ -669,7 +675,8 @@ export default {
       justify-content: center;
       align-items: center;
       border-radius: 50%;
-      color: white;  
+      color: white;
+      font-size: 3vw;  
     }
     .btn-submit {
       background: darkgreen;

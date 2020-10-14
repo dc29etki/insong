@@ -92,7 +92,7 @@
     },
     mounted() {
       if(this.$auth.user){
-        this.isGreeter = this.isaGreeter();
+        this.isaGreeter();
       }
       else {
         this.isGreeter = false;

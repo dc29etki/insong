@@ -15,7 +15,7 @@
           <p>
             InSong Greetings is an on-demand greeting service. Well-qualified singing greeters call that special someone in your life to perform a personalized greeting designed by you and sing to them a song of your choice live over the phone! Our greeters let your loved ones know they are important and recognized on their special occasion!
           </p>
-          <h5 class="font-italic">"When you write them, they feel recognized. When you serenade them, they feel like a monarch."</h5>
+          <h5 class="font-italic">"When you write them, they feel esteemed. When you serenade them, they feel like a monarch."</h5>
         </div>
       
         <div v-if="!$auth.isAuthenticated" class="s2">

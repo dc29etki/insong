@@ -84,6 +84,7 @@
       </span>
       </label>
     </div>
+    <div class="pb-5 mb-5"> </div>
     
   </div>
   </div>
@@ -183,6 +184,9 @@ export default {
   }
 </script>
 <style lang="scss">
+  html, body {
+    overflow: scroll;
+  }
   #greeting {
     height: auto;
     background: white;
