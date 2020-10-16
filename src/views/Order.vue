@@ -36,22 +36,22 @@
         <!-- The slideshow -->
         <div class="carousel-inner text-center mb-3">
           <div class="carousel-item active" data-interval="2500">
-            <div class="b-item"><router-link to="/send-greeting/birthday"><img src=".././assets/greeting-icons/birthday.png"/></router-link></div>
+            <div class="b-item"><router-link to="/send-greeting/birthday"><img src=".././assets/greeting-icons/birthday-min.png"/></router-link></div>
           </div>
           <div class="carousel-item" data-interval="2500">
-            <div class="b-item"><router-link to="/send-greeting/anniversary"><img src=".././assets/greeting-icons/anniversary.png"/></router-link></div>
+            <div class="b-item"><router-link to="/send-greeting/anniversary"><img src=".././assets/greeting-icons/anniversary-min.png"/></router-link></div>
           </div>
           <div class="carousel-item" data-interval="2500">
-            <div class="b-item"><router-link to="/send-greeting/missyou"><img src=".././assets/greeting-icons/miss.png"/></router-link></div>
+            <div class="b-item"><router-link to="/send-greeting/missyou"><img src=".././assets/greeting-icons/miss-min.png"/></router-link></div>
           </div>
           <div class="carousel-item" data-interval="2500">
-            <div class="b-item"><router-link to="/send-greeting/thinking"><img src=".././assets/greeting-icons/thinking.png"/></router-link></div>
+            <div class="b-item"><router-link to="/send-greeting/thinking"><img src=".././assets/greeting-icons/thinking-min.png"/></router-link></div>
           </div>
           <div class="carousel-item" data-interval="2500">
-            <div class="b-item"><router-link to="/send-greeting/love"><img src=".././assets/greeting-icons/love.png"/></router-link></div>
+            <div class="b-item"><router-link to="/send-greeting/love"><img src=".././assets/greeting-icons/love-min.png"/></router-link></div>
           </div>
           <div class="carousel-item" data-interval="2500">
-            <div class="b-item"><router-link to="/send-greeting/sorry"><img src=".././assets/greeting-icons/sorry.png"/></router-link></div>
+            <div class="b-item"><router-link to="/send-greeting/sorry"><img src=".././assets/greeting-icons/sorry-min.png"/></router-link></div>
           </div>
         </div>
   
@@ -66,12 +66,12 @@
     </div>
     
     <div id="grid-view" v-if="this.view=='grid'">
-      <div class="item"><router-link to="/send-greeting/birthday"><img src=".././assets/greeting-icons/birthday.png"/></router-link></div>
-      <div class="item"><router-link to="/send-greeting/anniversary"><img src=".././assets/greeting-icons/anniversary.png"/></router-link></div>
-      <div class="item"><router-link to="/send-greeting/missyou"><img src=".././assets/greeting-icons/miss.png"/></router-link></div>
-      <div class="item"><router-link to="/send-greeting/thinking"><img src=".././assets/greeting-icons/thinking.png"/></router-link></div>
-      <div class="item"><router-link to="/send-greeting/love"><img src=".././assets/greeting-icons/love.png"/></router-link></div>
-      <div class="item"><router-link to="/send-greeting/sorry"><img src=".././assets/greeting-icons/sorry.png"/></router-link></div>
+      <div class="item"><router-link to="/send-greeting/birthday"><img src=".././assets/greeting-icons/birthday-min.png"/></router-link></div>
+      <div class="item"><router-link to="/send-greeting/anniversary"><img src=".././assets/greeting-icons/anniversary-min.png"/></router-link></div>
+      <div class="item"><router-link to="/send-greeting/missyou"><img src=".././assets/greeting-icons/miss-min.png"/></router-link></div>
+      <div class="item"><router-link to="/send-greeting/thinking"><img src=".././assets/greeting-icons/thinking-min.png"/></router-link></div>
+      <div class="item"><router-link to="/send-greeting/love"><img src=".././assets/greeting-icons/love-min.png"/></router-link></div>
+      <div class="item"><router-link to="/send-greeting/sorry"><img src=".././assets/greeting-icons/sorry-min.png"/></router-link></div>
     </div>
     
     <div class="switch-button">

@@ -63,6 +63,7 @@
     },
     methods: {
       async isaGreeter() {
+        console.log("checking if greeter...")
         const token = await this.$auth.getTokenSilently();
         let url = new URL('https://insong-066b.restdb.io/rest/greeters')
         let json = {
