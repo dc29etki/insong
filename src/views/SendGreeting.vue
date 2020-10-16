@@ -122,7 +122,7 @@
            <h4 v-else>When should we send this greeting?</h4>
            <div class="form-group">
              <div class="w-75 mx-auto">
-               <input class="form-control" type="date" value="2011-08-19" id="example-datetime-local-input" v-model="formData.date_requested">
+               <input class="form-control" type="date" :min="moment().format('YYYY-MM-DD')" id="example-datetime-local-input" v-model="formData.date_requested">
              </div>
            </div>
            <h4>What is the best time to call?</h4>
