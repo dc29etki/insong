@@ -9,6 +9,8 @@
     src="https://www.paypal.com/sdk/js?client-id=Aac4_TjyjB8UrAMqoDjik6EdmYriqFxBT2qMyWxwRUg7ZUyh6EnOZn3abeZsaPfBVdchl8KmYONL3Fxa"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
   </script>
 
+
+
 <template>
   <div id="greeting-order" class="has-footer has-header">
     <div class="pb-5 mb-5"> </div>
@@ -122,7 +124,9 @@
            <h4 v-else>When should we send this greeting?</h4>
            <div class="form-group">
              <div class="w-75 mx-auto">
-               <datepicker v-model="formData.date_requested" format="yyyy-MM-dd" input-class="dp"></datepicker>
+               <datepicker :disabled-dates="state.disabledDates" v-model="formData.date_requested" format="D MMM dd, yyyy" input-class="dp"></datepicker>
+               <!-- moment:{{moment().format('YYYY-MM-DD')}}<br>
+               date:{{moment(this.formData.date_requested).format("YYYY-MM-DD")}} -->
                <!-- <input class="form-control" type="date" :min="moment().format('YYYY-MM-DD')" id="example-datetime-local-input" v-model="formData.date_requested"> -->
              </div>
            </div>
@@ -142,7 +146,7 @@
             <div class="form-buttons">  
               <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
               
-              <button v-if="this.formData.date_requested>=moment().format('YYYY-MM-DD') && this.formData.best_time" class="btn btn-lg " @click.prevent="next()">Next</button>
+              <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time" class="btn btn-lg " @click.prevent="next()">Next</button>
               <button v-else class="btn btn-lg  disabled">Next</button>
             </div>
             <div class="indicators">
@@ -467,9 +471,17 @@ export default {
       var objectkeys = {};
       var user = "";
       var type = '';
+      var d = new Date();
+      d.setDate(d.getDate() - 1);
+      var state = {
+        disabledDates: {
+            to: d
+          }
+      };
       return {
         step:1,
         orders,
+        state,
         objectkeys,
         user,
         type,
@@ -534,7 +546,7 @@ export default {
           {
             recipient_name: this.formData.recipient_name,
             recipient_phone: this.formData.recipient_phone,
-            date_requested: this.formData.date_requested,
+            date_requested: moment(this.formData.date_requested).format("YYYY-MM-DD"),
             timezone: this.formData.timezone,
             best_time: this.formData.best_time,
             message: this.formData.message,
@@ -714,8 +726,8 @@ export default {
     justify-content: center;
   }
   .btn {
-    max-width: 150px;
-    max-height: 150px;
+    max-width: 125px;
+    max-height: 125px;
   }
 </style>
 

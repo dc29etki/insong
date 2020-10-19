@@ -178,7 +178,7 @@ export default {
     created() {
     },
     mounted () {
-      $(".carousel").carousel({ interval: 2500 });
+      $(".carousel").carousel({ interval: 2500, pause: "hover" });
     }
     
   }
@@ -240,7 +240,11 @@ export default {
     }
   }
   .carousel-inner {
-    width: 100vw;
+    width: 100%;
+    img {
+      margin-left: 10vw;
+      margin-right: 10vw;
+    }
   }
   .greetings {
     display: flex;
@@ -252,13 +256,29 @@ export default {
   }
   
   .b-item {
-    width: 100%;
+    width: 100vw;
     img {
       width: 75vmin;
       margin: 5vmin;
     }
   }
   @media only screen and (min-width: 1200px) {
+    .carousel-inner {
+      width: 100%;
+      img {
+        margin-left: 10vw;
+        margin-right: 10vw;
+      }
+    }
+    .greetings {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      margin: 0 auto;
+      img {
+        width: 100%;
+      }
+    }
     .b-item {
       width: 100%;
       img {
@@ -375,6 +395,12 @@ export default {
     background: #FF9A00 !important;
     z-index: 0;
     //border: 1px solid black !important;
+  }
+  .carousel-inner {
+    img {
+      margin-left: 10vw;
+      margin-right: 10vw;
+    }
   }
 
 </style>
