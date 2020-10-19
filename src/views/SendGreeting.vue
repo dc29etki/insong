@@ -701,10 +701,12 @@ export default {
   .btn:hover {
     color: white !important;
   }
-  .formf {
-    width: 50vw;
-    margin-left: auto !important;
-    margin-right: auto !important;
+  @media only screen and (min-width: 1200px) {
+    .formf {
+      width: 50vw;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
   }
   .form-place {
     display: flex;
