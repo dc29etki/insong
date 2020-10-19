@@ -254,8 +254,17 @@ export default {
   .b-item {
     width: 100%;
     img {
-      width: 75%;
-      margin: 5vh;
+      width: 75vmin;
+      margin: 5vmin;
+    }
+  }
+  @media only screen and (min-width: 1200px) {
+    .b-item {
+      width: 100%;
+      img {
+        width: 50vmin;
+        margin: 5vmin;
+      }
     }
   }
   

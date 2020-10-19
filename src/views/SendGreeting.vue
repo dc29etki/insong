@@ -14,7 +14,7 @@
     <div class="pb-5 mb-5"> </div>
     
     <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">   
-       
+    <div class="form-place">
     <h2 style="color: #FF9A00!important;" v-if="this.type=='birthday'" class="text-center">Happy Birthday</h2>
     <h2 style="color: #D44545!important;" v-if="this.type=='anniversary'" class="text-center">Happy Anniversary</h2>
     <h2 style="color: #37AF03!important;" v-if="this.type=='missyou'" class="text-center">I Miss You</h2>
@@ -122,7 +122,8 @@
            <h4 v-else>When should we send this greeting?</h4>
            <div class="form-group">
              <div class="w-75 mx-auto">
-               <input class="form-control" type="date" :min="moment().format('YYYY-MM-DD')" id="example-datetime-local-input" v-model="formData.date_requested">
+               <datepicker v-model="formData.date_requested" format="yyyy-MM-dd" input-class="dp"></datepicker>
+               <!-- <input class="form-control" type="date" :min="moment().format('YYYY-MM-DD')" id="example-datetime-local-input" v-model="formData.date_requested"> -->
              </div>
            </div>
            <h4>What is the best time to call?</h4>
@@ -423,6 +424,7 @@
           
           </form>
         </div>
+      </div>
         <!-- <form>
         <div class="row p-2 m-0">
           <div class="col-12"><input type="text" placeholder="Recipient Name" v-model="formData.recipient_name" class="span3 w-100"></div>
@@ -453,10 +455,12 @@
 import axios from 'axios';
 import PayPal from 'vue-paypal-checkout'
 import moment from 'moment'
+import Datepicker from 'vuejs-datepicker';
+
 
 export default {
     name: 'Order',
-    components: {},
+    components: {Datepicker},
     inject: [],
     data() {      
       var orders = {};
@@ -660,6 +664,9 @@ export default {
       }
     }
   }
+  .dp {
+    width: 100%;
+  }
   .form-buttons {
     display: flex;
     width: 100%;
@@ -693,6 +700,20 @@ export default {
   }
   .btn:hover {
     color: white !important;
+  }
+  .formf {
+    width: 50vw;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  .form-place {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .btn {
+    max-width: 150px;
+    max-height: 150px;
   }
 </style>
 
