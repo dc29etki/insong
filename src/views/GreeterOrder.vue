@@ -42,8 +42,9 @@
           <span v-if="this.order.anonymous">an anonymous person</span><span v-else>{{this.order.sender}}</span><span v-if="this.order.also_from"> and {{this.order.also_from}}</span> who is the reason you’re receiving this greeting gift.<br>
           <div class="p-2">{{this.order.message}}</div>
           <div class="font-italic text-center p-2">
-            <span class="font-weight-bold">[Sing {{this.order.song}}]</span><br><br>
+            <span class="font-weight-bold">[Sing {{this.order.song}}]</span><br>
             <div><p v-html="this.lyrics"></p></div>
+            <div v-if="this.order.song=='Happy Birthday'"><p class="font-weight-bold">To: {{this.order.recipient_name.split(" ")[0]}}</p></div>
           </div>
           We hope you enjoyed this InSong greeting! <span v-if="this.order.type=='birthday'">Have a great birthday!</span><span v-else>Have a great day/night!</span>
         </div>
@@ -208,21 +209,6 @@ export default {
           }
           else if(song=="Purple Rain - Prince") {
             this.lyrics="I never meant to cause you any sorrow<br>I never meant to cause you any pain<br>I only wanted one time to see you laughing<br>I only want to see you laughing in the purple rain<br><br>Purple rain, purple rain<br>Purple rain, purple rain<br>Purple rain, purple rain <br><br>I never meant to cause you any sorrow<br>I never meant to cause you any pain<br>I only wanted one time to see you laughing<br>I only want to see you laughing in the purple rain<br><br>Purple rain, purple rain<br>Purple rain, purple rain<br>Purple rain, purple rain"
-          }
-          else if(song=="Good Life - One Republic") {
-            this.lyrics=""
-          }
-          else if(song=="Happy - Pharrell Williams") {
-            this.lyrics=""
-          }
-          else if(song=="(I Got You) I Feel Good - James Brown") {
-            this.lyrics=""
-          }
-          else if(song=="On Top of the World - Imagine Dragons") {
-            this.lyrics=""
-          }
-          else if(song=="Roar - Katy Perry") {
-            this.lyrics=""
           }
         },
         async getGreeters() {
