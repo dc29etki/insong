@@ -13,9 +13,9 @@
       <br>Money Earned Other: ${{this.greeter.money_owed_other}}
     </div>
       <div class="buttons3">
-        <router-link to="/greeter-myorders" class="btn btn-lg btn-dark">My orders</router-link>
-        <router-link to="/greeter-orders" class="btn btn-lg btn-dark">Available orders</router-link>
-        <router-link to="/completed-orders" class="btn btn-lg btn-dark">Completed orders</router-link>
+        <div><router-link to="/greeter-myorders" class="btn btn-lg btn-dark">My orders</router-link></div>
+        <div><router-link to="/greeter-orders" class="btn btn-lg btn-dark">Available orders</router-link></div>
+        <div><router-link to="/completed-orders" class="btn btn-lg btn-dark">Completed orders</router-link></div>
       </div>
     </div>        
   </div>
@@ -149,6 +149,7 @@ export default {
     .btn {
       margin: 10px;
       padding: 10px;
+      width: 100% !important;
     }
   }
   h1 {

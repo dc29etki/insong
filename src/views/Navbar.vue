@@ -32,6 +32,9 @@
           <li class="nav-item">
             <router-link to="/help" class="nav-link">Help</router-link>
           </li>
+          <li class="nav-item">
+            <a href="https://www.freeprivacypolicy.com/live/82973711-c888-4374-8d04-91f11e0cd462" class="nav-link">Privacy Policy</a>
+          </li>
         </ul>
       </div>
     </div>    
