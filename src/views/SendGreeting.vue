@@ -22,7 +22,7 @@
     <h2 style="color: #37AF03!important;" v-if="this.type=='missyou'" class="text-center">I Miss You</h2>
     <h2 style="color: #FFD93B!important;" v-if="this.type=='thinking'" class="text-center">Thinking of You</h2>
     <h2 style="color: #8E67DD!important;" v-if="this.type=='love'" class="text-center">I Love You</h2>
-    <h2 style="color: #2C6ABD!important;" v-if="this.type=='sorry'" class="text-center">I'm Sorry</h2>
+    <h2 style="color: #2C6ABD!important;" v-if="this.type=='sorry'" class="text-center">I am Sorry</h2>
     
     <h6 id="fill-out">Fill out the form below to send a greeting now!</h6>
     <div class="mx-5 mt-5 mb-2" id="ppal" style="position: relative; z-index: 1;">
@@ -103,18 +103,96 @@
             
             <div class="clearfix"></div>
               
-            <div class="form-buttons">  
+            <div v-if="this.type=='birthday'" class="form-buttons birthday">  
               <button v-if="this.formData.song" class="btn btn-lg " @click.prevent="next()">Next</button>
               <button v-else class="btn btn-lg  disabled">Next</button>
             </div>
-            <div class="indicators">
-              <div class="item active"></div>
-              <div class="item"></div>
-              <div class="item"></div>
-              <div class="item"></div>
-              <div class="item"></div>
-              <div class="item"></div>
-              <div class="item"></div>
+            <div v-if="this.type=='anniversary'" class="form-buttons anniversary">  
+              <button v-if="this.formData.song" class="btn btn-lg " @click.prevent="next()">Next</button>
+              <button v-else class="btn btn-lg  disabled">Next</button>
+            </div>
+            <div v-if="this.type=='missyou'" class="form-buttons missyou">  
+              <button v-if="this.formData.song" class="btn btn-lg " @click.prevent="next()">Next</button>
+              <button v-else class="btn btn-lg  disabled">Next</button>
+            </div>
+            <div v-if="this.type=='sorry'" class="form-buttons sorry">  
+              <button v-if="this.formData.song" class="btn btn-lg " @click.prevent="next()">Next</button>
+              <button v-else class="btn btn-lg  disabled">Next</button>
+            </div>
+            <div v-if="this.type=='thinking'" class="form-buttons thinking">  
+              <button v-if="this.formData.song" class="btn btn-lg " @click.prevent="next()">Next</button>
+              <button v-else class="btn btn-lg  disabled">Next</button>
+            </div>
+            <div v-if="this.type=='love'" class="form-buttons love">  
+              <button v-if="this.formData.song" class="btn btn-lg " @click.prevent="next()">Next</button>
+              <button v-else class="btn btn-lg  disabled">Next</button>
+            </div>
+            
+            <div v-if="this.type=='birthday'" class="indicators birthday">  
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+              </div>
+            </div>
+            <div v-if="this.type=='anniversary'" class="indicators anniversary">  
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+              </div>
+            </div>
+            <div v-if="this.type=='missyou'" class="indicators missyou">  
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+              </div>
+            </div>
+            <div v-if="this.type=='sorry'" class="indicators sorry">  
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+              </div>
+            </div>
+            <div v-if="this.type=='thinking'" class="indicators thinking">  
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+              </div>
+            </div>
+            <div v-if="this.type=='love'" class="indicators love">  
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+              </div>
             </div>
     
           </div>
@@ -143,20 +221,109 @@
             
               <div class="clearfix"></div>
               
-            <div class="form-buttons">  
-              <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+            
+             <div v-if="this.type=='birthday'" class="form-buttons birthday">  
+               <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
               
-              <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time" class="btn btn-lg " @click.prevent="next()">Next</button>
-              <button v-else class="btn btn-lg  disabled">Next</button>
+               <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time" class="btn btn-lg " @click.prevent="next()">Next</button>
+               <button v-else class="btn btn-lg  disabled">Next</button>
+             </div>
+             <div v-if="this.type=='anniversary'" class="form-buttons anniversary">  
+               <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+              
+               <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time" class="btn btn-lg " @click.prevent="next()">Next</button>
+               <button v-else class="btn btn-lg  disabled">Next</button>
+             </div>
+             <div v-if="this.type=='missyou'" class="form-buttons missyou">  
+               <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+              
+               <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time" class="btn btn-lg " @click.prevent="next()">Next</button>
+               <button v-else class="btn btn-lg  disabled">Next</button>
+             </div>
+             <div v-if="this.type=='sorry'" class="form-buttons sorry">  
+               <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+              
+               <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time" class="btn btn-lg " @click.prevent="next()">Next</button>
+               <button v-else class="btn btn-lg  disabled">Next</button>
+             </div>
+             <div v-if="this.type=='thinking'" class="form-buttons thinking">  
+               <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+              
+               <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time" class="btn btn-lg " @click.prevent="next()">Next</button>
+               <button v-else class="btn btn-lg  disabled">Next</button>
+             </div>
+             <div v-if="this.type=='love'" class="form-buttons love">  
+               <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+              
+               <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time" class="btn btn-lg " @click.prevent="next()">Next</button>
+               <button v-else class="btn btn-lg  disabled">Next</button>
+             </div>
+            
+            <div v-if="this.type=='birthday'" class="indicators birthday">  
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+              </div>
             </div>
-            <div class="indicators">
-              <div class="item active"></div>
-              <div class="item active"></div>
-              <div class="item"></div>
-              <div class="item"></div>
-              <div class="item"></div>
-              <div class="item"></div>
-              <div class="item"></div>
+            <div v-if="this.type=='anniversary'" class="indicators anniversary">  
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+              </div>
+            </div>
+            <div v-if="this.type=='missyou'" class="indicators missyou">  
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+              </div>
+            </div>
+            <div v-if="this.type=='sorry'" class="indicators sorry">  
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+              </div>
+            </div>
+            <div v-if="this.type=='thinking'" class="indicators thinking">  
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+              </div>
+            </div>
+            <div v-if="this.type=='love'" class="indicators love">  
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+              </div>
             </div>
     
           </div>
@@ -201,22 +368,115 @@
             </div>
 
               <div class="clearfix"></div>
-                            
-              <div class="form-buttons">  
+              
+              <div v-if="this.type=='birthday'" class="form-buttons birthday">  
                 <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
                 <div>
                   <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==10 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
                   <button v-else class="btn btn-lg  disabled">Next</button>
                 </div>
               </div>
-              <div class="indicators">
-                <div class="item active"></div>
-                <div class="item active"></div>
-                <div class="item active"></div>
-                <div class="item"></div>
-                <div class="item"></div>
-                <div class="item"></div>
-                <div class="item"></div>
+              <div v-if="this.type=='anniversary'" class="form-buttons anniversary">  
+                <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+                <div>
+                  <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==10 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
+                  <button v-else class="btn btn-lg  disabled">Next</button>
+                </div>
+              </div>
+              <div v-if="this.type=='missyou'" class="form-buttons missyou">  
+                <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+                <div>
+                  <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==10 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
+                  <button v-else class="btn btn-lg  disabled">Next</button>
+                </div>
+              </div>
+              <div v-if="this.type=='sorry'" class="form-buttons sorry">  
+                <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+                <div>
+                  <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==10 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
+                  <button v-else class="btn btn-lg  disabled">Next</button>
+                </div>
+              </div>
+              <div v-if="this.type=='thinking'" class="form-buttons thinking">  
+                <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+                <div>
+                  <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==10 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
+                  <button v-else class="btn btn-lg  disabled">Next</button>
+                </div>
+              </div>
+              <div v-if="this.type=='love'" class="form-buttons love">  
+                <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+                <div>
+                  <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==10 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
+                  <button v-else class="btn btn-lg  disabled">Next</button>
+                </div>
+              </div>
+              
+              <div v-if="this.type=='birthday'" class="indicators birthday">  
+                <div class="indicators">
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                </div>
+              </div>
+              <div v-if="this.type=='anniversary'" class="indicators anniversary">  
+                <div class="indicators">
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                </div>
+              </div>
+              <div v-if="this.type=='missyou'" class="indicators missyou">  
+                <div class="indicators">
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                </div>
+              </div>
+              <div v-if="this.type=='sorry'" class="indicators sorry">  
+                <div class="indicators">
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                </div>
+              </div>
+              <div v-if="this.type=='thinking'" class="indicators thinking">  
+                <div class="indicators">
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                </div>
+              </div>
+              <div v-if="this.type=='love'" class="indicators love">  
+                <div class="indicators">
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                </div>
               </div>
               
           </div>
@@ -239,21 +499,115 @@
 
               <div class="clearfix"></div>
                             
-              <div class="form-buttons">  
+              
+              <div v-if="this.type=='birthday'" class="form-buttons birthday">  
                 <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
                 <div>
                   <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg " @click.prevent="next()">Next</button>
                   <button v-else class="btn btn-lg  disabled">Next</button>
                 </div>
               </div>
-              <div class="indicators">
-                <div class="item active"></div>
-                <div class="item active"></div>
-                <div class="item active"></div>
-                <div class="item active"></div>
-                <div class="item"></div>
-                <div class="item"></div>
-                <div class="item"></div>
+              <div v-if="this.type=='anniversary'" class="form-buttons anniversary">  
+                <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+                <div>
+                  <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg " @click.prevent="next()">Next</button>
+                  <button v-else class="btn btn-lg  disabled">Next</button>
+                </div>
+              </div>
+              <div v-if="this.type=='missyou'" class="form-buttons missyou">  
+                <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+                <div>
+                  <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg " @click.prevent="next()">Next</button>
+                  <button v-else class="btn btn-lg  disabled">Next</button>
+                </div>
+              </div>
+              <div v-if="this.type=='sorry'" class="form-buttons sorry">  
+                <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+                <div>
+                  <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg " @click.prevent="next()">Next</button>
+                  <button v-else class="btn btn-lg  disabled">Next</button>
+                </div>
+              </div>
+              <div v-if="this.type=='thinking'" class="form-buttons thinking">  
+                <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+                <div>
+                  <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg " @click.prevent="next()">Next</button>
+                  <button v-else class="btn btn-lg  disabled">Next</button>
+                </div>
+              </div>
+              <div v-if="this.type=='love'" class="form-buttons love">  
+                <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+                <div>
+                  <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg " @click.prevent="next()">Next</button>
+                  <button v-else class="btn btn-lg  disabled">Next</button>
+                </div>
+              </div>
+              
+              <div v-if="this.type=='birthday'" class="indicators birthday">  
+                <div class="indicators">
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                </div>
+              </div>
+              <div v-if="this.type=='anniversary'" class="indicators anniversary">  
+                <div class="indicators">
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                </div>
+              </div>
+              <div v-if="this.type=='missyou'" class="indicators missyou">  
+                <div class="indicators">
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                </div>
+              </div>
+              <div v-if="this.type=='sorry'" class="indicators sorry">  
+                <div class="indicators">
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                </div>
+              </div>
+              <div v-if="this.type=='thinking'" class="indicators thinking">  
+                <div class="indicators">
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                </div>
+              </div>
+              <div v-if="this.type=='love'" class="indicators love">  
+                <div class="indicators">
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item active"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                  <div class="item"></div>
+                </div>
               </div>
               
           </div>
@@ -269,23 +623,118 @@
             </div>
             
               <div class="clearfix"></div>
-
-            <div class="form-buttons">  
+            
+            
+            <div v-if="this.type=='birthday'" class="form-buttons birthday">  
               <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
               <div>
                 <button v-if="this.formData.message.length<300" class="btn btn-lg " @click.prevent="next()">Next</button>
                 <button v-else class="btn btn-lg  disabled">Next</button>
               </div>
             </div>
-            <div class="indicators">
-              <div class="item active"></div>
-              <div class="item active"></div>
-              <div class="item active"></div>
-              <div class="item active"></div>
-              <div class="item active"></div>
-              <div class="item"></div>
-              <div class="item"></div>
+            <div v-if="this.type=='anniversary'" class="form-buttons anniversary">  
+              <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+              <div>
+                <button v-if="this.formData.message.length<300" class="btn btn-lg " @click.prevent="next()">Next</button>
+                <button v-else class="btn btn-lg  disabled">Next</button>
+              </div>
             </div>
+            <div v-if="this.type=='missyou'" class="form-buttons missyou">  
+              <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+              <div>
+                <button v-if="this.formData.message.length<300" class="btn btn-lg " @click.prevent="next()">Next</button>
+                <button v-else class="btn btn-lg  disabled">Next</button>
+              </div>
+            </div>
+            <div v-if="this.type=='sorry'" class="form-buttons sorry">  
+              <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+              <div>
+                <button v-if="this.formData.message.length<300" class="btn btn-lg " @click.prevent="next()">Next</button>
+                <button v-else class="btn btn-lg  disabled">Next</button>
+              </div>
+            </div>
+            <div v-if="this.type=='thinking'" class="form-buttons thinking">  
+              <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+              <div>
+                <button v-if="this.formData.message.length<300" class="btn btn-lg " @click.prevent="next()">Next</button>
+                <button v-else class="btn btn-lg  disabled">Next</button>
+              </div>
+            </div>
+            <div v-if="this.type=='love'" class="form-buttons love">  
+              <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+              <div>
+                <button v-if="this.formData.message.length<300" class="btn btn-lg " @click.prevent="next()">Next</button>
+                <button v-else class="btn btn-lg  disabled">Next</button>
+              </div>
+            </div>
+            
+            <div v-if="this.type=='birthday'" class="indicators birthday">  
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+              </div>
+            </div>
+            <div v-if="this.type=='anniversary'" class="indicators anniversary">  
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+              </div>
+            </div>
+            <div v-if="this.type=='missyou'" class="indicators missyou">  
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+              </div>
+            </div>
+            <div v-if="this.type=='sorry'" class="indicators sorry">  
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+              </div>
+            </div>
+            <div v-if="this.type=='thinking'" class="indicators thinking">  
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+              </div>
+            </div>
+            <div v-if="this.type=='love'" class="indicators love">  
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+              </div>
+            </div>
+            
           </div>
 
           <div v-if="step === 6" style="font-size: 2.5vw !important;">
@@ -389,18 +838,97 @@
 
               <div class="clearfix"></div>
 
-            <div class="form-buttons">  
+            
+            <div v-if="this.type=='birthday'" class="form-buttons birthday">  
               <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
               <div><button class="btn btn-lg  btn-submit" @click="paypalset()">$</button></div>
             </div>
-            <div class="indicators">
-              <div class="item active"></div>
-              <div class="item active"></div>
-              <div class="item active"></div>
-              <div class="item active"></div>
-              <div class="item active"></div>
-              <div class="item active"></div>
-              <div class="item"></div>
+            <div v-if="this.type=='anniversary'" class="form-buttons anniversary">  
+              <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+              <div><button class="btn btn-lg  btn-submit" @click="paypalset()">$</button></div>
+            </div>
+            <div v-if="this.type=='missyou'" class="form-buttons missyou">  
+              <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+              <div><button class="btn btn-lg  btn-submit" @click="paypalset()">$</button></div>
+            </div>
+            <div v-if="this.type=='sorry'" class="form-buttons sorry">  
+              <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+              <div><button class="btn btn-lg  btn-submit" @click="paypalset()">$</button></div>
+            </div>
+            <div v-if="this.type=='thinking'" class="form-buttons thinking">  
+              <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+              <div><button class="btn btn-lg  btn-submit" @click="paypalset()">$</button></div>
+            </div>
+            <div v-if="this.type=='love'" class="form-buttons love">  
+              <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
+              <div><button class="btn btn-lg  btn-submit" @click="paypalset()">$</button></div>
+            </div>
+            
+            <div v-if="this.type=='birthday'" class="indicators birthday">  
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item"></div>
+              </div>
+            </div>
+            <div v-if="this.type=='anniversary'" class="indicators anniversary">  
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item"></div>
+              </div>
+            </div>
+            <div v-if="this.type=='missyou'" class="indicators missyou">  
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item"></div>
+              </div>
+            </div>
+            <div v-if="this.type=='sorry'" class="indicators sorry">  
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item"></div>
+              </div>
+            </div>
+            <div v-if="this.type=='thinking'" class="indicators thinking">  
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item"></div>
+              </div>
+            </div>
+            <div v-if="this.type=='love'" class="indicators love">  
+              <div class="indicators">
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item active"></div>
+                <div class="item"></div>
+              </div>
             </div>
     
           </div>
@@ -410,20 +938,101 @@
             <p>Then click submit to send your greeting!</p>
             <div v-if="this.type=='birthday'" class="font-weight-bold p-3">Price: $9.95</div>
             <div v-else class="font-weight-bold p-3">Price: $14.95</div>
-              <div id="submit-hidden" class="btn btn-insong2 disabled">Submit</div>
-              <div class="btn btn-insong2" id="submit-button" @click="postOrders()">Submit</div>
               <!-- <div id="paypal-button-container"></div> -->
               <div class="clearfix"></div>
 
-            <div class="indicators">
-              <div class="item active"></div>
-              <div class="item active"></div>
-              <div class="item active"></div>
-              <div class="item active"></div>
-              <div class="item active"></div>
-              <div class="item active"></div>
-              <div class="item active"></div>
-            </div>
+           <div v-if="this.type=='birthday'" class="form-buttons birthday">  
+             <div id="submit-hidden" class="btn btn-insong2 disabled">Submit</div>
+             <div class="btn btn-insong2" id="submit-button" @click="postOrders()">Submit</div>
+           </div>
+           <div v-if="this.type=='anniversary'" class="form-buttons anniversary">  
+             <div id="submit-hidden" class="btn btn-insong2 disabled">Submit</div>
+             <div class="btn btn-insong2" id="submit-button" @click="postOrders()">Submit</div>
+           </div>
+           <div v-if="this.type=='missyou'" class="form-buttons missyou">  
+             <div id="submit-hidden" class="btn btn-insong2 disabled">Submit</div>
+             <div class="btn btn-insong2" id="submit-button" @click="postOrders()">Submit</div>
+           </div>
+           <div v-if="this.type=='sorry'" class="form-buttons sorry">  
+             <div id="submit-hidden" class="btn btn-insong2 disabled">Submit</div>
+             <div class="btn btn-insong2" id="submit-button" @click="postOrders()">Submit</div>
+           </div>
+           <div v-if="this.type=='thinking'" class="form-buttons thinking">  
+             <div id="submit-hidden" class="btn btn-insong2 disabled">Submit</div>
+             <div class="btn btn-insong2" id="submit-button" @click="postOrders()">Submit</div>
+           </div>
+           <div v-if="this.type=='love'" class="form-buttons love">  
+             <div id="submit-hidden" class="btn btn-insong2 disabled">Submit</div>
+             <div class="btn btn-insong2" id="submit-button" @click="postOrders()">Submit</div>
+           </div>
+           
+           <div v-if="this.type=='birthday'" class="indicators birthday">  
+             <div class="indicators">
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+             </div>
+           </div>
+           <div v-if="this.type=='anniversary'" class="indicators anniversary">  
+             <div class="indicators">
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+             </div>
+           </div>
+           <div v-if="this.type=='missyou'" class="indicators missyou">  
+             <div class="indicators">
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+             </div>
+           </div>
+           <div v-if="this.type=='sorry'" class="indicators sorry">  
+             <div class="indicators">
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+             </div>
+           </div>
+           <div v-if="this.type=='thinking'" class="indicators thinking">  
+             <div class="indicators">
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+             </div>
+           </div>
+           <div v-if="this.type=='love'" class="indicators love">  
+             <div class="indicators">
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+               <div class="item active"></div>
+             </div>
+           </div>
+           
           </div>
           
           </form>
@@ -707,8 +1316,8 @@ export default {
       padding: 0 15px;
     }
   }
-  .disabled {
-    background: #ccc !important;
+  .btn.disabled {
+    opacity: .4 !important;
   }
   .btn:hover {
     color: white !important;
@@ -729,6 +1338,41 @@ export default {
     max-width: 125px;
     max-height: 125px;
   }
+  
+  .birthday{
+    button, .item.active, .btn{
+      background: #FF9A00;
+    }
+  }
+  .anniversary{
+    button, .item.active, .btn{
+      background: #D44545;
+    }
+  }
+  .missyou{
+    button, .item.active, .btn{
+      background: #37AF03;
+    }
+  }
+  .thinking{
+    button, .item.active, .btn{
+      background: #FFD93B;
+    }
+  }
+  .love{
+    button, .item.active, .btn{
+      background: #8E67DD;
+    }
+  }
+  .sorry{
+    button, .item.active, .btn{
+      background: #2C6ABD;
+    }
+  }
+  .btn-submit {
+    background: darkgreen!important;
+  }
+  
 </style>
 
 

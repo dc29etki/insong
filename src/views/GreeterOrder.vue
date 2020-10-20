@@ -31,7 +31,9 @@
           Hi, {{this.order.recipient_name.split(" ")[0]}}! This is {{this.$auth.user.name}} from InSong Greetings calling you on behalf of 
           <span v-if="this.order.anonymous">an anonymous person</span><span v-else>{{this.order.sender}}</span><span v-if="this.order.also_from"> and {{this.order.also_from}}</span> who is the reason you’re receiving this greeting gift.<br>
           <div class="font-italic">{{this.order.message}}</div>
-          <div class="font-weight-bold">[Sing <span class="font-italic">{{this.order.song}}</span>]</div>
+          <div class="font-weight-bold text-center">
+            [Sing <span class="font-italic">{{this.order.song}}</span>]
+          </div>
           We hope you enjoyed this InSong greeting! <span v-if="this.order.type=='birthday'">Have a great birthday!</span><span v-else>Have a great day/night!</span>
         </div>
        
@@ -64,6 +66,7 @@ export default {
       var sortedOrders = [];
       var objectkeys = {};
       var user = "";
+      var lyrics = "";
       return {
         moment,
         orders,
