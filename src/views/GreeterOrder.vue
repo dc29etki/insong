@@ -7,15 +7,24 @@
         
     <h2 class="text-center">Order</h2>
     
-    <router-link to="/switchboard" class="btn btn-dark">Back to Switchboard</router-link>
-    <div class="text-left p-3 m-3 mx-auto">
+    <router-link to="/switchboard" class="btn btn-dark">Back to Switchboard</router-link><br>
+    
+    
+    <div class="text-left px-3 mb-3 mx-auto">
      <div class="order-info">
-       <div class="border p-2"><strong>Recipient:</strong><br>
+       
+       <div class="border px-2">
+         
+         <strong>Recipient:</strong><br>
          Name: {{this.order.recipient_name}}<br>
          Phone: {{this.order.recipient_phone}}<br>
          Date to call: {{this.order.date_requested.split("T")[0]}}<br>
          Best Time to call: {{this.order.best_time}}<br>
-         Time Zone: {{this.order.timezone}}
+         Time Zone: {{this.order.timezone}}<br>
+         
+         <a :href="'https://telzio.com/dashboard#!dial:+1'+this.order.recipient_phone" class="btn text-white w-100 mx-auto p-0 my-1 font-weight-bold" style="background:#163e5c;">
+           Call With<br><img style="height: 50px; width: auto;" src="../assets/telzio.png">
+         </a>
        </div>
        Created: {{new Date(this.order.created_at).toLocaleString()}}<br>
        <div class=""><strong>Sender:</strong><br>
@@ -23,16 +32,17 @@
          Also from: {{this.order.also_from}}<br>
          Anonymous? {{this.order.anonymous}}
        </div>
+       <span class="font-weight-bold">Song:</span> {{this.order.song}}<br>
        <div class="border">
-        <span class="font-weight-bold">Song:</span> {{this.order.song}}<br>
+        
         <div class="font-weight-bold">Script:</div>
           Hi, is this {{this.order.recipient_name}}?<br>
           — — —<br>
           Hi, {{this.order.recipient_name.split(" ")[0]}}! This is {{this.$auth.user.name}} from InSong Greetings calling you on behalf of 
           <span v-if="this.order.anonymous">an anonymous person</span><span v-else>{{this.order.sender}}</span><span v-if="this.order.also_from"> and {{this.order.also_from}}</span> who is the reason you’re receiving this greeting gift.<br>
-          <div class="font-italic">{{this.order.message}}</div>
-          <div class="font-weight-bold text-center">
-            [Sing <span class="font-italic">{{this.order.song}}</span>]<br><br>
+          <div class="p-2">{{this.order.message}}</div>
+          <div class="font-italic text-center p-2">
+            <span class="font-weight-bold">[Sing {{this.order.song}}]</span><br><br>
             <div><p v-html="this.lyrics"></p></div>
           </div>
           We hope you enjoyed this InSong greeting! <span v-if="this.order.type=='birthday'">Have a great birthday!</span><span v-else>Have a great day/night!</span>
@@ -97,7 +107,6 @@ export default {
         },
         setLyrics() {
           var song = this.order.song;
-          console.log(song)
           if(song=="ily (i love you baby) [feat. Emilee] - Surf Mesa"){
             this.lyrics = "I love you, baby, and if it's quite alright<br>I need you, baby, to warm these lonely nights<br>I love you, baby<br>Trust in me when I say<br><br>I love you, baby, and if it's quite alright<br>I need you, baby, to warm these lonely nights<br>I love you, baby<br>Trust in me when I say<br><br>I love you, baby...<br>I love you, baby...";
           }
@@ -126,7 +135,6 @@ export default {
             this.lyrics="Your lips, your lips<br>I could kiss them all day if you'd let me<br>Your laugh, your laugh<br>You hate but I think it's so sexy<br>You're so beautiful<br>And I tell you everyday<br><br>Oh you know, you know, you know<br>I'd never ask you to change<br>If perfect's what you're searching for<br>Then just stay the same<br>So don't even bother asking if you look okay<br>You know I'll say,<br><br>When I see your face<br>There's not a thing that I would change<br>'Cause you're amazing<br>Just the way you are<br>And when you smile<br>The whole world stops and stares for a while<br>'Cause you're amazing<br>Just the way you are"
           }
           else if(song=="If I Ain’t Got You - Alicia Keys") {
-            console.log("yes")
             this.lyrics="Some people live for the fortune<br>Some people live just for the fame<br>Some people live for the power, yeah<br>Some people live just to play the game<br><br>Some people think that the physical things<br>Define what's within<br>And I've been there before<br>But that life's a bore<br>So full of the superficial<br><br>Some people want it all<br>But I don't want nothing at all<br>If it ain't you, baby<br>If I ain't got you, baby<br>Some people want diamond rings<br>Some just want everything<br>But everything means nothing<br>If I ain't got you, yeah"
           }
           else if(song=="I’m Yours - Jason Mraz") {

@@ -1334,9 +1334,11 @@ export default {
     flex-direction: column;
     justify-content: center;
   }
-  .btn {
-    max-width: 125px;
-    max-height: 125px;
+  .form-buttons {
+    button{
+      max-width: 125px;
+      max-height: 125px;
+    }
   }
   
   .birthday{
