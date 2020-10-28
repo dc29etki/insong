@@ -7,7 +7,7 @@
 </head>
 
   <script
-    src="https://www.paypal.com/sdk/js?client-id=Aac4_TjyjB8UrAMqoDjik6EdmYriqFxBT2qMyWxwRUg7ZUyh6EnOZn3abeZsaPfBVdchl8KmYONL3Fxa"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
+    src="https://www.paypal.com/sdk/js?client-id=Ae8tIkWu49WSCKC4a8Mj_s9gedi84BLdOyJtpuIFhfjIhOcQyFwxk1JBmZ5fN2NfQAoqejRDZZnApTVq"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
   </script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -117,7 +117,7 @@ export default {
           recipient_phone: '',
         },
         paypal: {
-          sandbox: 'Aac4_TjyjB8UrAMqoDjik6EdmYriqFxBT2qMyWxwRUg7ZUyh6EnOZn3abeZsaPfBVdchl8KmYONL3Fxa',
+          sandbox: 'Ae8tIkWu49WSCKC4a8Mj_s9gedi84BLdOyJtpuIFhfjIhOcQyFwxk1JBmZ5fN2NfQAoqejRDZZnApTVq',
         }
       }
     },
