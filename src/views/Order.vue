@@ -16,7 +16,7 @@
 
 <template>
   <div id="greeting" class="has-footer has-header">
-    <div class="pb-5 mb-5"> </div>
+    <div class="space pb-5 mt-5"> </div>
     
     <h3 class="text-center">Click to Choose</h3>
     <div class="outside">
@@ -84,7 +84,7 @@
       </span>
       </label>
     </div>
-    <div class="pb-5 mb-5"> </div>
+    <div class="space pb-5 mt-5"> </div>
     
   </div>
   </div>
@@ -278,6 +278,9 @@ export default {
       img {
         width: 100%;
       }
+    }
+    .space {
+      margin-bottom: 50px !important;
     }
     .b-item {
       width: 100%;

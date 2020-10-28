@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <template>
   <div id="ty" class="has-footer has-header text-center">
-    <div class="pb-5 mb-5"> </div>
+    <div class="space pb-5 mt-5"> </div>
     <h1 class="pt-5">Thank You!</h1>
     <h5 class="px-4">You order has been added to the queue! The next available greeter will claim and complete your greeting.</h5>
     <br>

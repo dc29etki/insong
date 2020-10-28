@@ -3,7 +3,7 @@
   <div id="g-order" class="has-footer has-header">
     
     <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">  
-      <div class="pb-5 mb-5"> </div>
+      <div class="space pb-5 mt-5"> </div>
         
     <h2 class="text-center">Order</h2>
     

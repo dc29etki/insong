@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <template>
   <div id="myorders" class="has-footer has-header">
-    <div class="pb-5 mb-5"> </div>
+    <div class="space pb-5 mt-5"> </div>
     
     
     <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">    

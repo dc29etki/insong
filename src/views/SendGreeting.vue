@@ -13,7 +13,7 @@
 
 <template>
   <div id="greeting-order" class="has-footer has-header">
-    <div class="pb-5 mb-5"> </div>
+    <div class="space pb-5 mt-5"> </div>
     
     <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">   
     <div class="form-place">
@@ -202,7 +202,7 @@
            <h4 v-else>When should we send this greeting?</h4>
            <div class="form-group">
              <div class="w-75 mx-auto">
-               <datepicker :disabled-dates="state.disabledDates" v-model="formData.date_requested" format="D MMM dd, yyyy" input-class="dp"></datepicker>
+               <datepicker :disabled-dates="state.disabledDates" v-model="formData.date_requested" format="D MMM dd, yyyy" input-class="dp border"></datepicker>
                <!-- moment:{{moment().format('YYYY-MM-DD')}}<br>
                date:{{moment(this.formData.date_requested).format("YYYY-MM-DD")}} -->
                <!-- <input class="form-control" type="date" :min="moment().format('YYYY-MM-DD')" id="example-datetime-local-input" v-model="formData.date_requested"> -->
@@ -225,37 +225,37 @@
              <div v-if="this.type=='birthday'" class="form-buttons birthday">  
                <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
               
-               <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time" class="btn btn-lg " @click.prevent="next()">Next</button>
+               <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time && this.formData.date_requested" class="btn btn-lg " @click.prevent="next()">Next</button>
                <button v-else class="btn btn-lg  disabled">Next</button>
              </div>
              <div v-if="this.type=='anniversary'" class="form-buttons anniversary">  
                <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
               
-               <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time" class="btn btn-lg " @click.prevent="next()">Next</button>
+               <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time && this.formData.date_requested" class="btn btn-lg " @click.prevent="next()">Next</button>
                <button v-else class="btn btn-lg  disabled">Next</button>
              </div>
              <div v-if="this.type=='missyou'" class="form-buttons missyou">  
                <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
               
-               <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time" class="btn btn-lg " @click.prevent="next()">Next</button>
+               <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time && this.formData.date_requested" class="btn btn-lg " @click.prevent="next()">Next</button>
                <button v-else class="btn btn-lg  disabled">Next</button>
              </div>
              <div v-if="this.type=='sorry'" class="form-buttons sorry">  
                <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
               
-               <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time" class="btn btn-lg " @click.prevent="next()">Next</button>
+               <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time && this.formData.date_requested" class="btn btn-lg " @click.prevent="next()">Next</button>
                <button v-else class="btn btn-lg  disabled">Next</button>
              </div>
              <div v-if="this.type=='thinking'" class="form-buttons thinking">  
                <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
               
-               <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time" class="btn btn-lg " @click.prevent="next()">Next</button>
+               <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time && this.formData.date_requested" class="btn btn-lg " @click.prevent="next()">Next</button>
                <button v-else class="btn btn-lg  disabled">Next</button>
              </div>
              <div v-if="this.type=='love'" class="form-buttons love">  
                <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
               
-               <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time" class="btn btn-lg " @click.prevent="next()">Next</button>
+               <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time && this.formData.date_requested" class="btn btn-lg " @click.prevent="next()">Next</button>
                <button v-else class="btn btn-lg  disabled">Next</button>
              </div>
             
