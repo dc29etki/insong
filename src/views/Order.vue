@@ -290,7 +290,9 @@ export default {
       }
     }
   }
-  
+  .space {
+    margin-bottom: 50px !important;
+  }
   .carousel-control-prev-icon,
   .carousel-control-next-icon {
     height: 50px;

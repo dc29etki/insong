@@ -8,7 +8,6 @@
 <script src="https://www.paypal.com/sdk/js?client-id=AXFB1opqCo3013I9MKgZGbnmaGiZmwY2sQxrF19lYhZkOs_NogqFJoV4Zjil6T144yiuTFivx4JYuBjK&currency=USD"></script>
 
 
-
 <template>
   <div id="greeting-order" class="has-footer has-header">
     <div class="space pb-5 mt-5"> </div>
@@ -1064,7 +1063,6 @@
 
 <script>
 import axios from 'axios';
-import PayPal from 'vue-paypal-checkout'
 import moment from 'moment'
 import Datepicker from 'vuejs-datepicker';
 
@@ -1106,9 +1104,6 @@ export default {
           also_from: '',
           anonymous: false
         },
-        paypal: {
-          live: 'AXFB1opqCo3013I9MKgZGbnmaGiZmwY2sQxrF19lYhZkOs_NogqFJoV4Zjil6T144yiuTFivx4JYuBjK',          //Aac4_TjyjB8UrAMqoDjik6EdmYriqFxBT2qMyWxwRUg7ZUyh6EnOZn3abeZsaPfBVdchl8KmYONL3Fxa
-        }
       }
     },
       computed: {
