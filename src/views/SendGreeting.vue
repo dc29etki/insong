@@ -5,9 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!-- Optimal Internet Explorer compatibility -->
 </head>
 
-  <script
-    src="https://www.paypal.com/sdk/js?client-id=Ae8tIkWu49WSCKC4a8Mj_s9gedi84BLdOyJtpuIFhfjIhOcQyFwxk1JBmZ5fN2NfQAoqejRDZZnApTVq"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
-  </script>
+<script src="https://www.paypal.com/sdk/js?client-id=AXFB1opqCo3013I9MKgZGbnmaGiZmwY2sQxrF19lYhZkOs_NogqFJoV4Zjil6T144yiuTFivx4JYuBjK&currency=USD"></script>
 
 
 
@@ -1109,8 +1107,7 @@ export default {
           anonymous: false
         },
         paypal: {
-          sandbox: 'Ae8tIkWu49WSCKC4a8Mj_s9gedi84BLdOyJtpuIFhfjIhOcQyFwxk1JBmZ5fN2NfQAoqejRDZZnApTVq',
-          //Aac4_TjyjB8UrAMqoDjik6EdmYriqFxBT2qMyWxwRUg7ZUyh6EnOZn3abeZsaPfBVdchl8KmYONL3Fxa
+          live: 'AXFB1opqCo3013I9MKgZGbnmaGiZmwY2sQxrF19lYhZkOs_NogqFJoV4Zjil6T144yiuTFivx4JYuBjK',          //Aac4_TjyjB8UrAMqoDjik6EdmYriqFxBT2qMyWxwRUg7ZUyh6EnOZn3abeZsaPfBVdchl8KmYONL3Fxa
         }
       }
     },

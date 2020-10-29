@@ -6,7 +6,7 @@
 </head>
 
   <script
-    src="https://www.paypal.com/sdk/js?client-id=Ae8tIkWu49WSCKC4a8Mj_s9gedi84BLdOyJtpuIFhfjIhOcQyFwxk1JBmZ5fN2NfQAoqejRDZZnApTVq"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
+    src="https://www.paypal.com/sdk/js?client-id=AXFB1opqCo3013I9MKgZGbnmaGiZmwY2sQxrF19lYhZkOs_NogqFJoV4Zjil6T144yiuTFivx4JYuBjK"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
   </script>
 
 <template>
@@ -68,7 +68,7 @@ export default {
           recipient_phone: '',
         },
         paypal: {
-          sandbox: 'Ae8tIkWu49WSCKC4a8Mj_s9gedi84BLdOyJtpuIFhfjIhOcQyFwxk1JBmZ5fN2NfQAoqejRDZZnApTVq',
+          sandbox: 'AXFB1opqCo3013I9MKgZGbnmaGiZmwY2sQxrF19lYhZkOs_NogqFJoV4Zjil6T144yiuTFivx4JYuBjK',
         }
       }
     },
