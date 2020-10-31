@@ -279,9 +279,7 @@ export default {
         width: 100%;
       }
     }
-    .space {
-      margin-bottom: 50px !important;
-    }
+r
     .b-item {
       width: 100%;
       img {

@@ -3,14 +3,10 @@
   <nav class="navbar navbar-expand-md px-2 py-0">
     <div class="container">
       <span><img class="p-0 m-0" style="height: 9vh;" src=".././assets/logo-top.png"/></span>
-      <div
-        class="user-button mx-2"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-      >
+      <div class="user-button" @click="switchOpen()">
         <font-awesome-icon :icon="['fa', 'user-circle']" />
       </div>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="navbar-collapse" v-if="this.open">
         <ul class="navbar-nav mr-auto"></ul>
         <ul class="navbar-nav ml-auto">
           <template v-if="$auth.isAuthenticated">
@@ -44,7 +40,19 @@
 import { mapGetters } from "vuex";
 import axios from 'axios';
 export default {
+  data() {
+    var open = false;
+    return {
+      open,
+    }
+  },
   methods: {
+    switchOpen() {
+      if (this.open== true) {
+        this.open = false;
+      }
+      else this.open = true;
+    },
   login() {
         this.$auth.loginWithRedirect();
       },

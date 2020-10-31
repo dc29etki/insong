@@ -1,7 +1,7 @@
 <!DOCTYPE html> 
 <template>
   <div id="home" class="has-footer has-header">    
-    <div class="space pb-5 mt-5"> </div>
+    <div class="space pb-3 mt-4"> </div>
     
     <div class="home-area m-2 text-center">
     <img style="height:17.5vh;" src=".././assets/logo-main.png"/>
