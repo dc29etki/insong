@@ -94,7 +94,6 @@ export default {
     color: white;
     background: #EFEFEF;   
     position: fixed !important;
-    height: 100px;
     width: 100%;
     .navbar-brand {
       color: #545454 !important;
@@ -107,9 +106,4 @@ export default {
   
   
   
-  @media only screen and (min-width: 767px) {
-    .user-button {
-      display: none;
-    }
-  }
 </style>
