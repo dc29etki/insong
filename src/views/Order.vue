@@ -262,13 +262,13 @@ export default {
       margin: 5vmin;
     }
   }
-   @media only screen and (min-width: 500px) {
+   @media (pointer:none), (pointer:coarse) {
      .space {
-       margin-top: 50px !important;
+       margin-top: 20px !important;
      }
    }
    .space {
-     margin-top: 20px !important;
+     margin-top: 50px !important;
    }
   @media only screen and (min-width: 1200px) {
     .carousel-inner {

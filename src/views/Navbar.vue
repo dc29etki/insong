@@ -2,7 +2,7 @@
 <template>
   <nav class="navbar navbar-expand-md px-2 py-0">
     <div class="container">
-      <span><img class="p-0 m-0" style="height: 9vh;" src=".././assets/logo-top.png"/></span>
+      <span><img class="p-0 m-0" style="height: 85px;" src=".././assets/logo-top.png"/></span>
       <div class="user-button" @click="switchOpen()">
         <font-awesome-icon :icon="['fa', 'user-circle']" />
       </div>
@@ -94,6 +94,7 @@ export default {
     color: white;
     background: #EFEFEF;   
     position: fixed !important;
+    height: 100px;
     width: 100%;
     .navbar-brand {
       color: #545454 !important;
@@ -103,6 +104,8 @@ export default {
   .navbar-brand {
     color: white;
   }
+  
+  
   
   @media only screen and (min-width: 767px) {
     .user-button {
