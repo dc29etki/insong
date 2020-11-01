@@ -33,7 +33,8 @@
           </li>
         </ul>
       </div>
-    </div>    
+    </div>  
+    <div class="space"> </div>  
   </nav>
 </template>
 <script>

@@ -262,6 +262,14 @@ export default {
       margin: 5vmin;
     }
   }
+   @media only screen and (min-width: 500px) {
+     .space {
+       margin-top: 50px !important;
+     }
+   }
+   .space {
+     margin-top: 20px !important;
+   }
   @media only screen and (min-width: 1200px) {
     .carousel-inner {
       width: 100%;
@@ -280,7 +288,7 @@ export default {
       }
     }
     .space {
-      margin-bottom: 20px !important;
+      margin-top: 50px !important;
     }
     .b-item {
       width: 100%;
