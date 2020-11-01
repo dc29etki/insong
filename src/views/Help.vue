@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <template>
   <div id="help">
-  <div class="space pb-5 mt-5"> </div>
+  <div class="space pb-3 mt-3"> </div>
   
     <h2 class="text-center m-3">Help and Support</h2>
     <div class="buttons2">

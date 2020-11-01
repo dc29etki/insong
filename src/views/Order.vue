@@ -16,7 +16,7 @@
 
 <template>
   <div id="greeting" class="has-footer has-header">
-    <div class="space pb-5 mt-5"> </div>
+    <div class="space pb-3 mt-3"> </div>
     
     <h3 class="text-center">Click to Choose</h3>
     <div class="outside">
@@ -84,7 +84,7 @@
       </span>
       </label>
     </div>
-    <div class="space pb-5 mt-5"> </div>
+    <div class="space pb-3 mt-3"> </div>
     
   </div>
   </div>

@@ -111,7 +111,7 @@
     position:fixed;
     bottom:0;
     width:100vw;
-    height: 10vh;
+    height: 12.5vh;
     .footer-navigation {
       list-style-type:none;
       color: #545454 ;

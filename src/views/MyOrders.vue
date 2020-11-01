@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <template>
   <div id="myorders" class="has-footer has-header">
-    <div class="space pb-5 mt-5"> </div>
+    <div class="space pb-3 mt-3"> </div>
     
     
     <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">    
     <h2 class="text-center">My Greetings</h2>
-        
-    <div class="text-left p-3 m-3 mx-auto">
+    <div v-if="this.loading" class="alert alert-primary w-75 mx-auto my-5">Loading greetings...</div>
+    <div v-if="!this.loading && !this.orders_exist" class="alert alert-danger w-75 mx-auto my-5">No Greetings Yet</div>
+    
+    <div v-if="this.orders_exist" class="text-left p-3 m-3 mx-auto">
       <div class="box2" v-for="o in sortedOrders" :key="o">
         <div v-if="o.status=='Completed'" class="item completed">
           Sent to: {{o.recipient_name}}
@@ -77,12 +79,16 @@ export default {
       var sortedOrders = [];
       var objectkeys = {};
       var user = "";
+      var loading = true;
+      var orders_exist = false;
       return {
         moment,
         orders,
         sortedOrders,
         objectkeys,
         user,
+        orders_exist,
+        loading,
         apiMessage: "",
         formData: {
           recipient: '',
@@ -122,6 +128,10 @@ export default {
           });
           this.orders = data;
           this.sortedOrders = this.orders.slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+          this.loading = false;
+          if(this.sortedOrders.length > 0) {
+            this.orders_exist = true;
+          }
         },
         async postOrders() {
           const token = await this.$auth.getTokenSilently();

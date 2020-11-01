@@ -45,7 +45,7 @@
       
     
     </div>
-    <div class="space pb-5 mt-5"> </div>
+    <div class="space pb-3 mt-3"> </div>
     
   </div>
 </template>
