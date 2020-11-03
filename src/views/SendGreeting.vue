@@ -22,10 +22,10 @@
     <h2 style="color: #2C6ABD!important;" v-if="this.type=='sorry'" class="text-center">I am Sorry</h2>
     
     <h6 id="fill-out">Fill out the form below to send a greeting now!</h6>
-    <div class="mx-5 mt-5 mb-2" id="ppal" style="position: relative; z-index: 1;">
+    <div class="mx-5" id="ppal" style="position: relative; z-index: 1;">
       <div id="paypal-button-container"></div>
     </div>
-    <div class="formf border py-4 m-1" id="formf" style="margin-bottom: 100px;">
+    <div class="formf border py-2 m-1" id="formf" style="margin-bottom: 100px;">
       <div class="page1">
         <form>
           <div v-if="step === 1">
@@ -933,7 +933,7 @@
           <div v-if="step === 7">
             <h5>Complete Your Payment</h5>
             <p>Then click submit to send your greeting!</p>
-            <div v-if="this.type=='birthday'" class="font-weight-bold p-3">Price: $9.95</div>
+            <div v-if="this.type=='birthday'" class="font-weight-bold">Price: $9.95</div>
             <div v-else class="font-weight-bold p-3">Price: $14.95</div>
               <!-- <div id="paypal-button-container"></div> -->
               <div class="clearfix"></div>
@@ -1084,7 +1084,7 @@ export default {
           }
       };
       return {
-        step:1,
+        step:6,
         orders,
         state,
         objectkeys,
@@ -1267,8 +1267,8 @@ export default {
     display: flex;
     justify-content: center;
     .item {
-      padding: 8px;
       margin: 5px;
+      padding: 8px;
       background: #999;
       height: 5px;
       width: 5px;
