@@ -1084,7 +1084,7 @@ export default {
           }
       };
       return {
-        step:6,
+        step:1,
         orders,
         state,
         objectkeys,
