@@ -106,23 +106,23 @@
             </div>
             <div v-if="this.type=='anniversary'" class="form-buttons anniversary">  
               <button v-if="this.formData.song" class="btn btn-lg " @click.prevent="next()">Next</button>
-              <div v-else class="btn btn-lg  disabled">Next</div>
+              <div v-else class="btn btn-lg nextb disabled">Next</div>
             </div>
             <div v-if="this.type=='missyou'" class="form-buttons missyou">  
               <button v-if="this.formData.song" class="btn btn-lg " @click.prevent="next()">Next</button>
-              <div v-else class="btn btn-lg  disabled">Next</div>
+              <div v-else class="btn btn-lg nextb disabled">Next</div>
             </div>
             <div v-if="this.type=='sorry'" class="form-buttons sorry">  
               <button v-if="this.formData.song" class="btn btn-lg " @click.prevent="next()">Next</button>
-              <div v-else class="btn btn-lg  disabled">Next</div>
+              <div v-else class="btn btn-lg nextb disabled">Next</div>
             </div>
             <div v-if="this.type=='thinking'" class="form-buttons thinking">  
               <button v-if="this.formData.song" class="btn btn-lg " @click.prevent="next()">Next</button>
-              <div v-else class="btn btn-lg  disabled">Next</div>
+              <div v-else class="btn btn-lg nextb disabled">Next</div>
             </div>
             <div v-if="this.type=='love'" class="form-buttons love">  
               <button v-if="this.formData.song" class="btn btn-lg " @click.prevent="next()">Next</button>
-              <div v-else class="btn btn-lg  disabled">Next</div>
+              <div v-else class="btn btn-lg nextb disabled">Next</div>
             </div>
             
             <div v-if="this.type=='birthday'" class="indicators birthday">  
@@ -223,37 +223,37 @@
                <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
               
                <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time && this.formData.date_requested" class="btn btn-lg " @click.prevent="next()">Next</button>
-               <div v-else class="btn btn-lg  disabled">Next</div>
+               <div v-else class="btn btn-lg nextb disabled">Next</div>
              </div>
              <div v-if="this.type=='anniversary'" class="form-buttons anniversary">  
                <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
               
                <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time && this.formData.date_requested" class="btn btn-lg " @click.prevent="next()">Next</button>
-               <div v-else class="btn btn-lg  disabled">Next</div>
+               <div v-else class="btn btn-lg nextb disabled">Next</div>
              </div>
              <div v-if="this.type=='missyou'" class="form-buttons missyou">  
                <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
               
                <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time && this.formData.date_requested" class="btn btn-lg " @click.prevent="next()">Next</button>
-               <div v-else class="btn btn-lg  disabled">Next</div>
+               <div v-else class="btn btn-lg nextb disabled">Next</div>
              </div>
              <div v-if="this.type=='sorry'" class="form-buttons sorry">  
                <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
               
                <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time && this.formData.date_requested" class="btn btn-lg " @click.prevent="next()">Next</button>
-               <div v-else class="btn btn-lg  disabled">Next</div>
+               <div v-else class="btn btn-lg nextb disabled">Next</div>
              </div>
              <div v-if="this.type=='thinking'" class="form-buttons thinking">  
                <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
               
                <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time && this.formData.date_requested" class="btn btn-lg " @click.prevent="next()">Next</button>
-               <div v-else class="btn btn-lg  disabled">Next</div>
+               <div v-else class="btn btn-lg nextb disabled">Next</div>
              </div>
              <div v-if="this.type=='love'" class="form-buttons love">  
                <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
               
                <button v-if="moment(this.formData.date_requested).format('YYYY-MM-DD')>=moment().format('YYYY-MM-DD') && this.formData.best_time && this.formData.date_requested" class="btn btn-lg " @click.prevent="next()">Next</button>
-               <div v-else class="btn btn-lg  disabled">Next</div>
+               <div v-else class="btn btn-lg nextb disabled">Next</div>
              </div>
             
             <div v-if="this.type=='birthday'" class="indicators birthday">  
@@ -370,42 +370,42 @@
                 <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
                 <div>
                   <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==10 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
-                  <div v-else class="btn btn-lg  disabled">Next</div>
+                  <div v-else class="btn btn-lg nextb disabled">Next</div>
                 </div>
               </div>
               <div v-if="this.type=='anniversary'" class="form-buttons anniversary">  
                 <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
                 <div>
                   <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==10 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
-                  <div v-else class="btn btn-lg  disabled">Next</div>
+                  <div v-else class="btn btn-lg nextb disabled">Next</div>
                 </div>
               </div>
               <div v-if="this.type=='missyou'" class="form-buttons missyou">  
                 <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
                 <div>
                   <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==10 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
-                  <div v-else class="btn btn-lg  disabled">Next</div>
+                  <div v-else class="btn btn-lg nextb disabled">Next</div>
                 </div>
               </div>
               <div v-if="this.type=='sorry'" class="form-buttons sorry">  
                 <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
                 <div>
                   <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==10 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
-                  <div v-else class="btn btn-lg  disabled">Next</div>
+                  <div v-else class="btn btn-lg nextb disabled">Next</div>
                 </div>
               </div>
               <div v-if="this.type=='thinking'" class="form-buttons thinking">  
                 <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
                 <div>
                   <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==10 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
-                  <div v-else class="btn btn-lg  disabled">Next</div>
+                  <div v-else class="btn btn-lg nextb disabled">Next</div>
                 </div>
               </div>
               <div v-if="this.type=='love'" class="form-buttons love">  
                 <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
                 <div>
                   <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==10 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
-                  <div v-else class="btn btn-lg  disabled">Next</div>
+                  <div v-else class="btn btn-lg nextb disabled">Next</div>
                 </div>
               </div>
               
@@ -501,42 +501,42 @@
                 <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
                 <div>
                   <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg " @click.prevent="next()">Next</button>
-                  <div v-else class="btn btn-lg  disabled">Next</div>
+                  <div v-else class="btn btn-lg nextb disabled">Next</div>
                 </div>
               </div>
               <div v-if="this.type=='anniversary'" class="form-buttons anniversary">  
                 <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
                 <div>
                   <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg " @click.prevent="next()">Next</button>
-                  <div v-else class="btn btn-lg  disabled">Next</div>
+                  <div v-else class="btn btn-lg nextb disabled">Next</div>
                 </div>
               </div>
               <div v-if="this.type=='missyou'" class="form-buttons missyou">  
                 <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
                 <div>
                   <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg " @click.prevent="next()">Next</button>
-                  <div v-else class="btn btn-lg  disabled">Next</div>
+                  <div v-else class="btn btn-lg nextb disabled">Next</div>
                 </div>
               </div>
               <div v-if="this.type=='sorry'" class="form-buttons sorry">  
                 <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
                 <div>
                   <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg " @click.prevent="next()">Next</button>
-                  <div v-else class="btn btn-lg  disabled">Next</div>
+                  <div v-else class="btn btn-lg nextb disabled">Next</div>
                 </div>
               </div>
               <div v-if="this.type=='thinking'" class="form-buttons thinking">  
                 <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
                 <div>
                   <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg " @click.prevent="next()">Next</button>
-                  <div v-else class="btn btn-lg  disabled">Next</div>
+                  <div v-else class="btn btn-lg nextb disabled">Next</div>
                 </div>
               </div>
               <div v-if="this.type=='love'" class="form-buttons love">  
                 <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
                 <div>
                   <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg " @click.prevent="next()">Next</button>
-                  <div v-else class="btn btn-lg  disabled">Next</div>
+                  <div v-else class="btn btn-lg nextb disabled">Next</div>
                 </div>
               </div>
               
@@ -626,42 +626,42 @@
               <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
               <div>
                 <button v-if="this.formData.message.length<300" class="btn btn-lg " @click.prevent="next()">Next</button>
-                <div v-else class="btn btn-lg  disabled">Next</div>
+                <div v-else class="btn btn-lg nextb disabled">Next</div>
               </div>
             </div>
             <div v-if="this.type=='anniversary'" class="form-buttons anniversary">  
               <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
               <div>
                 <button v-if="this.formData.message.length<300" class="btn btn-lg " @click.prevent="next()">Next</button>
-                <div v-else class="btn btn-lg  disabled">Next</div>
+                <div v-else class="btn btn-lg nextb disabled">Next</div>
               </div>
             </div>
             <div v-if="this.type=='missyou'" class="form-buttons missyou">  
               <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
               <div>
                 <button v-if="this.formData.message.length<300" class="btn btn-lg " @click.prevent="next()">Next</button>
-                <div v-else class="btn btn-lg  disabled">Next</div>
+                <div v-else class="btn btn-lg nextb disabled">Next</div>
               </div>
             </div>
             <div v-if="this.type=='sorry'" class="form-buttons sorry">  
               <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
               <div>
                 <button v-if="this.formData.message.length<300" class="btn btn-lg " @click.prevent="next()">Next</button>
-                <div v-else class="btn btn-lg  disabled">Next</div>
+                <div v-else class="btn btn-lg nextb disabled">Next</div>
               </div>
             </div>
             <div v-if="this.type=='thinking'" class="form-buttons thinking">  
               <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
               <div>
                 <button v-if="this.formData.message.length<300" class="btn btn-lg " @click.prevent="next()">Next</button>
-                <div v-else class="btn btn-lg  disabled">Next</div>
+                <div v-else class="btn btn-lg nextb disabled">Next</div>
               </div>
             </div>
             <div v-if="this.type=='love'" class="form-buttons love">  
               <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
               <div>
                 <button v-if="this.formData.message.length<300" class="btn btn-lg " @click.prevent="next()">Next</button>
-                <div v-else class="btn btn-lg  disabled">Next</div>
+                <div v-else class="btn btn-lg nextb disabled">Next</div>
               </div>
             </div>
             
@@ -1282,16 +1282,17 @@ export default {
     width: 100%;
   }
   .form-buttons {
-    display: flex;
+    display: inline-grid;
     width: 100%;
     flex-direction: row;
     justify-content: center;
     padding: 10px;
+    width: 17vw;
     button, div {
-      width: 17vw;
+      width: 17vw !important;
       margin: 0 10px;
       background: #FF9A00;
-      height: 17vw;
+      height: 17vw !important;
       display: flex;
       justify-content: center;
       align-items: center;
