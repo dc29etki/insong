@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <template>
-  <div id="switchboard" class="has-footer has-header">
+  <div id="switchboard" class="has-footer has-header noselect">
     
     <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">
       <div class="space pb-3 mt-3"> </div>

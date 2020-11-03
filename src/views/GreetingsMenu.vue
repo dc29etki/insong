@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <template>
-  <div id="more" class="has-footer has-header">
+  <div id="more" class="has-footer has-header noselect">
     <div class="pb-4 mb-5"> </div>
     
     

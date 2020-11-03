@@ -15,7 +15,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 <template>
-  <div id="greeting" class="has-footer has-header">
+  <div id="greeting" class="has-footer has-header noselect">
     <div class="space pb-3 mt-3"> </div>
     
     <h3 class="text-center">Click to Choose</h3>

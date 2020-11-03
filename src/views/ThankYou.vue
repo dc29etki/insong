@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <template>
-  <div id="ty" class="has-footer has-header text-center">
+  <div id="ty" class="has-footer has-header noselect text-center">
     <div class="space pb-3 mt-3"> </div>
     <h1 class="pt-5">Thank You!</h1>
     <h5 class="px-4">You order has been added to the queue! The next available greeter will claim and complete your greeting.</h5>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <template>
-  <div id="myorders" class="has-footer has-header">
+  <div id="myorders" class="has-footer has-header noselect">
     <div class="space pb-3 mt-3"> </div>
     
     

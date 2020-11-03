@@ -9,7 +9,7 @@
 
 
 <template>
-  <div id="greeting-order" class="has-footer has-header">
+  <div id="greeting-order" class="has-footer has-header noselect">
     <div class="space pb-3 mt-3"> </div>
     
     <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">   
