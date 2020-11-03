@@ -1297,7 +1297,9 @@ export default {
       align-items: center;
       border-radius: 50%;
       color: white;
-      font-size: 3vw;  
+      font-size: 3vw;
+      max-width: 150px;
+      max-height: 150px;  
     }
     .btn-submit {
       background: darkgreen;
