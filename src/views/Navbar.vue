@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <template>
-  <nav class="navbar navbar-expand-md px-2 py-0">
+  <nav class="navbar navbar-expand-md px-2 py-0 noselect">
     <div class="container">
       <span><img class="p-0 m-0" style="height: 85px;" src=".././assets/logo-top.png"/></span>
       <div class="user-button" @click="switchOpen()">

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <template>
-  <div id="footer">
+  <div id="footer" class="noselect">
     <nav>
       <ul @click="isaGreeter()" class="footer-navigation">
       <div class="d-flex justify-content-center" v-if="this.isGreeter">
