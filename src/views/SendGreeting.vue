@@ -332,7 +332,7 @@
               <br>
             </div>
             <div class="row p-2 m-0">
-              <div class="col-12"><input type="tel" placeholder="Recipient Phone (with area code)" v-model="formData.recipient_phone" class="span3 w-100 form-control"></div>
+              <div class="col-12"><input type="tel" @input="acceptNumber" placeholder="Recipient Phone (10 digits)" v-model="formData.recipient_phone" class="span3 w-100 form-control"></div>
               <br>
             </div>
             <h5>What is their timezone?</h5>
@@ -369,42 +369,42 @@
               <div v-if="this.type=='birthday'" class="form-buttons birthday">  
                 <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
                 <div>
-                  <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==10 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
+                  <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==14 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
                   <div v-else class="btn btn-lg nextb disabled">Next</div>
                 </div>
               </div>
               <div v-if="this.type=='anniversary'" class="form-buttons anniversary">  
                 <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
                 <div>
-                  <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==10 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
+                  <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==14 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
                   <div v-else class="btn btn-lg nextb disabled">Next</div>
                 </div>
               </div>
               <div v-if="this.type=='missyou'" class="form-buttons missyou">  
                 <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
                 <div>
-                  <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==10 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
+                  <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==14 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
                   <div v-else class="btn btn-lg nextb disabled">Next</div>
                 </div>
               </div>
               <div v-if="this.type=='sorry'" class="form-buttons sorry">  
                 <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
                 <div>
-                  <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==10 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
+                  <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==14 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
                   <div v-else class="btn btn-lg nextb disabled">Next</div>
                 </div>
               </div>
               <div v-if="this.type=='thinking'" class="form-buttons thinking">  
                 <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
                 <div>
-                  <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==10 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
+                  <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==14 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
                   <div v-else class="btn btn-lg nextb disabled">Next</div>
                 </div>
               </div>
               <div v-if="this.type=='love'" class="form-buttons love">  
                 <div><button class="btn btn-lg " @click.prevent="prev()">Back</button></div>
                 <div>
-                  <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==10 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
+                  <button v-if="this.formData.recipient_name && this.formData.recipient_phone.length==14 && this.formData.timezone" class="btn btn-lg " @click.prevent="next()">Next</button>
                   <div v-else class="btn btn-lg nextb disabled">Next</div>
                 </div>
               </div>
@@ -1065,7 +1065,7 @@
 import axios from 'axios';
 import moment from 'moment'
 import Datepicker from 'vuejs-datepicker';
-
+import $ from 'jquery'
 
 export default {
     name: 'Order',
@@ -1147,7 +1147,7 @@ export default {
           axios.post("https://insong-066b.restdb.io/rest/orders",
           {
             recipient_name: this.formData.recipient_name,
-            recipient_phone: this.formData.recipient_phone,
+            recipient_phone: this.formData.recipient_phone.replace('(', '').replace(')', '').replace('-', '').replace(' ', ''),
             date_requested: moment(this.formData.date_requested).format("YYYY-MM-DD"),
             timezone: this.formData.timezone,
             best_time: this.formData.best_time,
@@ -1168,6 +1168,10 @@ export default {
             }
           }).then(this.$router.push({path: "/thank-you"}));
 
+        },
+        acceptNumber() {
+          var x = this.formData.recipient_phone.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+          this.formData.recipient_phone = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
         },
         paypalset() {
           this.next();
@@ -1282,16 +1286,11 @@ export default {
     width: 100%;
   }
   .form-buttons {
-    display: inline-grid;
-    width: 100%;
-    flex-direction: row;
-    justify-content: center;
+ 
     padding: 10px;
-    width: 17vw;
     button, div {
       width: 17vw !important;
       margin: 0 10px;
-      background: #FF9A00;
       height: 17vw !important;
       display: flex;
       justify-content: center;
@@ -1299,6 +1298,8 @@ export default {
       border-radius: 50%;
       color: white;
       font-size: 3vw; 
+      max-height: 125px;
+      max-width: 125px;
     }
     .btn-submit {
       background: darkgreen;
@@ -1328,13 +1329,6 @@ export default {
     flex-direction: column;
     justify-content: center;
   }
-  .form-buttons {
-    button{
-      max-width: 125px;
-      max-height: 125px;
-    }
-  }
-  
   .birthday{
     button, .item.active, .btn{
       background: #FF9A00;
