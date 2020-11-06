@@ -7,7 +7,9 @@
           
     
     <h2 class="text-center">Welcome greeter!</h2>
-        
+    
+    <div class="btn btn-primary" @click="makeCall()">Make Call</div>
+    
     <div class="border" v-if="this.greeter">
       {{this.greeter.orders_completed}} orders completed for a total of ${{this.greeter.money_earned.toFixed(2)}}
       <br>Money Earned Birthday: ${{this.greeter.money_owed_birthday}}
@@ -56,21 +58,24 @@ export default {
           this.$auth.loginWithRedirect();
         },
         makeCall() {
-          
-          fetch("https://api.telzio.com/dial/outbound", {
-            "method": "POST",
-            "headers": {
-              "Content-Type": "application/json",
-              "Authorization": "Basic cGtfNTFmMzk5ODIwNTAzYmVhNWMzZDEwZTc2NTJlYzpza18xODk5NTA0ODE2YjczNzNkMjE3YmFhNDRlZA=="
-            },
-            "body": "{\"From\":\"+19142155033\",\"Aleg\":\"+15188104039\",\"Bleg\":\"500\"}"
-          })
-          .then(response => {
-            console.log(response);
-          })
-          .catch(err => {
-            console.error(err);
+          this.$confirm("Place call?").then(() => {
+            fetch("https://api.telzio.com/dial/outbound", {
+              "method": "POST",
+              "headers": {
+                "Content-Type": "application/json",
+                "Authorization": "Basic cGtfNTFmMzk5ODIwNTAzYmVhNWMzZDEwZTc2NTJlYzpza18xODk5NTA0ODE2YjczNzNkMjE3YmFhNDRlZA=="
+              },
+              "body": "{\"From\":\"+19142155033\",\"Aleg\":\"+15188104039\",\"Bleg\":\"500\"}"
+            })
+            .then(response => {
+              console.log(response);
+            })
+            .catch(err => {
+              console.error(err);
+            });
           });
+          
+          
         },
         logout() {
           this.$auth.logout({

@@ -116,7 +116,7 @@ export default {
           const token = await this.$auth.getTokenSilently();
           let url = new URL('https://insong-066b.restdb.io/rest/orders')
           let json = {
-            "greeter": this.greeter.user_email
+            "greeter": "walter@walterburmer.com" // this.greeter.user_email
           };
           url.searchParams.set('q', JSON.stringify(json))
           console.log(url)

@@ -116,28 +116,23 @@ export default {
         makeCall() {
           var phone = "+1" + this.order.recipient_phone;
           var username = this.greeter.telzio_username;
-          // fetch("https://api.telzio.com/dial/outbound", {
- //            "method": "POST",
- //            "headers": {
- //              "Content-Type": "application/json",
- //              "Authorization": "Basic cGtfNTFmMzk5ODIwNTAzYmVhNWMzZDEwZTc2NTJlYzpza18xODk5NTA0ODE2YjczNzNkMjE3YmFhNDRlZA=="
- //            },
- //            "body": "{\"From\":\"+19142155033\",\"Aleg\":\"phone\",\"Bleg\":\"username\"}"
- //          })
-          axios.post('https://api.telzio.com/dial/outbound', {
-              From: '+19142155033',
-              Aleg: phone,
-              Bleg: username,
-            },
-            {auth: {
-              username: "pk_51f399820503bea5c3d10e7652ec",
-              password: "sk_1899504816b7373d217baa44ed"
-            }})
-          .then(response => {
-            console.log(response);
-          })
-          .catch(err => {
-            console.error(err);
+          this.$confirm("Call "+phone+"?").then(() => {
+            axios.post('https://api.telzio.com/dial/outbound', {
+                From: '+19142155033',
+                Aleg: phone,
+                Bleg: username,
+              },
+              {
+              auth: {
+                username: "pk_51f399820503bea5c3d10e7652ec",
+                password: "sk_1899504816b7373d217baa44ed"
+              }})
+            .then(response => {
+              console.log(response);
+            })
+            .catch(err => {
+              console.error(err);
+            })
           });
         },
         setLyrics() {

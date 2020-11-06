@@ -7,6 +7,11 @@ import store from "./store";
 import VueAxios from './plugins/axios'
 import { authGuard } from "./auth/authGuard";
 
+import VueSimpleAlert from "vue-simple-alert";
+
+Vue.use(VueSimpleAlert);
+
+
 Vue.use(VueAxios)
 
 
