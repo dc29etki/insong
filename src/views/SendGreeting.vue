@@ -1134,6 +1134,13 @@ export default {
           this.apiMessage = data;
         },
         async postOrders() {
+          var price = 0.00;
+          if(this.type == 'birthday'){
+            price = 9.95;
+          }
+          else {
+            price = 14.95;
+          }
           const token = await this.$auth.getTokenSilently();
           axios.post("https://insong-066b.restdb.io/rest/orders",
           {
@@ -1151,6 +1158,7 @@ export default {
             auth0_user_id: this.$auth.user.sub,
             created_at: Date.now(),
             type: this.type,
+            price: price,
             status: "Posted"
           },
           {
