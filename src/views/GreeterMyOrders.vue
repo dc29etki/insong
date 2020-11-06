@@ -9,7 +9,8 @@
     
     <router-link to="/switchboard" class="btn btn-dark">Back to Switchboard</router-link>
     
-    <div v-if="orders.length<1" class="border m-5 p-4">No orders right now, check back later</div>
+    <div class="alert alert-primary w-75 mx-auto my-5" v-if="loading">Loading...</div>
+    <div v-if="!loading && orders.length<1" class="border m-5 p-4">No orders right now, check back later</div>
     <div class="text-left p-3 m-3 mx-auto">
       <div class="box2" v-for="o in orders" :key="o">
         <div class="item" v-if="o">
@@ -43,12 +44,14 @@ export default {
       var sortedOrders = [];
       var objectkeys = {};
       var user = "";
+      var loading = true;
       return {
         moment,
         orders,
         sortedOrders,
         objectkeys,
         user,
+        loading,
         apiMessage: "",
         formData: {
           recipient: '',
@@ -108,6 +111,7 @@ export default {
           }).then(this.$router.push({path: "/switchboard"}));
         },
         async getOrders() {
+          this.loading = true;
           const token = await this.$auth.getTokenSilently();
           let url = new URL('https://insong-066b.restdb.io/rest/orders')
           let json = {
@@ -121,6 +125,7 @@ export default {
             }
           });
           this.orders = data;
+          this.loading = false;
           // for(var i=0; i<data.length; i++) {
 //             if(data[i].greeter == this.greeter.email) {
 //               if(data[i].status=='In Queue'){

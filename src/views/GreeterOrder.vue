@@ -9,7 +9,6 @@
     
     <router-link to="/switchboard" class="btn btn-dark">Back to Switchboard</router-link><br>
     
-    
     <div class="text-left px-3 mb-3 mx-auto">
      <div class="order-info">
        
@@ -22,8 +21,8 @@
          Best Time to call: {{this.order.best_time}}<br>
          Time Zone: {{this.order.timezone}}<br>
          
-         <a :href="'https://telzio.com/dashboard#!dial:+1'+this.order.recipient_phone" class="btn text-white w-100 mx-auto p-0 my-1 font-weight-bold" style="background:#163e5c;">
-           Call With<br><img style="height: 50px; width: auto;" src="../assets/telzio.png">
+         <a target="_blank" :href="'https://telzio.com/dashboard#!dial:+1'+this.order.recipient_phone" class="btn text-white w-100 mx-auto p-0 my-1 font-weight-bold" style="background:#163e5c;">
+           Call With<br><img style="height: 50px; width: auto;" src="https://i.ibb.co/BVRTz8H/telzio.png"/>
          </a>
        </div>
        Created: {{new Date(this.order.created_at).toLocaleString()}}<br>

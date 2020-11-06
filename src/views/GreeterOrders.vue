@@ -10,7 +10,8 @@
     
     <router-link to="/switchboard" class="btn btn-dark">Back to Switchboard</router-link>
     
-    <div v-if="orders.length<1" class="border m-5 p-4">No orders right now, check back later</div>
+    <div class="alert alert-primary w-75 mx-auto my-5" v-if="loading">Loading...</div>
+    <div v-if="!loading && orders.length<1" class="border m-5 p-4">No orders right now, check back later</div>
     <div class="text-left p-3 m-3 mx-auto">
       <div class="box2" v-for="o in sortedOrders" :key="o">
         Todays Orders:
@@ -76,6 +77,7 @@ export default {
       var objectkeys = {};
       var greeter = "";
       var user = "";
+      var loading = true;
       return {
         moment,
         orders,
@@ -83,6 +85,7 @@ export default {
         objectkeys,
         user,
         greeter,
+        loading,
         apiMessage: "",
         formData: {
           recipient: '',
@@ -156,6 +159,7 @@ export default {
           this.orders = data;
           
           this.sortedOrders = this.orders.slice().sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+          this.loading = false;
         },
         async postOrders() {
           const token = await this.$auth.getTokenSilently();
