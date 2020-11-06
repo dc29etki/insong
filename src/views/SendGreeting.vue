@@ -742,7 +742,8 @@
                     From:
                   </div>
                   <div class="col-8 text-left">
-                    {{this.$auth.user.name}}
+                    <span v-if="formData.anonymous">Anonymous</span>
+                    <span  v-else>{{this.$auth.user.name}}</span>
                   </div>
                 </div>
                 
@@ -818,16 +819,6 @@
                   </div>
                   <div class="col-8 text-left">
                     {{formData.message}}
-                  </div>
-                </div>
-                
-                <div class="row">
-                  <div class="col-4 text-right">
-                    Anonymous:
-                  </div>
-                  <div class="col-8 text-left">
-                    <div v-if="formData.anonymous">Yes</div>
-                    <div v-if="!formData.anonymous">No</div>
                   </div>
                 </div>
                 
