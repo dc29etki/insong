@@ -8,22 +8,26 @@
     <h2 class="text-center">Order</h2>
     
     <router-link to="/switchboard" class="btn btn-dark">Back to Switchboard</router-link><br>
-    
+        
     <div class="text-left px-3 mb-3 mx-auto">
-     <div class="order-info">
+    <div class="alert alert-primary w-75 mx-auto my-5" v-if="this.loading">Loading...</div>
+     <div v-else class="order-info">
        
        <div class="border px-2">
          
          <strong>Recipient:</strong><br>
          Name: {{this.order.recipient_name}}<br>
          Phone: {{this.order.recipient_phone}}<br>
-         Date to call: {{this.order.date_requested.split("T")[0]}}<br>
+         <span v-if="this.order.date_requested">Date to call: {{this.order.date_requested.split("T")[0]}}<br></span>
          Best Time to call: {{this.order.best_time}}<br>
          Time Zone: {{this.order.timezone}}<br>
          
-         <a target="_blank" :href="'https://telzio.com/dashboard#!dial:+1'+this.order.recipient_phone" class="btn text-white w-100 mx-auto p-0 my-1 font-weight-bold" style="background:#163e5c;">
+         <!-- <a target="_blank" :href="'https://telzio.com/dashboard#!dial:+1'+this.order.recipient_phone" class="btn text-white w-100 mx-auto p-0 my-1 font-weight-bold" style="background:#163e5c;"> -->
+         <div target="_blank" @click="makeCall()" class="btn text-white w-100 mx-auto p-0 my-1 font-weight-bold" style="background:#163e5c;">
+          
            Call With<br><img style="height: 50px; width: auto;" src="https://i.ibb.co/BVRTz8H/telzio.png"/>
-         </a>
+         </div>
+         Note: Clicking this button will place the call, when the user picks up, your telzio app will ring and connect you.
        </div>
        Created: {{new Date(this.order.created_at).toLocaleString()}}<br>
        <div class=""><strong>Sender:</strong><br>
@@ -37,7 +41,7 @@
         <div class="font-weight-bold">Script:</div>
           Hi, is this {{this.order.recipient_name}}?<br>
           — — —<br>
-          Hi, {{this.order.recipient_name.split(" ")[0]}}! This is {{this.$auth.user.name}} from InSong Greetings calling you on behalf of 
+         <div v-if="this.order.recipient_name"> Hi, {{this.order.recipient_name.split(" ")[0]}}! This is {{this.$auth.user.name}} from InSong Greetings calling you on behalf of 
           <span v-if="this.order.anonymous">an anonymous person</span><span v-else>{{this.order.sender}}</span><span v-if="this.order.also_from"> and {{this.order.also_from}}</span> who is the reason you’re receiving this greeting gift.<br>
           <div class="p-2">{{this.order.message}}</div>
           <div class="font-italic text-center p-2">
@@ -46,18 +50,19 @@
             <div v-if="this.order.song=='Happy Birthday'"><p class="font-weight-bold">To: {{this.order.recipient_name.split(" ")[0]}}</p></div>
           </div>
           We hope you enjoyed this InSong greeting! <span v-if="this.order.type=='birthday'">Have a great birthday!</span><span v-else>Have a great day/night!</span>
-        </div>
-       
+        </div></div>
+        <div class="buttons justify-content-center my-2">
+          <div v-if="this.order.calls==0 || !this.order.calls" @click="completeOrder(1, false)" class="btn btn-danger item">Attempted First Call</div>
+          <div v-if="this.order.calls==1" @click="completeOrder(2, false)" class="btn btn-danger item">Attempted Second Call</div>
+          <div v-if="this.order.calls==2" @click="completeOrder(3, false)" class="btn btn-danger item">Attempted Third Call</div>
+          <div v-if="this.order.calls==0 || !this.order.calls" @click="completeOrder(1, true)" class="btn btn-success item">Completed on First Call</div>
+          <div v-if="this.order.calls==1" @click="completeOrder(2, true)" class="btn btn-success item">Completed on Second Call</div>
+          <div v-if="this.order.calls==2" @click="completeOrder(3, true)" class="btn btn-success item">Completed on Third Call</div>
+          <div v-if="this.order.calls>2" @click="completeOrder(99, true)" class="btn btn-success item">Voicemail left</div>
+       </div>
      </div>
-     <div class="buttons">
-       <div v-if="this.order.calls==0 || !this.order.calls" @click="completeOrder(1, false)" class="btn btn-danger item">Attempted First Call</div>
-       <div v-if="this.order.calls==1" @click="completeOrder(2, false)" class="btn btn-danger item">Attempted Second Call</div>
-       <div v-if="this.order.calls==2" @click="completeOrder(3, false)" class="btn btn-danger item">Attempted Third Call</div>
-       <div v-if="this.order.calls==0 || !this.order.calls" @click="completeOrder(1, true)" class="btn btn-success item">Completed on First Call</div>
-       <div v-if="this.order.calls==1" @click="completeOrder(2, true)" class="btn btn-success item">Completed on Second Call</div>
-       <div v-if="this.order.calls==2" @click="completeOrder(3, true)" class="btn btn-success item">Completed on Third Call</div>
-       <div v-if="this.order.calls>2" @click="completeOrder(99, true)" class="btn btn-success item">Voicemail left</div>
-    </div>      
+      
+    
     </div>
     
     </div>
@@ -79,6 +84,7 @@ export default {
       var objectkeys = {};
       var user = "";
       var lyrics = "";
+      var loading = true;
       return {
         moment,
         orders,
@@ -87,6 +93,7 @@ export default {
         objectkeys,
         lyrics,
         user,
+        loading,
         apiMessage: "",
         formData: {
           recipient: '',
@@ -104,6 +111,33 @@ export default {
         logout() {
           this.$auth.logout({
             returnTo: window.location.origin
+          });
+        },
+        makeCall() {
+          var phone = "+1" + this.order.recipient_phone;
+          var username = this.greeter.telzio_username;
+          // fetch("https://api.telzio.com/dial/outbound", {
+ //            "method": "POST",
+ //            "headers": {
+ //              "Content-Type": "application/json",
+ //              "Authorization": "Basic cGtfNTFmMzk5ODIwNTAzYmVhNWMzZDEwZTc2NTJlYzpza18xODk5NTA0ODE2YjczNzNkMjE3YmFhNDRlZA=="
+ //            },
+ //            "body": "{\"From\":\"+19142155033\",\"Aleg\":\"phone\",\"Bleg\":\"username\"}"
+ //          })
+          axios.post('https://api.telzio.com/dial/outbound', {
+              From: '+19142155033',
+              Aleg: phone,
+              Bleg: username,
+            },
+            {auth: {
+              username: "pk_51f399820503bea5c3d10e7652ec",
+              password: "sk_1899504816b7373d217baa44ed"
+            }})
+          .then(response => {
+            console.log(response);
+          })
+          .catch(err => {
+            console.error(err);
           });
         },
         setLyrics() {
@@ -309,6 +343,7 @@ export default {
           });
           this.order = data[0];
           this.setLyrics();
+          this.loading = false;
         },
         async postOrders() {
           const token = await this.$auth.getTokenSilently();
@@ -331,7 +366,6 @@ export default {
     mounted() { 
       this.getGreeters();
     }
-    
   }
 </script>
 <style lang="scss">
