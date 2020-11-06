@@ -7,9 +7,7 @@
           
     
     <h2 class="text-center">Welcome greeter!</h2>
-    
-    <div class="btn btn-primary" @click="makeCall()">Make Call</div>
-    
+        
     <div class="border" v-if="this.greeter">
       {{this.greeter.orders_completed}} orders completed for a total of ${{this.greeter.money_earned.toFixed(2)}}
       <br>Money Earned Birthday: ${{this.greeter.money_owed_birthday}}
