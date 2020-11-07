@@ -4,8 +4,7 @@
     
     <div class="home-area m-2 text-center" style="margin-bottom: 100px !important;">
       <div class="space pb-3 mt-3"> </div>
-          
-    
+              
     <h2 class="text-center">Welcome greeter!</h2>
         
     <div class="border" v-if="this.greeter">
@@ -56,24 +55,24 @@ export default {
           this.$auth.loginWithRedirect();
         },
         makeCall() {
-          this.$confirm("Place call?").then(() => {
-            fetch("https://api.telzio.com/dial/outbound", {
-              "method": "POST",
-              "headers": {
-                "Content-Type": "application/json",
-                "Authorization": "Basic cGtfNTFmMzk5ODIwNTAzYmVhNWMzZDEwZTc2NTJlYzpza18xODk5NTA0ODE2YjczNzNkMjE3YmFhNDRlZA=="
+          var username = this.greeter.telzio_username;
+          this.$confirm("Call "+"?").then(() => {
+            axios.post('https://api.telzio.com/dial/user', {
+                Username: username,
+                Destination: '+15186496876',
               },
-              "body": "{\"From\":\"+19142155033\",\"Aleg\":\"+15188104039\",\"Bleg\":\"500\"}"
-            })
+              {
+              auth: {
+                username: "pk_51f399820503bea5c3d10e7652ec",
+                password: "sk_1899504816b7373d217baa44ed"
+              }})
             .then(response => {
               console.log(response);
             })
             .catch(err => {
               console.error(err);
-            });
+            })
           });
-          
-          
         },
         logout() {
           this.$auth.logout({

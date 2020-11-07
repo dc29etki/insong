@@ -27,7 +27,6 @@
           
            Call With<br><img style="height: 50px; width: auto;" src="https://i.ibb.co/BVRTz8H/telzio.png"/>
          </div>
-         Note: Clicking this button will place the call, when the user picks up, your telzio app will ring and connect you.
        </div>
        Created: {{new Date(this.order.created_at).toLocaleString()}}<br>
        <div class=""><strong>Sender:</strong><br>
@@ -117,10 +116,9 @@ export default {
           var phone = "+1" + this.order.recipient_phone;
           var username = this.greeter.telzio_username;
           this.$confirm("Call "+phone+"?").then(() => {
-            axios.post('https://api.telzio.com/dial/outbound', {
-                From: '+19142155033',
-                Aleg: phone,
-                Bleg: username,
+            axios.post('https://api.telzio.com/dial/user', {
+                Username: username,
+                Destination: phone,
               },
               {
               auth: {
