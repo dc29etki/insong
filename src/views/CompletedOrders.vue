@@ -10,6 +10,8 @@
     
     <router-link to="/switchboard" class="btn btn-dark">Back to Switchboard</router-link>
     
+    <div class="alert alert-primary w-75 mx-auto my-5" v-if="loading">Loading...</div>
+    
     <div class="pt-3">
       {{this.greeter.orders_completed}} orders completed for a total of ${{this.greeter.money_earned.toFixed(2)}}
     </div>
@@ -51,6 +53,7 @@ export default {
       var objectkeys = {};
       var user = "";
       var greeter = "";
+      var loading = true;
       return {
         moment,
         orders,
@@ -130,6 +133,7 @@ export default {
           });
           this.orders = data;
           this.sortedOrders = this.orders.slice().sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+          this.loading = false;
         },
         async postOrders() {
           const token = await this.$auth.getTokenSilently();
