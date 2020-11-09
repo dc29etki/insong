@@ -17,6 +17,8 @@
         <div class="item" v-if="o">
           Sent to: {{o.recipient_name}}
           <br>
+          Status: {{o.status}}, {{o.calls}} calls
+          <br>
           Song: {{o.song}}
           <br>
           Type: {{o.type}}
@@ -117,7 +119,6 @@ export default {
           let url = new URL('https://insong-066b.restdb.io/rest/orders')
           let json = {
             "greeter": this.greeter.user_email,
-            "status": "In Queue"
           };
           url.searchParams.set('q', JSON.stringify(json))
           console.log(url)
@@ -126,15 +127,15 @@ export default {
               Authorization: `Bearer ${token}`
             }
           });
-          this.orders = data;
+          
+          for(var i=0; i<data.length; i++) {
+            if(data[i].status!="Completed"){
+              this.orders.push(data[i])
+            }
+          }
+          
           this.loading = false;
-          // for(var i=0; i<data.length; i++) {
-//             if(data[i].greeter == this.greeter.email) {
-//               if(data[i].status=='In Queue'){
-//                 this.orders.push(data[i])
-//               }
-//             }
-//           }
+          
           this.sortedOrders = this.orders.slice().sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
         },
         async postOrders() {

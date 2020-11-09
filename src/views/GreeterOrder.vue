@@ -278,6 +278,7 @@ export default {
         },
         
         async completeOrder(calls, completed) {
+          
           var status = '';
           if(completed) {
             status = "Completed"
@@ -287,39 +288,41 @@ export default {
           }
           var id = this.$route.params.id;
           const token = await this.$auth.getTokenSilently();
-          axios.put("https://insong-066b.restdb.io/rest/orders/"+id,
-          {
-            status: status,
-            calls: calls,
-            completed_at: Date.now()
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`    // send the access token through the 'Authorization' header
-            }
-          })
-          var greeterID = this.greeter._id;
-          var birthdayamount = 0.00;
-          var amount = 0.00;
-          if(this.order.type=='Birthday'){
-            birthdayamount = 9.95
-          }
-          else {amount = 14.95}
-          if(completed){
-            axios.put("https://insong-066b.restdb.io/rest/greeters/"+this.greeter._id,
+          this.$confirm("Confirm").then(() => {
+            axios.put("https://insong-066b.restdb.io/rest/orders/"+id,
             {
-              orders_completed: this.greeter.orders_completed + 1,
-              money_earned: this.greeter.money_earned + birthdayamount + amount,
-              money_owed: this.greeter.money_earned + birthdayamount + amount,
-              money_owed_birthday: this.money_owed_birthday + birthdayamount,
-              money_owed_other:  this.money_owed_other + amount,
+              status: status,
+              calls: calls,
+              completed_at: Date.now()
             },
             {
               headers: {
                 Authorization: `Bearer ${token}`    // send the access token through the 'Authorization' header
               }
-            }).then(this.$router.push({path: "/switchboard"}));
-          }else {this.$router.push({path: "/switchboard"})}
+            })
+            var greeterID = this.greeter._id;
+            var birthdayamount = 0.00;
+            var amount = 0.00;
+            if(this.order.type=='Birthday'){
+              birthdayamount = 9.95
+            }
+            else {amount = 14.95}
+            if(completed){
+              axios.put("https://insong-066b.restdb.io/rest/greeters/"+this.greeter._id,
+              {
+                orders_completed: this.greeter.orders_completed + 1,
+                money_earned: this.greeter.money_earned + birthdayamount + amount,
+                money_owed: this.greeter.money_earned + birthdayamount + amount,
+                money_owed_birthday: this.greeter.money_owed_birthday + birthdayamount,
+                money_owed_other:  this.greeter.money_owed_other + amount,
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`    // send the access token through the 'Authorization' header
+                }
+              }).then(this.$router.push({path: "/switchboard"}));
+            }else {this.$router.push({path: "/switchboard"})}
+          });
         },
         
         async getOrders() {
