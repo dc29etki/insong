@@ -35,6 +35,8 @@
               Date Requested: {{o.date_requested.split("T")[0]}}<br>
             </span>
             
+            Time Requested: {{o.best_time}}<br>
+            
             <div class="btn btn-primary" @click="addOrder(o._id)">Add to Queue</div>
           </div>
         </div>

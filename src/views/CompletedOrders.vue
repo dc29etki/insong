@@ -61,6 +61,7 @@ export default {
         objectkeys,
         user,
         greeter,
+        loading,
         apiMessage: "",
         formData: {
           recipient: '',

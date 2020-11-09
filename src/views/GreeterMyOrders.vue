@@ -23,8 +23,13 @@
           <br>
           Type: {{o.type}}
           <br>
-          Created: {{o.created_at.split("T")[0]}}<br>
-          Requested: <span v-if="o.date_requested">{{o.date_requested.split("T")[0]}}</span><br>
+          <span v-if="o.created_at">
+            Created: {{o.created_at.split("T")[0]}}<br>
+          </span>
+          <span v-if="o.date_requested">
+            Date Requested: {{o.date_requested.split("T")[0]}}
+          </span><br>
+          Time Requested: {{o.best_time}}<br>
           <router-link class="btn btn-primary" :to="{ name: 'GreeterOrder', params: { id: o._id }}">View Order</router-link>
         </div>
       </div>
