@@ -28,9 +28,8 @@
           <br>
           Completed: {{o.completed_at.split("T")[0]}}
           <br>
-          Price: <span v-if="o.type=='Birthday'">$9.95</span>
-          <span v-if="o.type=='Cover (partial)'">$13.95</span>
-          <span v-if="o.type=='Cover (full)'">$19.95</span>
+          Price: <span v-if="o.type=='Birthday'">$2.00</span>
+          <span v-else>$3.50</span>
         </div>
       </div>
             

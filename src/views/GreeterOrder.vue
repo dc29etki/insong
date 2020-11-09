@@ -304,9 +304,9 @@ export default {
             var birthdayamount = 0.00;
             var amount = 0.00;
             if(this.order.type=='Birthday'){
-              birthdayamount = 9.95
+              birthdayamount = 2.00
             }
-            else {amount = 14.95}
+            else {amount = 3.50}
             if(completed){
               axios.patch("https://insong-066b.restdb.io/rest/greeters/"+this.greeter._id,
               {

@@ -27,6 +27,8 @@
             <br>
             Type: {{o.type}}
             <br>
+            Price: <span v-if="o.type=='Birthday'">$2.00</span><span v-else>$3.50</span>
+            <br>
             <span v-if="o.created_at">
               Created: {{o.created_at.split("T")[0]}}<br>
             </span>
