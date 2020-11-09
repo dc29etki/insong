@@ -58,7 +58,7 @@
           </div>
           <div v-if="o.date_requested.split('T')[0] < moment().format('YYYY-MM-DD')">
             <hr>
-            <h4 style="color:red;">Missed Orders:</h4>
+            <h4 style="color:red;">Missed Order:</h4>
             <div style="border:5px solid red; padding: 10px;">
             Sent to: {{o.recipient_name}}{{o}}hi
             <br>
