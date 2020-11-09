@@ -102,7 +102,7 @@ export default {
         async addOrder(id) {
           console.log(id);
           const token = await this.$auth.getTokenSilently();
-          axios.put("https://insong-066b.restdb.io/rest/orders/"+id,
+          axios.patch("https://insong-066b.restdb.io/rest/orders/"+id,
           {
             status: "In Queue",
             greeter: this.greeter.email

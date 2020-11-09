@@ -265,7 +265,7 @@ export default {
         async addOrder(id) {
           console.log(id);
           const token = await this.$auth.getTokenSilently();
-          axios.put("https://insong-066b.restdb.io/rest/orders/"+id,
+          axios.patch("https://insong-066b.restdb.io/rest/orders/"+id,
           {
             status: "In Queue",
             greeter: this.greeter.email
@@ -289,7 +289,7 @@ export default {
           var id = this.$route.params.id;
           const token = await this.$auth.getTokenSilently();
           this.$confirm("Confirm").then(() => {
-            axios.put("https://insong-066b.restdb.io/rest/orders/"+id,
+            axios.patch("https://insong-066b.restdb.io/rest/orders/"+id,
             {
               status: status,
               calls: calls,
@@ -308,7 +308,7 @@ export default {
             }
             else {amount = 14.95}
             if(completed){
-              axios.put("https://insong-066b.restdb.io/rest/greeters/"+this.greeter._id,
+              axios.patch("https://insong-066b.restdb.io/rest/greeters/"+this.greeter._id,
               {
                 orders_completed: this.greeter.orders_completed + 1,
                 money_earned: this.greeter.money_earned + birthdayamount + amount,
