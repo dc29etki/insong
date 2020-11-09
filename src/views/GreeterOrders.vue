@@ -42,7 +42,7 @@
         </div>
         <hr>
         <div class="box2" v-for="o in sortedOrders" :key="o">
-          Future Orders:
+          <!-- Future Orders:
           <div v-if="o.date_requested.split('T')[0] > moment().format('YYYY-MM-DD')" class="item">
             Sent to: {{o.recipient_name}}
             <br>
@@ -57,7 +57,7 @@
               Date Requested: {{o.date_requested.split("T")[0]}}<br>
             </span>
             <div class="btn btn-primary" @click="addOrder(o._id)">Add to Queue</div>
-          </div>
+          </div> -->
           <div v-if="o.date_requested.split('T')[0] < moment().format('YYYY-MM-DD')">
             <hr>
             <h4 style="color:red;">Missed Order:</h4>
