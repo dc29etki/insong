@@ -9,57 +9,78 @@
     <h6>Select order to add to your queue.</h6>
     
     <router-link to="/switchboard" class="btn btn-dark">Back to Switchboard</router-link>
-    
+    <!-- orders:<div class="box2" v-for="o in orders" :key="o">
+      order{{o}}
+    </div> -->
     <div class="alert alert-primary w-75 mx-auto my-5" v-if="loading">Loading...</div>
-    <div v-if="!loading && orders.length<1" class="border m-5 p-4">No orders right now, check back later</div>
-    <div class="text-left p-3 m-3 mx-auto">
-      <div class="box2" v-for="o in sortedOrders" :key="o">
-        Todays Orders:
-        <div v-if="o.date_requested.split('T')[0] == moment().format('YYYY-MM-DD')" class="item">
-          Sent to: {{o.recipient_name}}
-          <br>
-          Song: {{o.song}}
-          <br>
-          Type: {{o.type}}
-          <br>
-          Created: {{o.created_at.split("T")[0]}}<br>
-          Date Requested: {{o.date_requested.split("T")[0]}}<br>
-          <div class="btn btn-primary" @click="addOrder(o._id)">Add to Queue</div>
-        </div>
-      </div>
-      <hr>
-      <div class="box2" v-for="o in sortedOrders" :key="o">
-        Future Orders:
-        <div v-if="o.date_requested.split('T')[0] > moment().format('YYYY-MM-DD')" class="item">
-          Sent to: {{o.recipient_name}}
-          <br>
-          Song: {{o.song}}
-          <br>
-          Type: {{o.type}}
-          <br>
-          Created: {{o.created_at.split("T")[0]}}<br>
-          Date Requested: {{o.date_requested.split("T")[0]}}<br>
-          <div class="btn btn-primary" @click="addOrder(o._id)">Add to Queue</div>
-        </div>
-        <div v-if="o.date_requested.split('T')[0] < moment().format('YYYY-MM-DD')">
-          <hr>
-          <h4 style="color:red;">Missed Orders:</h4>
-          <div style="border:5px solid red; padding: 10px;">
-          Sent to: {{o.recipient_name}}{{o}}hi
-          <br>
-          Song: {{o.song}}
-          <br>
-          Type: {{o.type}}
-          <br>
-          Created: {{o.created_at.split("T")[0]}}<br>
-          Date Requested: {{o.date_requested.split("T")[0]}}<br>{{moment().format('YYYY-MM-DD')}}
-          <div class="btn btn-primary" @click="addOrder(o._id)">Add to Queue</div>
+    <div v-if="!loading && sortedOrders.length<1" class="border m-5 p-4">No orders right now, check back later</div>
+
+    <div v-if="sortedOrders.length>0">
+      
+      <div v-if="sortedOrders" class="text-left p-3 m-3 mx-auto">
+        <div class="box2" v-for="o in sortedOrders" :key="o">
+          Todays Orders:
+          <div v-if="o.date_requested.split('T')[0] == moment().format('YYYY-MM-DD')" class="item">
+            Sent to: {{o.recipient_name}}
+            <br>
+            Song: {{o.song}}
+            <br>
+            Type: {{o.type}}
+            <br>
+            <span v-if="o.created_at">
+              Created: {{o.created_at.split("T")[0]}}<br>
+            </span>
+            
+            <span v-if="o.date_requested">
+              Date Requested: {{o.date_requested.split("T")[0]}}<br>
+            </span>
+            
+            <div class="btn btn-primary" @click="addOrder(o._id)">Add to Queue</div>
           </div>
         </div>
+        <hr>
+        <div class="box2" v-for="o in sortedOrders" :key="o">
+          Future Orders:
+          <div v-if="o.date_requested.split('T')[0] > moment().format('YYYY-MM-DD')" class="item">
+            Sent to: {{o.recipient_name}}
+            <br>
+            Song: {{o.song}}
+            <br>
+            Type: {{o.type}}
+            <br>
+            <span v-if="o.created_at">
+              Created: {{o.created_at.split("T")[0]}}<br>
+            </span>
+            <span v-if="o.date_requested">
+              Date Requested: {{o.date_requested.split("T")[0]}}<br>
+            </span>
+            <div class="btn btn-primary" @click="addOrder(o._id)">Add to Queue</div>
+          </div>
+          <div v-if="o.date_requested.split('T')[0] < moment().format('YYYY-MM-DD')">
+            <hr>
+            <h4 style="color:red;">Missed Orders:</h4>
+            <div style="border:5px solid red; padding: 10px;">
+            Sent to: {{o.recipient_name}}{{o}}hi
+            <br>
+            Song: {{o.song}}
+            <br>
+            Type: {{o.type}}
+            <br>
+            <span v-if="o.created_at">
+              Created: {{o.created_at.split("T")[0]}}<br>
+            </span>
+            <span v-if="o.date_requested">
+              Date Requested: {{o.date_requested.split("T")[0]}}<br>{{moment().format('YYYY-MM-DD')}}
+            </span>
+            <div class="btn btn-primary" @click="addOrder(o._id)">Add to Queue</div>
+            </div>
+          </div>
+        </div>
+
       </div>
-            
+      
     </div>
-    
+          
     </div>
     
   </div>
@@ -160,6 +181,7 @@ export default {
           
           this.sortedOrders = this.orders.slice().sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
           this.loading = false;
+          console.log(this.sortedOrders)
         },
         async postOrders() {
           const token = await this.$auth.getTokenSilently();
