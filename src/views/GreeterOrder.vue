@@ -57,7 +57,7 @@
           <div v-if="this.order.calls==0 || !this.order.calls" @click="completeOrder(1, true)" class="btn btn-success item">Completed on First Call</div>
           <div v-if="this.order.calls==1" @click="completeOrder(2, true)" class="btn btn-success item">Completed on Second Call</div>
           <div v-if="this.order.calls==2" @click="completeOrder(3, true)" class="btn btn-success item">Completed on Third Call</div>
-          <div v-if="this.order.calls>2" @click="completeOrder(99, true)" class="btn btn-success item">Voicemail left</div>
+          <div v-if="this.order.calls>2" @click="completeOrder(4, true)" class="btn btn-success item">Voicemail left</div>
        </div>
      </div>
       
