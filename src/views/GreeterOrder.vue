@@ -35,7 +35,7 @@
          Also from: {{this.order.also_from}}<br>
        </div>
        <span class="font-weight-bold">Song:</span> {{this.order.song}}<br>
-       <div class="border">
+       <div class="border p-2">
         
         <div class="font-weight-bold">Script:</div>
           Hi, is this {{this.order.recipient_name}}?<br>
@@ -43,6 +43,7 @@
          <div v-if="this.order.recipient_name"> Hi, {{this.order.recipient_name.split(" ")[0]}}! This is {{this.$auth.user.name}} from InSong Greetings calling you on behalf of 
           <span v-if="this.order.anonymous">an anonymous person</span><span v-else>{{this.order.sender}}</span><span v-if="this.order.also_from"> and {{this.order.also_from}}</span> who is the reason you’re receiving this greeting gift.<br>
           <div class="p-2">{{this.order.message}}</div>
+          The song I'm going to sing for you is {{this.order.song}}.
             <div class="font-italic text-center p-2">
               <span class="font-weight-bold">[Sing {{this.order.song}}]</span><br>
               <div><p v-html="this.lyrics"></p></div>
