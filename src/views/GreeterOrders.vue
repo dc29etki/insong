@@ -43,9 +43,7 @@
         </div>
         <hr>
       </div>
-    
-    <div v-if="!loading && futureOrders.length<1" class="border m-5 p-4">No future orders right now, check back later</div>
-    
+        
     <div v-if="futureOrders.length>0" class="text-left p-3 m-3 mx-auto">
       Future Orders:
       <div class="box2" v-for="o in futureOrders" :key="o">
