@@ -51,7 +51,7 @@
             We hope you enjoyed this InSong greeting! <span v-if="this.order.type=='birthday'">Have a great birthday!</span><span v-else>Have a great day/night!</span>
           </div>
         </div>
-        <div class="buttons justify-content-center my-2">
+        <div id="status-buttons" class="buttons justify-content-center my-2">
           <div v-if="this.order.calls==0 || !this.order.calls" @click="completeOrder(1, false)" class="btn btn-danger item">Attempted First Call</div>
           <div v-if="this.order.calls==1" @click="completeOrder(2, false)" class="btn btn-danger item">Attempted Second Call</div>
           <div v-if="this.order.calls==2" @click="completeOrder(3, false)" class="btn btn-danger item">Attempted Third Call</div>
@@ -127,6 +127,7 @@ export default {
                 password: "sk_1899504816b7373d217baa44ed"
               }})
             .then(response => {
+              document.getElementById('status-buttons').style.display="flex";
               console.log(response);
             })
             .catch(err => {
@@ -433,5 +434,8 @@ export default {
       padding: 10px;
       margin: 10px;
     }
+  }
+  #status-buttons {
+    display: none;
   }
 </style>
