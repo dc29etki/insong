@@ -36,7 +36,7 @@
               Date Requested: {{o.date_requested.split("T")[0]}}<br>
             </span>
             
-            Time Requested: {{o.best_time}}, {{o.timezone}} Time<br>
+            Time Requested: {{o.best_time}}, {{o.timezone}}<br>
             
             <div class="btn btn-primary" @click="addOrder(o._id)">Add to Queue</div>
           </div>
@@ -60,6 +60,7 @@
             <span v-if="o.date_requested">
               Date Requested: {{o.date_requested.split("T")[0]}}<br>
             </span>
+            Time Requested: {{o.best_time}}, {{o.timezone}}<br>
           </div>
           <hr>
         </div>
@@ -84,6 +85,7 @@
             <span v-if="o.date_requested">
               Date Requested: {{o.date_requested.split("T")[0]}}<br>{{moment().format('YYYY-MM-DD')}}
             </span>
+            Time Requested: {{o.best_time}}, {{o.timezone}}<br>
             <div class="btn btn-primary" @click="addOrder(o._id)">Add to Queue</div>
             </div>
           </div>
