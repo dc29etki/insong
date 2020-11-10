@@ -278,14 +278,38 @@ export default {
         },
         
         async completeOrder(calls, completed) {
-          
+          var phone = "+1" + this.order.recipient_phone;
           var status = '';
           if(completed) {
             status = "Completed"
           }
           if(!completed) {
             status = "Attempted"
+            if(calls==1) {
+              var from = this.order.sender;
+              if(this.order.anonymous) {
+                from = "anonymous"
+              }
+              var message = "InSong Greetings is attempting to deliver a special greeting sent to you by " + from + ". We will try to reach you again in about 15 minutes. We hope you are available to hear your InSong."
+              axios.post('https://api.telzio.com/sms/send', {
+                  From: '+19142155033',
+                  To: phone,
+                  Message: message,
+              },
+              {
+                auth: {
+                  username: "pk_51f399820503bea5c3d10e7652ec",
+                  password: "sk_1899504816b7373d217baa44ed"
+                }})
+              .then(response => {
+                console.log(response);
+              })
+              .catch(err => {
+                console.error(err);
+              })
+            }
           }
+                    
           var id = this.$route.params.id;
           const token = await this.$auth.getTokenSilently();
           this.$confirm("Confirm").then(() => {
