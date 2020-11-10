@@ -280,12 +280,14 @@ export default {
         async completeOrder(calls, completed) {
           var phone = "+1" + this.order.recipient_phone;
           var status = '';
+          var texts = 0;
           if(completed) {
             status = "Completed"
           }
           if(!completed) {
             status = "Attempted"
             if(calls==1) {
+              texts = 1;
               var from = this.order.sender;
               if(this.order.anonymous) {
                 from = "anonymous"
@@ -316,6 +318,7 @@ export default {
             axios.patch("https://insong-066b.restdb.io/rest/orders/"+id,
             {
               status: status,
+              texts: texts,
               calls: calls,
               completed_at: Date.now()
             },
