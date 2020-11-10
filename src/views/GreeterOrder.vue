@@ -295,7 +295,7 @@ export default {
               if(this.order.anonymous) {
                 from = "anonymous"
               }
-              var message = "InSong Greetings is attempting to deliver a special greeting sent to you by " + from + ". We will try to reach you again in about 15 minutes. We hope you are available to hear your InSong."
+              var message = "InSong Greetings is attempting to deliver a special greeting sent to you by " + from + ". We will try to reach you again in about 15 minutes. We hope you are available to answer our call to hear your InSong greeting performed live!";
               axios.post('https://api.telzio.com/sms/send', {
                   From: '+19142155033',
                   To: phone,
