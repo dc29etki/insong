@@ -42,7 +42,8 @@
           — — —<br>
          <div v-if="this.order.recipient_name"> Hi, {{this.order.recipient_name.split(" ")[0]}}! This is {{this.$auth.user.name}} from InSong Greetings calling you on behalf of 
           <span v-if="this.order.anonymous">an anonymous person</span><span v-else>{{this.order.sender}}</span><span v-if="this.order.also_from"> and {{this.order.also_from}}</span> who is the reason you’re receiving this greeting gift.<br>
-          <div class="p-2">{{this.order.message}}</div>
+          <div class="p-2"><span v-if="this.order.anonymous">Anonymous</span><span v-else>{{this.order.sender}}</span> says {{this.order.message}}</div>
+          <span v-if="this.order.anonymous">Anonymous</span><span v-else>{{this.order.sender}}</span> would like you to know you are in their thoughts and they love you! <span v-if="this.order.anonymous">Anonymous</span><span v-else>{{this.order.sender}}</span> asked me to perform this song for you to let you know how they are feeling right now. We hope it makes you smile! 
             <div class="font-italic text-center p-2">
               <span class="font-weight-bold">[Sing {{this.order.song}}]</span><br>
               <div><p v-html="this.lyrics"></p></div>
