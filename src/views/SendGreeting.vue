@@ -500,42 +500,42 @@
               <div v-if="this.type=='birthday'" class="form-buttons birthday">  
                 <div><button class="btn btn-lg m-0 " @click.prevent="prev()">Back</button></div>
                 <div>
-                  <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg m-0 " @click.prevent="next()">Next</button>
+                  <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg m-0 " @click.prevent="next(); setMessage();">Next</button>
                   <div v-else class="btn btn-lg m-0 nextb disabled">Next</div>
                 </div>
               </div>
               <div v-if="this.type=='anniversary'" class="form-buttons anniversary">  
                 <div><button class="btn btn-lg m-0 " @click.prevent="prev()">Back</button></div>
                 <div>
-                  <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg m-0 " @click.prevent="next()">Next</button>
+                  <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg m-0 " @click.prevent="next(); setMessage();">Next</button>
                   <div v-else class="btn btn-lg m-0 nextb disabled">Next</div>
                 </div>
               </div>
               <div v-if="this.type=='missyou'" class="form-buttons missyou">  
                 <div><button class="btn btn-lg m-0 " @click.prevent="prev()">Back</button></div>
                 <div>
-                  <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg m-0 " @click.prevent="next()">Next</button>
+                  <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg m-0 " @click.prevent="next(); setMessage();">Next</button>
                   <div v-else class="btn btn-lg m-0 nextb disabled">Next</div>
                 </div>
               </div>
               <div v-if="this.type=='sorry'" class="form-buttons sorry">  
                 <div><button class="btn btn-lg m-0 " @click.prevent="prev()">Back</button></div>
                 <div>
-                  <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg m-0 " @click.prevent="next()">Next</button>
+                  <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg m-0 " @click.prevent="next(); setMessage();">Next</button>
                   <div v-else class="btn btn-lg m-0 nextb disabled">Next</div>
                 </div>
               </div>
               <div v-if="this.type=='thinking'" class="form-buttons thinking">  
                 <div><button class="btn btn-lg m-0 " @click.prevent="prev()">Back</button></div>
                 <div>
-                  <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg m-0 " @click.prevent="next()">Next</button>
+                  <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg m-0 " @click.prevent="next(); setMessage();">Next</button>
                   <div v-else class="btn btn-lg m-0 nextb disabled">Next</div>
                 </div>
               </div>
               <div v-if="this.type=='love'" class="form-buttons love">  
                 <div><button class="btn btn-lg m-0 " @click.prevent="prev()">Back</button></div>
                 <div>
-                  <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg m-0 " @click.prevent="next()">Next</button>
+                  <button v-if="this.formData.from || this.formData.anonymous" class="btn btn-lg m-0 " @click.prevent="next(); setMessage();">Next</button>
                   <div v-else class="btn btn-lg m-0 nextb disabled">Next</div>
                 </div>
               </div>
@@ -1172,6 +1172,34 @@ export default {
           var x = this.formData.recipient_phone.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
           this.formData.recipient_phone = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
         },
+        setMessage() {
+          var name = this.formData.from;
+          if(this.formData.anonymous) {
+            name = 'An anonymous person'
+          }
+          switch(this.type) {
+            case "birthday":
+              this.formData.message = name + " would like you to know you are in their thoughts on your special day! " + name + " asked me to perform this song for you and sing your best wishes true! We hope it makes you smile!";
+              break;
+            case "anniversary":
+              this.formData.message = name + " would like you to know how much they love you! " + name + " asked me to perform this song for you to let you know how they are feeling on this special day. We hope it makes you smile!";
+              break;
+            case "missyou":
+              this.formData.message = name + " would like you to know you are in their thoughts and they miss you! " + name + " asked me to perform this song for you to let you know how they are feeling right now. We hope it makes you smile!";
+              break;
+            case "thinking":
+              this.formData.message = name + " would like you to know you are in their thoughts and they care about you a lot! " + name + " asked me to perform this song for you to let you know how they are feeling right now. We hope it makes you smile!";
+              break;
+            case "love":
+              this.formData.message = name + " would like you to know you are in their thoughts and they love you! " + name + " asked me to perform this song for you to let you know how they are feeling right now. We hope it makes you smile!";
+              break;
+            case "sorry":
+              this.formData.message = name + " would like you to know you are in their thoughts and they are very sorry! " + name + " asked me to perform this song for you to let you know how they are feeling right now. We hope this makes it easier for you to forgive them!";
+              break;
+            default:
+              // code block
+          }
+        },
         paypalset() {
           this.next();
           var price = 0.00;
@@ -1208,28 +1236,7 @@ export default {
     created() {
       this.getOrders();
       this.type = this.$route.params.type;
-      switch(this.type) {
-        case "birthday":
-          this.formData.message = "They would like you to know you are in their thoughts on your special day! They asked me to perform this song for you and sing your best wishes true! We hope it makes you smile!";
-          break;
-        case "anniversary":
-          this.formData.message = "They would like you to know how much they love you! They asked me to perform this song for you to let you know how they are feeling on this special day. We hope it makes you smile!";
-          break;
-        case "missyou":
-          this.formData.message = "They would like you to know you are in their thoughts and they miss you! They asked me to perform this song for you to let you know how they are feeling right now. We hope it makes you smile!";
-          break;
-        case "thinking":
-          this.formData.message = "They would like you to know you are in their thoughts and they care about you a lot! They asked me to perform this song for you to let you know how they are feeling right now. We hope it makes you smile!";
-          break;
-        case "love":
-          this.formData.message = "They would like you to know you are in their thoughts and they love you! They asked me to perform this song for you to let you know how they are feeling right now. We hope it makes you smile!";
-          break;
-        case "sorry":
-          this.formData.message = "They would like you to know you are in their thoughts and they are very sorry! They asked me to perform this song for you to let you know how they are feeling right now. We hope this makes it easier for you to forgive them!";
-          break;
-        default:
-          // code block
-      }
+      
     },
     mounted () {
     }
