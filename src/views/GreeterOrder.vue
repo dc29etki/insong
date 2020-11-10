@@ -30,9 +30,9 @@
        </div>
        Created: {{new Date(this.order.created_at).toLocaleString()}}<br>
        <div class=""><strong>Sender:</strong><br>
-         Name: {{this.order.sender}}<br>
+         Name: <span v-if="this.order.anonymous">Anonymous</span>
+         <span v-else>{{this.order.sender}}</span><br>
          Also from: {{this.order.also_from}}<br>
-         Anonymous? {{this.order.anonymous}}
        </div>
        <span class="font-weight-bold">Song:</span> {{this.order.song}}<br>
        <div class="border">
@@ -43,13 +43,14 @@
          <div v-if="this.order.recipient_name"> Hi, {{this.order.recipient_name.split(" ")[0]}}! This is {{this.$auth.user.name}} from InSong Greetings calling you on behalf of 
           <span v-if="this.order.anonymous">an anonymous person</span><span v-else>{{this.order.sender}}</span><span v-if="this.order.also_from"> and {{this.order.also_from}}</span> who is the reason you’re receiving this greeting gift.<br>
           <div class="p-2">{{this.order.message}}</div>
-          <div class="font-italic text-center p-2">
-            <span class="font-weight-bold">[Sing {{this.order.song}}]</span><br>
-            <div><p v-html="this.lyrics"></p></div>
-            <div v-if="this.order.song=='Happy Birthday'"><p class="font-weight-bold">To: {{this.order.recipient_name.split(" ")[0]}}</p></div>
+            <div class="font-italic text-center p-2">
+              <span class="font-weight-bold">[Sing {{this.order.song}}]</span><br>
+              <div><p v-html="this.lyrics"></p></div>
+              <div v-if="this.order.song=='Happy Birthday'"><p class="font-weight-bold">To: {{this.order.recipient_name.split(" ")[0]}}</p></div>
+            </div>
+            We hope you enjoyed this InSong greeting! <span v-if="this.order.type=='birthday'">Have a great birthday!</span><span v-else>Have a great day/night!</span>
           </div>
-          We hope you enjoyed this InSong greeting! <span v-if="this.order.type=='birthday'">Have a great birthday!</span><span v-else>Have a great day/night!</span>
-        </div></div>
+        </div>
         <div class="buttons justify-content-center my-2">
           <div v-if="this.order.calls==0 || !this.order.calls" @click="completeOrder(1, false)" class="btn btn-danger item">Attempted First Call</div>
           <div v-if="this.order.calls==1" @click="completeOrder(2, false)" class="btn btn-danger item">Attempted Second Call</div>
