@@ -14,12 +14,11 @@
     </div> -->
     <div class="alert alert-primary w-75 mx-auto my-5" v-if="loading">Loading...</div>
     <div v-if="!loading && sortedOrders.length<1" class="border m-5 p-4">No orders right now, check back later</div>
-
-    <div v-if="sortedOrders.length>0">
       
-      <div v-if="sortedOrders" class="text-left p-3 m-3 mx-auto">
+      <div v-if="sortedOrders.length>0" class="text-left p-3 m-3 mx-auto">
+        Todays Orders:
         <div class="box2" v-for="o in sortedOrders" :key="o">
-          Todays Orders:
+          
           <div v-if="o.date_requested.split('T')[0] == moment().format('YYYY-MM-DD')" class="item">
             Sent to: {{o.recipient_name}}
             <br>
@@ -43,9 +42,14 @@
           </div>
         </div>
         <hr>
-        <div class="box2" v-for="o in sortedOrders" :key="o">
-          <!-- Future Orders:
-          <div v-if="o.date_requested.split('T')[0] > moment().format('YYYY-MM-DD')" class="item">
+      </div>
+    
+    <div v-if="!loading && futureOrders.length<1" class="border m-5 p-4">No future orders right now, check back later</div>
+    
+    <div v-if="futureOrders.length>0" class="text-left p-3 m-3 mx-auto">
+      Future Orders:
+      <div class="box2" v-for="o in futureOrders" :key="o">
+          <div class="item">
             Sent to: {{o.recipient_name}}
             <br>
             Song: {{o.song}}
@@ -58,11 +62,17 @@
             <span v-if="o.date_requested">
               Date Requested: {{o.date_requested.split("T")[0]}}<br>
             </span>
-            <div class="btn btn-primary" @click="addOrder(o._id)">Add to Queue</div>
-          </div> -->
+          </div>
+          <hr>
+        </div>
+      </div>
+    </div>
+        
+      <div v-if="missedOrders.length>0" class="text-left p-3 m-3 mx-auto">
+       <h4 style="color:red;">Missed Orders:</h4>
+        <div class="box2" v-for="o in missedOrders" :key="o">
           <div v-if="o.date_requested.split('T')[0] < moment().format('YYYY-MM-DD')">
-            <hr>
-            <h4 style="color:red;">Missed Order:</h4>
+            
             <div style="border:5px solid red; padding: 10px;">
             Sent to: {{o.recipient_name}}{{o}}hi
             <br>
@@ -80,14 +90,11 @@
             </div>
           </div>
         </div>
-
       </div>
+    </div>
       
-    </div>
           
-    </div>
     
-  </div>
 </template>
 <script>
 import axios from 'axios';
@@ -99,6 +106,8 @@ export default {
     data() {      
       var orders = [];
       var sortedOrders = [];
+      var futureOrders = [];
+      var missedOrders = [];
       var objectkeys = {};
       var greeter = "";
       var user = "";
@@ -111,6 +120,8 @@ export default {
         user,
         greeter,
         loading,
+        futureOrders,
+        missedOrders,
         apiMessage: "",
         formData: {
           recipient: '',
@@ -181,11 +192,22 @@ export default {
               Authorization: `Bearer ${token}`
             }
           });
-          this.orders = data;
           
+          for (var i=0; i<data.length; i++) {
+            if (data[i].date_requested.split('T')[0] == moment().format('YYYY-MM-DD')){
+              this.orders.push(data[i])
+            }
+            else if (data[i].date_requested.split('T')[0] > moment().format('YYYY-MM-DD')){
+              this.futureOrders.push(data[i])
+            }
+            else if (data[i].date_requested.split('T')[0] < moment().format('YYYY-MM-DD')){
+              this.missedOrders.push(data[i])
+            }
+          }
+                    
           this.sortedOrders = this.orders.slice().sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
           this.loading = false;
-          console.log(this.sortedOrders)
+          console.log(this.futureOrders)
         },
         async postOrders() {
           const token = await this.$auth.getTokenSilently();
@@ -207,7 +229,6 @@ export default {
     },
     created() {
       this.getGreeters();
-      this.getOrders();
     }
     
   }

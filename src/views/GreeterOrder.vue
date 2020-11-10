@@ -284,8 +284,10 @@ export default {
           var phone = "+1" + this.order.recipient_phone;
           var status = '';
           var texts = 0;
+          var completed_at = '';
           if(completed) {
             status = "Completed"
+            completed_at = Date.now()
           }
           if(!completed) {
             status = "Attempted"
@@ -323,7 +325,7 @@ export default {
               status: status,
               texts: texts,
               calls: calls,
-              completed_at: Date.now()
+              completed_at: completed_at
             },
             {
               headers: {
