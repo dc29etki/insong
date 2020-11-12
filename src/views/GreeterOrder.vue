@@ -291,6 +291,9 @@ export default {
           }
           if(!completed) {
             status = "Attempted"
+            if(calls>0) {
+              texts = 1;
+            }
             if(calls==1) {
               texts = 1;
               var from = this.order.sender;
