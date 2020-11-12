@@ -180,7 +180,6 @@ export default {
   .box2 {
     display: flex;
     .item {
-      width: 100%;
       padding: 10px;
       margin: 10px;
       &.completed {

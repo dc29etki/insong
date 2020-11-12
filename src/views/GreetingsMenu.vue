@@ -81,7 +81,6 @@ export default {
     flex-direction: column;
     align-items: center;
     .item {
-      width: 100%;
       background: white;
       color: black !important;
       border-bottom: 2px solid black;

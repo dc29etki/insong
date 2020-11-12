@@ -258,7 +258,6 @@ export default {
     flex-direction: column;
     .item {
       border: 3px solid #232323;
-      width: 100%;
       padding: 10px;
       margin: 10px;
     }

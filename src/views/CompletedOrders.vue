@@ -183,7 +183,6 @@ export default {
     display: flex;
     .item {
       border: 3px solid #333;
-      width: 100%;
       padding: 10px;
       margin: 10px;
     }
