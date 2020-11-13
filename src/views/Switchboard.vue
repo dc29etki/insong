@@ -13,7 +13,8 @@
       <br>Money Earned Other: ${{this.greeter.money_owed_other}}
     </div>
       <div class="buttons3">
-        <div><router-link to="/greeter-myorders" class="btn btn-lg btn-dark">My orders</router-link></div>
+        <div><router-link to="/greeter-myorders" class="btn btn-lg btn-dark">My orders ({{this.count}})</router-link></div>
+        <!-- <div v-else><router-link to="/greeter-myorders" class="btn btn-lg btn-dark font-weight-bold" style="background: #FF9A00 !important;">My orders ({{this.count}})</router-link></div> -->
         <div><router-link to="/greeter-orders" class="btn btn-lg btn-dark">Available orders</router-link></div>
         <div><router-link to="/completed-orders" class="btn btn-lg btn-dark">Completed orders</router-link></div>
       </div>
@@ -33,12 +34,14 @@ export default {
       var objectkeys = {};
       var user = "";
       var greeter = "";
+      var count = 0;
       return {
         moment,
         orders,
         sortedOrders,
         objectkeys,
         user,
+        count,
         greeter,
         apiMessage: "",
         formData: {
@@ -95,7 +98,35 @@ export default {
           if(this.greeter == ""){
             this.$router.push({path: '/'});
           }
+          else {
+            this.getGreeterOrders();
+          }
         },  
+        async getGreeterOrders() {
+          const token = await this.$auth.getTokenSilently();
+          let url = new URL('https://insong-066b.restdb.io/rest/orders')
+          let json = {
+            "greeter": this.greeter.user_email,
+          };
+          url.searchParams.set('q', JSON.stringify(json))
+          console.log(url)
+          const { data } = await axios.get(url, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+          
+          var count = 0;
+          for(var i=0; i<data.length; i++) {
+            if(data[i].status!="Completed"){
+              count ++;
+            }
+          }
+          
+          this.count = count;
+          console.log(this.count)
+                  
+        },
         postOrder(){
           var url = "https://insong-066b.restdb.io/rest/";
           const token = this.$auth.getTokenSilently();

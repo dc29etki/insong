@@ -12,6 +12,7 @@
     <!-- orders:<div class="box2" v-for="o in orders" :key="o">
       order{{o}}
     </div> -->
+    <div class="alert alert-warning w-75 mx-auto mt-4" v-if="count>=2">You already have 2 greetings in your <router-link to="/greeter-myorders">queue.</router-link> Complete those before claiming new greetings.</div>
     <div class="alert alert-primary w-75 mx-auto my-5" v-if="loading">Loading...</div>
     <div v-if="!loading && sortedOrders.length<1" class="border m-5 p-4">No orders right now, check back later</div>
       
@@ -38,7 +39,10 @@
             
             Time Requested: {{o.best_time}}, {{o.timezone}}<br>
             
-            <div class="btn btn-primary" @click="addOrder(o._id)">Add to Queue</div>
+            <div v-if="count<2" class="btn btn-primary" @click="addOrder(o._id)">Add to Queue</div>
+            <div v-else class="btn btn-primary disabled">Add to Queue</div>
+            
+          
           </div>
         </div>
         <hr>
@@ -112,6 +116,7 @@ export default {
       var greeter = "";
       var user = "";
       var loading = true;
+      var count = 0;
       return {
         moment,
         orders,
@@ -119,6 +124,7 @@ export default {
         objectkeys,
         user,
         greeter,
+        count,
         loading,
         futureOrders,
         missedOrders,
@@ -158,7 +164,10 @@ export default {
           if(this.greeter == ""){
             this.$router.push({path: '/'});
           }
-          else {this.getOrders();}
+          else {
+            this.getGreeterOrders();
+            this.getOrders();
+          }
         },     
         postOrder(){
           var url = "https://insong-066b.restdb.io/rest/";
@@ -179,6 +188,31 @@ export default {
               Authorization: `Bearer ${token}`    // send the access token through the 'Authorization' header
             }
           }).then(this.$router.push({path: "/switchboard"}));
+        },
+        async getGreeterOrders() {
+          const token = await this.$auth.getTokenSilently();
+          let url = new URL('https://insong-066b.restdb.io/rest/orders')
+          let json = {
+            "greeter": this.greeter.user_email,
+          };
+          url.searchParams.set('q', JSON.stringify(json))
+          console.log(url)
+          const { data } = await axios.get(url, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+          
+          var count = 0;
+          for(var i=0; i<data.length; i++) {
+            if(data[i].status!="Completed"){
+              count ++;
+            }
+          }
+          
+          this.count = count;
+          console.log(this.count)
+                  
         },
         async getOrders() {
           const token = await this.$auth.getTokenSilently();
