@@ -111,7 +111,7 @@ export default {
         postOrder(){
           var url = "https://insong-066b.restdb.io/rest/";
           const token = this.$auth.getTokenSilently();
-          console.log(token);
+          
           axios.get(url)
           },
         async getOrders() {

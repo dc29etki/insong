@@ -92,7 +92,7 @@ export default {
             }
           });
           this.greeter = data[0];
-          console.log(this.greeter._id)
+          
           if(this.greeter == ""){
             this.$router.push({path: '/'});
           }
@@ -101,11 +101,11 @@ export default {
         postOrder(){
           var url = "https://insong-066b.restdb.io/rest/";
           const token = this.$auth.getTokenSilently();
-          console.log(token);
+          
           axios.get(url)
         },
         async addOrder(id) {
-          console.log(id);
+          
           const token = await this.$auth.getTokenSilently();
           axios.patch("https://insong-066b.restdb.io/rest/orders/"+id,
           {
@@ -126,7 +126,7 @@ export default {
             "greeter": this.greeter.user_email,
           };
           url.searchParams.set('q', JSON.stringify(json))
-          console.log(url)
+          
           const { data } = await axios.get(url, {
             headers: {
               Authorization: `Bearer ${token}`
