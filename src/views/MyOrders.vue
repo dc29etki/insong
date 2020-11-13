@@ -16,7 +16,13 @@
           <br>
           Song: {{o.song}}
           <br>
-          Created: {{o.created_at.split("T")[0]}}
+          <span v-if="o.created_at">
+            Created: {{o.created_at.split("T")[0]}}<br>
+          </span>
+          <br>
+          <span v-if="o.date_requested">
+            Requested Delivery Date: {{o.date_requested.split("T")[0]}}<br>
+          </span>
           <br>
           Status: {{o.status}}
           <div v-if="o.status === 'Completed' && o.completed_at">
@@ -28,7 +34,13 @@
           <br>
           Song: {{o.song}}
           <br>
-          Created: {{o.created_at.split("T")[0]}}
+          <span v-if="o.created_at">
+            Created: {{o.created_at.split("T")[0]}}<br>
+          </span>
+          <br>
+          <span v-if="o.date_requested">
+            Requested Delivery Date: {{o.date_requested.split("T")[0]}}<br>
+          </span>
           <br>
           Status: {{o.status}}
           <div v-if="o.status === 'Completed' && o.completed_at">
@@ -40,7 +52,13 @@
           <br>
           Song: {{o.song}}
           <br>
-          Created: {{o.created_at.split("T")[0]}}
+          <span v-if="o.created_at">
+            Created: {{o.created_at.split("T")[0]}}<br>
+          </span>
+          <br>
+          <span v-if="o.date_requested">
+            Requested Delivery Date: {{o.date_requested.split("T")[0]}}<br>
+          </span>
           <br>
           Status: {{o.status}}
           <div v-if="o.status === 'Completed' && o.completed_at">

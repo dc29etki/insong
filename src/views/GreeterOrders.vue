@@ -34,7 +34,7 @@
             </span>
             
             <span v-if="o.date_requested">
-              Date Requested: {{o.date_requested.split("T")[0]}}<br>
+              Delivery Date: {{o.date_requested.split("T")[0]}}<br>
             </span>
             
             Time Requested: {{o.best_time}}, {{o.timezone}}<br>
