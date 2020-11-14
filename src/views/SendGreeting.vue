@@ -1174,27 +1174,29 @@ export default {
         },
         setMessage() {
           var name = this.formData.from;
+          var name_short = name.split(" ")[0]
           if(this.formData.anonymous) {
             name = 'An anonymous person'
+            name_short = 'They'
           }
           switch(this.type) {
             case "birthday":
-              this.formData.message = name + " would like you to know you are in their thoughts on your special day! " + name + " asked me to perform this song for you and sing your best wishes true! We hope it makes you smile!";
+              this.formData.message = name + " would like you to know you are in their thoughts on your special day! " + name_short + " asked me to perform this song for you and sing your best wishes true! We hope it makes you smile!";
               break;
             case "anniversary":
-              this.formData.message = name + " would like you to know how much they love you! " + name + " asked me to perform this song for you to let you know how they are feeling on this special day. We hope it makes you smile!";
+              this.formData.message = name + " would like you to know how much they love you! " + name_short + " asked me to perform this song for you to let you know how they are feeling on this special day. We hope it makes you smile!";
               break;
             case "missyou":
-              this.formData.message = name + " would like you to know you are in their thoughts and they miss you! " + name + " asked me to perform this song for you to let you know how they are feeling right now. We hope it makes you smile!";
+              this.formData.message = name + " would like you to know you are in their thoughts and they miss you! " + name_short + " asked me to perform this song for you to let you know how they are feeling right now. We hope it makes you smile!";
               break;
             case "thinking":
-              this.formData.message = name + " would like you to know you are in their thoughts and they care about you a lot! " + name + " asked me to perform this song for you to let you know how they are feeling right now. We hope it makes you smile!";
+              this.formData.message = name + " would like you to know you are in their thoughts and they care about you a lot! " + name_short + " asked me to perform this song for you to let you know how they are feeling right now. We hope it makes you smile!";
               break;
             case "love":
-              this.formData.message = name + " would like you to know you are in their thoughts and they love you! " + name + " asked me to perform this song for you to let you know how they are feeling right now. We hope it makes you smile!";
+              this.formData.message = name + " would like you to know you are in their thoughts and they love you! " + name_short + " asked me to perform this song for you to let you know how they are feeling right now. We hope it makes you smile!";
               break;
             case "sorry":
-              this.formData.message = name + " would like you to know you are in their thoughts and they are very sorry! " + name + " asked me to perform this song for you to let you know how they are feeling right now. We hope this makes it easier for you to forgive them!";
+              this.formData.message = name + " would like you to know you are in their thoughts and they are very sorry! " + name_short + " asked me to perform this song for you to let you know how they are feeling right now. We hope this makes it easier for you to forgive them!";
               break;
             default:
               // code block
