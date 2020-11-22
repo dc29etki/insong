@@ -21,26 +21,51 @@
         <div class="box2" v-for="o in sortedOrders" :key="o">
           
           <div v-if="o.date_requested.split('T')[0] == moment().format('YYYY-MM-DD')" class="item">
-            Sent to: {{o.recipient_name}}
-            <br>
-            Song: {{o.song}}
-            <br>
-            Type: {{o.type}}
-            <br>
-            Price: <span v-if="o.type=='Birthday'">$2.00</span><span v-else>$3.50</span>
-            <br>
-            <span v-if="o.created_at">
-              Created: {{o.created_at.split("T")[0]}}<br>
-            </span>
             
-            <span v-if="o.date_requested">
-              Delivery Date: {{o.date_requested.split("T")[0]}}<br>
-            </span>
+            <div v-if="o.hidden == true">
+              Sent to: {{o.recipient_name}}
+              <br>
+              Song: {{o.song}}
+              <br>
+              Type: {{o.type}}
+              <br>
+              Price: <span v-if="o.type.toLowerCase()=='birthday'">$2.00</span><span v-else>$3.50</span>
+              <br>
+              <span v-if="o.created_at">
+                Created: {{o.created_at.split("T")[0]}}<br>
+              </span>
             
-            Time Requested: {{o.best_time}}, {{o.timezone}}<br>
+              <span v-if="o.date_requested">
+                Delivery Date: {{o.date_requested.split("T")[0]}}<br>
+              </span>
             
-            <div v-if="count<2" class="btn btn-primary" @click="addOrder(o._id)">Add to Queue</div>
-            <div v-else class="btn btn-primary disabled">Add to Queue</div>
+              Time Requested: {{o.best_time}}, {{o.timezone}}<br>
+            
+              <div class="btn btn-primary disabled">Not Yet Available</div>
+            </div>
+            
+            <div v-else>
+              Sent to: {{o.recipient_name}}
+              <br>
+              Song: {{o.song}}
+              <br>
+              Type: {{o.type}}
+              <br>
+              Price: <span v-if="o.type.toLowerCase()=='birthday'">$2.00</span><span v-else>$3.50</span>
+              <br>
+              <span v-if="o.created_at">
+                Created: {{o.created_at.split("T")[0]}}<br>
+              </span>
+            
+              <span v-if="o.date_requested">
+                Delivery Date: {{o.date_requested.split("T")[0]}}<br>
+              </span>
+            
+              Time Requested: {{o.best_time}}, {{o.timezone}}<br>
+            
+              <div v-if="count<2" class="btn btn-primary" @click="addOrder(o._id)">Add to Queue</div>
+              <div v-else class="btn btn-primary disabled">Add to Queue</div>
+            </div>
             
           
           </div>
