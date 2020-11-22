@@ -56,7 +56,6 @@
 </template>
 
 <script>
-import firebase from "firebase";
 import navbar from './Navbar.vue';
 import Footer from './layout/Footer';
 

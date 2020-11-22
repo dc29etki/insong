@@ -3,13 +3,10 @@
   <div id="profile">
   <div class="space pb-3 mt-3"> </div>
   
-    <h2 class="text-center m-3">Profile</h2>
-    <div class="p-3 m-3 border text-center">
-      <img style="height:10vh;" :src="$auth.user.picture">
-      <div class="font-weight-bold py-3">{{ $auth.user.name.toUpperCase() }}</div>
-      <div class>Email: {{ $auth.user.email }}</div>
-      <div class>Member Since: {{ new Date($auth.user.updated_at).toDateString()}}</div>
-      <div class="btn btn-danger m-3" @click="signOut">Log Out</div>
+    <h2 class="text-center m-3">Greetings Center</h2>
+    <div class="p-3 m-3 text-center d-flex flex-column align-items-center">
+      <router-link to="/order" class="btn btn-insong1 my-3">Send Greeting</router-link>
+      <router-link to="/my-orders" class="btn btn-insong1 my-3">My Greetings</router-link>
     </div>
   </div>
 </template>
@@ -30,6 +27,19 @@
     .label {
       float: left;
     }
+  }
+  .btn-insong1 {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+    width: 20vh;
+    border-radius: 50%;
+    background: #FF9A00;
+    color: white;
+    font-weight: 700;
+    font-size: 24px;
   }
 </style>
 

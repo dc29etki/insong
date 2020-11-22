@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <template>
-  <div id="profile">
+  <div id="help">
   <div class="space pb-3 mt-3"> </div>
   
-    <h2 class="text-center m-3">Profile</h2>
-    <div class="p-3 m-3 border text-center">
-      <img style="height:10vh;" :src="$auth.user.picture">
-      <div class="font-weight-bold py-3">{{ $auth.user.name.toUpperCase() }}</div>
-      <div class>Email: {{ $auth.user.email }}</div>
-      <div class>Member Since: {{ new Date($auth.user.updated_at).toDateString()}}</div>
-      <div class="btn btn-danger m-3" @click="signOut">Log Out</div>
+    <h2 class="text-center m-3">Help and Support</h2>
+    <div class="buttons2">
+      <a href="mailto:contact@insonggreetings.com?subject=Order Help" class="btn btn-dark">Help with an order</a>
+      <a href="mailto:contact@insonggreetings.com?subject=App Help" class="btn btn-dark">Help with the app</a>
+      <a href="mailto:contact@insonggreetings.com?subject=Greeter Support" class="btn btn-dark">Greeter Support</a>
     </div>
   </div>
 </template>
 
 <style lang="scss">
-  #profile {
+  #help {
     height: auto;
     background: white;
     overflow: scroll;
@@ -24,11 +22,13 @@
       color: white !important;
     }
   }
-  .formf {
-    color: white;
-    font-size: 18px;
-    .label {
-      float: left;
+  .buttons2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .btn {
+      margin: 10px 25px;
+      padding: 10px;
     }
   }
 </style>
@@ -36,13 +36,11 @@
 <script>
 import axios from 'axios';
 export default {
-    name: 'Profile',
+    name: 'Help',
     components: {},
     inject: [],
     data() {    
-    var hi = "hi;"  
       return {
-        hi
       }
     },
     methods: {

@@ -1,22 +1,34 @@
+<!DOCTYPE html>
 <template>
-  <div id="footer">
+  <div id="footer" class="noselect">
     <nav>
-      <ul class="footer-navigation">
-        <li v-bind:class="{'current': isCurrent(link)}" v-for="link in links" :key="link.label" v-on:click="routeTo(link.path)">
+      <ul @click="isaGreeter()" class="footer-navigation">
+      <div class="d-flex justify-content-center" v-if="this.isGreeter">
+        <li v-bind:class="{'current': isCurrent(link)}" v-for="link in links.slice(0,4)" :key="link.label" v-on:click="routeTo(link.path)">
           <div style="font-size: 1.5rem;" class="mb-2"><font-awesome-icon :icon="link.icon" /><br></div>
           <span class="label">{{link.label}}</span>
         </li>
+      </div>
+      <div class="d-flex justify-content-center" v-else>
+        <li v-bind:class="{'current': isCurrent(link)}" v-for="link in links.slice(0,3)" :key="link.label" v-on:click="routeTo(link.path)">
+          <div style="font-size: 1.5rem;" class="mb-2"><font-awesome-icon :icon="link.icon" /><br></div>
+          <span class="label">{{link.label}}</span>
+        </li>
+      </div>
       </ul>
     </nav>
   </div>
 </template>
 <script>
   import router from '../../router'
+  import axios from 'axios';
   export default {
     name: 'Footer',
     inject: [],
     data() {
-      let links = [
+      var isGreeter = false;
+      var greeter = '';
+      var links = [
         {
           label: "Home",
           icon: "home",
@@ -24,58 +36,90 @@
           path: "/"
         },
         {
-          label: "Articles",
-          icon: "newspaper",
-          component: "articles"
-        },
-        {
-          label: "Order",
-          icon: "store",
+          label: "Greetings Menu",
+          icon: "circle",
           component: "order",
           path: "/order"
         },
         {
-          label: "More",
-          icon: "bars",
-          component: "more"
+          label: "Greetings Center",
+          icon: "handshake",
+          component: "order",
+          path: "/greetings-center"
         },
+        {
+          label: "Greeter Switchboard",
+          icon: "microphone",
+          component: "order",
+          path: "/switchboard"
+        }
       ];
       return {
-        links
+        links,
+        axios,
+        isGreeter,
+        greeter
       }
     },
     methods: {
-      routeTo(component) {
-        this.$router.push({ path: component })
+      async isaGreeter() {
+        console.log("checking if greeter...")
+        const token = await this.$auth.getTokenSilently();
+        let url = new URL('https://insong-066b.restdb.io/rest/greeters')
+        let json = {
+          "user_email": this.$auth.user.email
+        };
+        url.searchParams.set('q', JSON.stringify(json))
+        const { data } = await axios.get(url, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        if(data[0]){
+          this.isGreeter = true;
+          return true;
+        }
+        else{this.isGreeter = false; return false;}
+      }, 
+      routeTo(path) {
+        if(path=="/"){
+          this.$router.push('home');
+        }
+        this.$router.push({ path: path })
       },
       isCurrent(link) {
         return router.currentRoute.name === link.component;
       }
     },
-    mounted() {}
+    mounted() {
+      if(this.$auth.user){
+        this.isaGreeter();
+      }
+      else {
+        this.isGreeter = false;
+      }
+    }
   }
 </script>
 <style lang="scss">
   #footer {
-    z-index: 1;
-    background-color:black;
+    z-index: 99;
+    background-color: #EFEFEF;
+    color: #545454;
     padding:10px 0;
     padding-bottom: calc(env(safe-area-inset-bottom) + 10px);
     position:fixed;
     bottom:0;
     width:100vw;
+    height: 100px;
     .footer-navigation {
-      display:flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      justify-content: space-between;
       list-style-type:none;
-      color:white;
-      margin:0;
-      padding:0;
+      color: #545454 ;
+      margin: 0;
+      padding: 0;
       li {
         flex:1;
-        margin:0;
+        margin:0 10px;
         padding:0;
         font-size:10px;
         text-align:center;

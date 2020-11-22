@@ -2,34 +2,58 @@
   "name": "insong",
   "version": "0.1.0",
   "private": true,
+  "description": "## Project setup ``` npm install ```",
+  "author": "",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "dev": "npm-run-all --parallel serve api",
-    "api": "node server.js"
+    "api": "node server.js",
+    "cordova-build-android": "cross-env CORDOVA_PLATFORM=android vue-cli-service cordova-build-android",
+    "cordova-build-browser": "cross-env CORDOVA_PLATFORM=browser vue-cli-service cordova-build-browser",
+    "cordova-build-electron": "cross-env CORDOVA_PLATFORM=electron vue-cli-service cordova-build-electron",
+    "cordova-build-ios": "cross-env CORDOVA_PLATFORM=ios vue-cli-service cordova-build-ios",
+    "cordova-build-only-www-android": "cross-env CORDOVA_PLATFORM=android vue-cli-service cordova-build-only-www-android",
+    "cordova-build-only-www-browser": "cross-env CORDOVA_PLATFORM=browser vue-cli-service cordova-build-only-www-browser",
+    "cordova-build-only-www-electron": "cross-env CORDOVA_PLATFORM=electron vue-cli-service cordova-build-only-www-electron",
+    "cordova-build-only-www-ios": "cross-env CORDOVA_PLATFORM=ios vue-cli-service cordova-build-only-www-ios",
+    "cordova-build-only-www-osx": "cross-env CORDOVA_PLATFORM=osx vue-cli-service cordova-build-only-www-osx",
+    "cordova-build-osx": "cross-env CORDOVA_PLATFORM=osx vue-cli-service cordova-build-osx",
+    "cordova-prepare": "vue-cli-service cordova-prepare",
+    "cordova-serve-android": "cross-env CORDOVA_PLATFORM=android vue-cli-service cordova-serve-android",
+    "cordova-serve-browser": "cross-env CORDOVA_PLATFORM=browser vue-cli-service cordova-serve-browser",
+    "cordova-serve-electron": "cross-env CORDOVA_PLATFORM=electron vue-cli-service cordova-serve-electron",
+    "cordova-serve-ios": "cross-env CORDOVA_PLATFORM=ios vue-cli-service cordova-serve-ios",
+    "cordova-serve-osx": "cross-env CORDOVA_PLATFORM=osx vue-cli-service cordova-serve-osx",
+    "dev": "npm-run-all --parallel serve api"
   },
-  "engines": {
-    "node": "12.6.0"
-  },
+  "main": "babel.config.js",
   "dependencies": {
-    "@auth0/auth0-spa-js": "^1.12.0",
+    "@auth0/auth0-spa-js": "^1.12.1",
+    "@auth0/cordova": "^0.4.3",
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/vue-fontawesome": "^0.1.10",
+    "auth0-js": "^9.14.0",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.2",
     "core-js": "^3.6.5",
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
-    "firebase": "^7.19.1",
     "jquery": "^3.5.1",
-    "jwks-rsa": "^1.9.0",
-    "netlify": "^4.3.13",
+    "jwks-rsa": "^1.10.1",
+    "moment": "^2.29.0",
+    "netlify": "^4.5.2",
     "npm-run-all": "^4.1.5",
     "popper.js": "^1.16.1",
-    "vue": "^2.6.11",
-    "vue-router": "^3.3.4",
+    "slick-carousel": "^1.8.1",
+    "vue": "^2.6.12",
+    "vue-loading-overlay": "^3.4.1",
+    "vue-paypal-checkout": "^3.2.0",
+    "vue-router": "^3.4.4",
+    "vue-simple-alert": "^1.1.1",
+    "vue-stripe-checkout": "^3.5.11",
+    "vuejs-datepicker": "^1.6.2",
     "vuex": "^3.5.1"
   },
   "devDependencies": {
@@ -40,8 +64,9 @@
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^4.14.1",
-    "sass-loader": "^9.0.2",
-    "vue-template-compiler": "^2.6.11"
+    "sass-loader": "^9.0.3",
+    "vue-cli-plugin-cordova": "~2.4.1",
+    "vue-template-compiler": "^2.6.12"
   },
   "eslintConfig": {
     "root": true,
@@ -64,16 +89,16 @@
     "last 2 versions",
     "not dead"
   ],
-  "description": "## Project setup ``` npm install ```",
-  "main": "babel.config.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dc29etki/insong.git"
-  },
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/dc29etki/insong/issues"
   },
-  "homepage": "https://github.com/dc29etki/insong#readme"
+  "engines": {
+    "node": "12.6.0"
+  },
+  "homepage": "https://github.com/dc29etki/insong#readme",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dc29etki/insong.git"
+  }
 }

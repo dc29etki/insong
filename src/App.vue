@@ -1,7 +1,8 @@
+<!DOCTYPE html>
 <template>
   <div>
     <navbar></navbar>
-    <main>
+    <main class="c-main">
       <router-view></router-view>
     </main>
     <Footer></Footer>
@@ -17,3 +18,11 @@ export default {
   }
 };
 </script>
+<style lang="scss">
+  @media only screen and (min-width: 1200px) {
+    .c-main {
+      width: 75%;
+      margin: 0 auto;
+    }
+  }
+</style>

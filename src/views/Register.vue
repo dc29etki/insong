@@ -76,7 +76,6 @@
 
 
 <script>
-import firebase from "firebase";
 
 import navbar from './Navbar.vue';
 import Footer from './layout/Footer';
@@ -96,23 +95,6 @@ export default {
   },
   methods: {
     submit() {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.form.email, this.form.password)
-        .then(data => {
-          data.user
-            .updateProfile({
-              displayName: this.form.name
-            })
-            .then(() => {
-              this.$router.push({
-                path: "/"
-              });
-            });
-        })
-        .catch(err => {
-          this.error = err.message;
-        });
     }
   }
 };

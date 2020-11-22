@@ -1,10 +1,17 @@
 module.exports = {
   runtimeCompiler: true,
+
   devServer: {
       proxy: {
         "/api": {
-          target: "http://localhost:3001"
+          target: "localhost"
         }
       }
-    }
+    },
+
+  publicPath: '',
+
+  pluginOptions: {
+    cordovaPath: 'src-cordova'
+  }
 }
