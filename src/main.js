@@ -123,7 +123,7 @@ const router = new VueRouter({
             path: '/order',
             name: 'Order',
             component: order,
-            beforeEnter: authGuard
+            //beforeEnter: authGuard
         },
         {
             path: "/more",
@@ -192,6 +192,7 @@ const router = new VueRouter({
             path: '/send-greeting/:type',
             name: "SendGreeting",
             component: sendgreeting,
+            beforeEnter: authGuard
         },
         {
             path: '/thank-you',
