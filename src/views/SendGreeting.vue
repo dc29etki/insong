@@ -1238,7 +1238,6 @@ export default {
     created() {
       this.getOrders();
       this.type = this.$route.params.type;
-      
     },
     mounted () {
     }
