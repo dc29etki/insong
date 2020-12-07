@@ -338,7 +338,7 @@ export default {
             var greeterID = this.greeter._id;
             var birthdayamount = 0.00;
             var amount = 0.00;
-            if(this.order.type=='Birthday'){
+            if(this.order.type.toLowerCase()=='birthday'){
               birthdayamount = 2.00
             }
             else {amount = 3.50}
